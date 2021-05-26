@@ -2,9 +2,12 @@ import * as THREE from 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r127/thr
 import {OrbitControls} from './OrbitControls.js';
 import {OBJLoader} from './OBJLoader.js';
 import {MTLLoader} from 'https://threejsfundamentals.org/threejs/resources/threejs/r127/examples/jsm/loaders/MTLLoader.js';
+import * as CANNON from './node_modules/cannon-es/dist/cannon-es.js'
 import {DragControls} from './DragControls.js'
 
+
 function main() {
+
 const canvas = document.querySelector('#c');
 const renderer = new THREE.WebGLRenderer({canvas});
 
