@@ -15,7 +15,7 @@ import {bodyToMesh} from './three-conversion-util.js'
     // three.js variables
     let camera, scene, renderer
     let mesh
-    let block0, block1, ramp
+    let block0, block1, ramp, test
     let car
 
     // cannon.js variables
@@ -31,8 +31,8 @@ import {bodyToMesh} from './three-conversion-util.js'
     const groundMaterial = new CANNON.Material('ground')
 
     initThree()
-    initCannon()
-    animate()
+    // initCannon()
+    // animate()
 
     function initThree() {
     // Camera
@@ -125,24 +125,27 @@ import {bodyToMesh} from './three-conversion-util.js'
     scene.add(ramp)
 
     // Create the visuals of the Car
-    const carGeo = new THREE.BoxBufferGeometry(8, 0.8, 4)
-    const carMat = new THREE.MeshBasicMaterial({ color: 0x000000, wireframe: true })
-    car = new THREE.Mesh(carGeo, carMat)
-    console.log("CAR: "+ car)
-    console.log(car)
-    scene.add(car)
+    // const carGeo = new THREE.BoxBufferGeometry(8, 0.8, 4)
+    // const carMat = new THREE.MeshBasicMaterial({ color: 0x000000, wireframe: true })
+    // car = new THREE.Mesh(carGeo, carMat)
+    // console.log("CAR: "+ car)
+    // console.log(car)
+    // scene.add(car)
 
     const mtlLoader = new MTLLoader();
-    let trainObj
     mtlLoader.load('models/Train/11709_train_v1_L3.mtl', (mtl) => {
         mtl.preload();
         const objLoader = new OBJLoader();
         objLoader.setMaterials(mtl);
         objLoader.load('models/Train/11709_train_v1_L3.obj', (train) => {
-            trainObj = train
+            train.rotateX(-Math.PI/2)
+            scene.add(train)
+            console.log(train)
         }, (xhr) => {
             if (xhr.loaded / xhr.total == 1) {
                 console.log("LOADED")
+                initCannon()
+                animate()
             }
         });
     });
@@ -199,7 +202,7 @@ import {bodyToMesh} from './three-conversion-util.js'
 
     // Create the physics of the Car
         {
-            const chassisShape = new CANNON.Box(new CANNON.Vec3(2, 0.2, 1))
+            const chassisShape = new CANNON.Box(new CANNON.Vec3(2, 1, 1))
             chassisBody = new CANNON.Body({ mass: 500 })
             chassisBody.addShape(chassisShape)
             chassisBody.position.set(-80, 100, -50)
@@ -210,11 +213,11 @@ import {bodyToMesh} from './three-conversion-util.js'
                 })
         
                 const wheelOptions = {
-                    radius: 1,
+                    radius: 1.5,
                     directionLocal: new CANNON.Vec3(0, -1, 0),
                     suspensionStiffness: 30,
-                    suspensionRestLength: 0.3,
-                    frictionSlip: 5,
+                    suspensionRestLength: 0.1,
+                    frictionSlip: 3,
                     dampingRelaxation: 2.3,
                     dampingCompression: 4.4,
                     maxSuspensionForce: 100000,
@@ -284,11 +287,15 @@ import {bodyToMesh} from './three-conversion-util.js'
                 }
                 })
 
+                // Adding physics of the ground
+
                 const heightfieldShape = new CANNON.Plane()
                 const heightfieldBody = new CANNON.Body({ mass: 0, material: groundMaterial })
                 heightfieldBody.addShape(heightfieldShape)
                 heightfieldBody.quaternion.setFromEuler(-Math.PI / 2, 0, 0)
                 world.addBody(heightfieldBody)
+
+                // Adding visuals of the ground
 
                 const groundGeo = new THREE.PlaneGeometry(1000, 1000, 1, 1)
                 const groundMat = new THREE.MeshBasicMaterial({ color: 0x0000FF, side: THREE.DoubleSide})
@@ -296,14 +303,27 @@ import {bodyToMesh} from './three-conversion-util.js'
                 groundMesh.rotation.x = Math.PI / 2;
                 scene.add(groundMesh)
 
+                // Adding physics of block0
+
                 block0Physics = new CANNON.Body({
                     mass: 0,
                     material: groundMaterial
                 })
                 block0Physics.addShape(new CANNON.Box(new CANNON.Vec3(33, 32.5, 31)))
                 console.log(block0Physics)
-                block0Physics.position.set(-63, 49, -63)
+                block0Physics.position.set(-62, 48.5, -63)
                 world.addBody(block0Physics)
+
+                // Adding the visuals of block0
+
+                let test1 = bodyToMesh(block0Physics)
+                console.log("BLOCK0")
+                test1.children[0].material.color.setHex(0xff0000)
+                test1.children[0].material.wireframe = true
+                console.log(test1.children[0])
+
+                test = test1.children[0].clone(true)
+                console.log(test)
 
                 block1Physics = new CANNON.Body({
                     mass: 0,
@@ -323,8 +343,8 @@ import {bodyToMesh} from './three-conversion-util.js'
                 console.log("RAMPRAMPRAMPRAMP")
                 console.log(rampPhysics)
 
-                rampPhysics.quaternion.setFromAxisAngle(new CANNON.Vec3(0, 0, 1), -Math.PI / 8)
-                rampPhysics.position.set(-30, 45.8, -50)
+                rampPhysics.quaternion.setFromAxisAngle(new CANNON.Vec3(0, 0, 1), -Math.PI / 7.8)
+                rampPhysics.position.set(-30, 46, -50)
                 world.addBody(rampPhysics)
 
 
@@ -352,6 +372,7 @@ import {bodyToMesh} from './three-conversion-util.js'
 
     }
 
+
     function animate() {
     requestAnimationFrame(animate)
 
@@ -367,9 +388,15 @@ import {bodyToMesh} from './three-conversion-util.js'
     block1.quaternion.copy(block1Physics.quaternion)
     ramp.position.copy(rampPhysics.position)
     ramp.quaternion.copy(rampPhysics.quaternion)
-    car.position.copy(chassisBody.position)
-    car.quaternion.copy(chassisBody.quaternion)
+    // car.position.copy(chassisBody.position)
+    // car.quaternion.copy(chassisBody.quaternion)
+    let a = scene.getObjectById(284, true)
 
+
+    a.position.copy(chassisBody.position)
+    a.quaternion.copy(chassisBody.quaternion)
+    a.rotateX(-Math.PI / 2)
+    a.rotateZ(Math.PI)
     render()
     }
 
@@ -397,28 +424,32 @@ import {bodyToMesh} from './three-conversion-util.js'
 
     switch (event.key) {
         case 'w':
+        case 'W':
         case 'ArrowUp':
         vehicle.applyEngineForce(-maxForce, 2)
         vehicle.applyEngineForce(-maxForce, 3)
         break
 
         case 's':
+        case 'S':
         case 'ArrowDown':
         vehicle.applyEngineForce(maxForce, 2)
         vehicle.applyEngineForce(maxForce, 3)
         break
 
         case 'a':
+        case 'A':
         case 'ArrowLeft':
         vehicle.setSteeringValue(maxSteerVal, 0)
         vehicle.setSteeringValue(maxSteerVal, 1)
         break
 
         case 'd':
+        case 'D':
         case 'ArrowRight':
         vehicle.setSteeringValue(-maxSteerVal, 0)
         vehicle.setSteeringValue(-maxSteerVal, 1)
-        breaks
+        break
 
         case ' ':
         // vehicle.setBrake(brakeForce, 0)
@@ -428,6 +459,7 @@ import {bodyToMesh} from './three-conversion-util.js'
         break
 
         case 'r':
+        case 'R':
             chassisBody.position.set(-80, 100, -50)
             break;
     }
@@ -437,24 +469,28 @@ import {bodyToMesh} from './three-conversion-util.js'
     document.addEventListener('keyup', (event) => {
     switch (event.key) {
         case 'w':
+        case 'W':
         case 'ArrowUp':
         vehicle.applyEngineForce(0, 2)
         vehicle.applyEngineForce(0, 3)
         break
 
         case 's':
+        case 'S':
         case 'ArrowDown':
         vehicle.applyEngineForce(0, 2)
         vehicle.applyEngineForce(0, 3)
         break
 
         case 'a':
+        case 'A':
         case 'ArrowLeft':
         vehicle.setSteeringValue(0, 0)
         vehicle.setSteeringValue(0, 1)
         break
 
         case 'd':
+        case 'D':
         case 'ArrowRight':
         vehicle.setSteeringValue(0, 0)
         vehicle.setSteeringValue(0, 1)
