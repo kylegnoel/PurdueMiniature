@@ -17,12 +17,13 @@ import {bodyToMesh} from './three-conversion-util.js'
     let mesh
     let block0, block1, ramp, test
     let car
+    let engineeringFountainMesh
 
     // cannon.js variables
     let world
     let body
     let bodyPos
-    let block0Physics, block1Physics, rampPhysics
+    let block0Physics, block1Physics, rampPhysics1, engineeringFountain
     let chassisBody
     let vehicle
     let wheelBody
@@ -117,9 +118,7 @@ import {bodyToMesh} from './three-conversion-util.js'
         // block0 = new THREE.Mesh(block0Geo, material)
         // scene.add(block0)
 
-        // const block1Geo = new THREE.BoxBufferGeometry(80, 75, 62)
-        // block1 = new THREE.Mesh(block1Geo, material)
-        // scene.add(block1)
+
 
         // const rampGeo = new THREE.BoxBufferGeometry(26, 75, 20)
         // ramp = new THREE.Mesh(rampGeo, material)
@@ -140,7 +139,8 @@ import {bodyToMesh} from './three-conversion-util.js'
             objLoader.setMaterials(mtl);
             objLoader.load('models/BoilermakerXtraSpecial/BoilermakerXtraSpecial.obj', (train) => {
                 scene.add(train)
-                console.log(train)
+                train.name = "train"
+                console.log(train.name)
             }, (xhr) => {
                 if (xhr.loaded / xhr.total == 1) {
                     console.log("LOADED")
@@ -174,7 +174,7 @@ import {bodyToMesh} from './three-conversion-util.js'
     chassisBody = new CANNON.Body({ mass: 700 })
     chassisBody.addShape(chassisShape)
     chassisBody.position.set(-80, 100, -50)
-    chassisBody.angularVelocity.set(0, 0.5, 0)
+    chassisBody.angularVelocity.set(0, 0, 0)
     chassisBody.quaternion.setFromEuler(0, Math.PI, 0)
 
     vehicle = new CANNON.RaycastVehicle({
@@ -188,13 +188,13 @@ import {bodyToMesh} from './three-conversion-util.js'
             suspensionRestLength: 0.1,
             frictionSlip: 3,
             dampingRelaxation: 2.3,
-            dampingCompression: 4.4,
+            dampingCompression: 6,
             maxSuspensionForce: 100000,
             rollInfluence: 0.01,
             axleLocal: new CANNON.Vec3(0, 0, 2),
             chassisConnectionPointLocal: new CANNON.Vec3(-1, 0, 1),
             maxSuspensionTravel: 0.3,
-            customSlidingRotationalSpeed: -30,
+            customSlidingRotationalSpeed: 3000000,
             useCustomSlidingRotationalSpeed: true,
         }
 
@@ -293,24 +293,75 @@ import {bodyToMesh} from './three-conversion-util.js'
                 mass: 0,
                 material: groundMaterial
             })
-            block1Physics.addShape(new CANNON.Box(new CANNON.Vec3(40, 32.5, 31)))
-            block1Physics.position.set(35, 39, -63)
+            block1Physics.addShape(new CANNON.Box(new CANNON.Vec3(43, 32.5, 35)))
+            block1Physics.position.set(33, 38.5, -65)
             world.addBody(block1Physics)
+
+            // Helper visuals for block1
+            const block1Geo = new THREE.BoxBufferGeometry(86, 65, 70)
+            const block1Mat = new THREE.MeshBasicMaterial({color: 0xFF0000, side: THREE.DoubleSide, wireframe: true})
+            block1 = new THREE.Mesh(block1Geo, block1Mat)
+            block1.position.copy(block1Physics.position)
+            block1.quaternion.copy(block1Physics.quaternion)
+            scene.add(block1)
+        }
+
+        // Adding physics of block2
+        {
+            const block2Physics = new CANNON.Body({
+                mass: 0,
+                material: groundMaterial,
+            })
+            block2Physics.addShape(new CANNON.Box(new CANNON.Vec3(50, 50, 58)))
+            block2Physics.position.set(73, 13, 42)
+            world.addBody(block2Physics)
+            
+            // helper visuals for block2
+
+            const block2Geo = new THREE.BoxBufferGeometry(100, 100, 116)
+            const block2Mat = new THREE.MeshBasicMaterial({color: 0xFF0000, side: THREE.DoubleSide, wireframe: true})
+            const block2Mesh = new THREE.Mesh(block2Geo, block2Mat)
+            block2Mesh.position.copy(block2Physics.position)
+            block2Mesh.quaternion.copy(block2Physics.quaternion)
+            scene.add(block2Mesh)
+
         }
 
 
-        // Adding Physics of ramp
+        // Adding Physics of ramp0
         {
-            rampPhysics = new CANNON.Body({
+            rampPhysics1 = new CANNON.Body({
                 mass: 0,
                 material: groundMaterial
             })
-            rampPhysics.addShape(new CANNON.Box(new CANNON.Vec3(13, 32.5, 10)))
+            rampPhysics1.addShape(new CANNON.Box(new CANNON.Vec3(13, 32.5, 10)))
     
     
-            rampPhysics.quaternion.setFromAxisAngle(new CANNON.Vec3(0, 0, 1), -Math.PI / 7.8)
-            rampPhysics.position.set(-30, 46, -50)
-            world.addBody(rampPhysics)
+            rampPhysics1.quaternion.setFromAxisAngle(new CANNON.Vec3(0, 0, 1), -Math.PI / 7.8)
+            rampPhysics1.position.set(-30, 46, -50)
+            world.addBody(rampPhysics1)
+        }
+
+        // Adding physics of ramp1
+        {
+            const rampPhysics2 = new CANNON.Body({
+                mass: 0,
+                material: groundMaterial
+            })
+            rampPhysics2.addShape(new CANNON.Box(new CANNON.Vec3(13, 32.5, 10.2)))
+    
+            rampPhysics2.quaternion.setFromAxisAngle(new CANNON.Vec3(1, 0, 0), Math.PI / 8)
+            rampPhysics2.position.set(63, 37.05, -33)
+            world.addBody(rampPhysics2)
+
+            const ramp2Geo = new THREE.BoxBufferGeometry(26, 65, 20.4)
+            const ramp2Mat = new THREE.MeshBasicMaterial({color: 0xFF0000, side: THREE.DoubleSide, wireframe: true})
+            const ramp2Mesh = new THREE.Mesh(ramp2Geo, ramp2Mat)
+
+            ramp2Mesh.position.copy(rampPhysics2.position)
+            ramp2Mesh.quaternion.copy(rampPhysics2.quaternion)
+            scene.add(ramp2Mesh)
+
         }
 
 
@@ -412,6 +463,34 @@ import {bodyToMesh} from './three-conversion-util.js'
 
         }
 
+        // Adding engineering fountain
+
+        {
+            engineeringFountain = new CANNON.Body({
+                mass: 50,
+                shape: new CANNON.Box(new CANNON.Vec3(5, 5, 5))
+            })
+            engineeringFountain.position.set(55, 77, -65)
+            world.addBody(engineeringFountain)
+
+            const mtlLoader = new MTLLoader();
+            mtlLoader.load('models/EngineeringFountain/EngineeringFountain.mtl', (mtl) => {
+                mtl.preload();
+                const objLoader = new OBJLoader();
+                objLoader.setMaterials(mtl);
+                objLoader.load('models/EngineeringFountain/EngineeringFountain.obj', (fountain) => {
+                    scene.add(fountain)
+                    fountain.name = "engineeringFountain"
+                    console.log(fountain)
+                }, (xhr) => {
+                    if (xhr.loaded / xhr.total == 1) {
+                        console.log("LOADED")
+                    }
+                });
+            });
+    
+
+        }
 
 
 
@@ -435,19 +514,33 @@ import {bodyToMesh} from './three-conversion-util.js'
     // block0.quaternion.copy(block0Physics.quaternion)
     // block1.position.copy(block1Physics.position)
     // block1.quaternion.copy(block1Physics.quaternion)
-    // ramp.position.copy(rampPhysics.position)
-    // ramp.quaternion.copy(rampPhysics.quaternion)
+    // ramp.position.copy(rampPhysics1.position)
+    // ramp.quaternion.copy(rampPhysics1.quaternion)
     // car.position.copy(chassisBody.position)
     // car.quaternion.copy(chassisBody.quaternion)
-    let a = scene.getObjectById(284, true)
+
+    let fountain = scene.getObjectByName("engineeringFountain", true)
+    fountain.position.copy(engineeringFountain.position)
+    fountain.quaternion.copy(engineeringFountain.quaternion)
+    fountain.position.y -= 5
+
+    
+    let train = scene.getObjectByName("train", true)
 
 
-    a.position.copy(chassisBody.position)
-    a.quaternion.copy(chassisBody.quaternion)
+    train.position.copy(chassisBody.position)
+    train.quaternion.copy(chassisBody.quaternion)
     // camera.lookAt(new THREE.Vector3(chassisBody.position.x, chassisBody.position.y, chassisBody.position.z))
-    a.rotateY(Math.PI)
-    let pos = a.position
-    pos.y -= 0.5
+    train.rotateY(Math.PI)
+    train.position.y -= 0.5
+
+
+    if (train.position.y < -100) {
+        chassisBody.position.set(-80, 90, -50)
+        chassisBody.quaternion.setFromEuler(0, Math.PI, 0)
+        chassisBody.angularVelocity.set(0,0,0)
+        chassisBody.velocity.set(0,0,0)
+    }
     render()
     }
 
@@ -505,12 +598,15 @@ import {bodyToMesh} from './three-conversion-util.js'
         case ' ':
         vehicle.setBrake(brakeForce, 2)
         vehicle.setBrake(brakeForce, 3)
+
         break
 
         case 'r':
         case 'R':
-            chassisBody.position.set(-80, 100, -50)
+            chassisBody.position.set(-80, 90, -50)
             chassisBody.quaternion.setFromEuler(0, Math.PI, 0)
+            chassisBody.angularVelocity.set(0,0,0)
+            chassisBody.velocity.set(0,0,0)
             console.log(chassisBody)
             break;
     }
