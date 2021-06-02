@@ -1,0 +1,45 @@
+newmtl Buffer Layer material_7d78684c-7df3-4394-a4e1-aa2d3229c7f3
+Kd 0.000 0.000 0.000
+d 1.000
+newmtl Material 2_cf4c2631-667f-4a16-bbf1-25e0c6e347f4
+Kd 0.859 0.714 0.094
+d 1.000
+newmtl Material_21a256c1-8b91-4845-8cc6-f050fe09a6c7
+Kd 0.859 0.714 0.094
+d 1.000
+newmtl 3D Text material 3_3b22ee9f-3ecb-496a-8f90-4cba384984c9
+Kd 1.000 1.000 1.000
+d 1.000
+newmtl 3D Text material_c739c2ac-a989-423e-9bc3-0d33fecdb0ad
+Kd 0.859 0.714 0.094
+d 1.000
+newmtl Box material_29520b95-4701-4b4b-8303-3696c3a3eb4a
+Kd 0.086 0.086 0.086
+d 1.000
+newmtl train_lower_part1 material_e835b3a5-c359-41ef-ab1b-657c64fa8068
+Kd 0.000 0.000 0.000
+d 1.000
+newmtl train_chimney1 material_9ac75512-e131-4455-9550-a93bb631f668
+Kd 0.000 0.000 0.000
+d 1.000
+newmtl 3D Text material 1_09e962d5-e61d-495f-8b3c-66a1d6ff7f06
+Kd 0.859 0.714 0.094
+d 1.000
+newmtl train_1 material_88a6190e-9dca-4166-b4a1-8b4d53f73ef2
+Kd 0.000 0.000 0.000
+d 1.000
+newmtl train_tube material_c6002054-f795-40f6-9d03-ee16aa3fbf68
+Kd 0.000 0.000 0.000
+d 1.000
+newmtl train_wheel7 material_a551d0be-2564-4d93-a206-fe7221fd0fed
+Kd 0.859 0.714 0.094
+d 1.000
+newmtl train_wheel8 material_a7b6c9b7-26ce-41d7-b2b0-9d99d3890174
+Kd 0.859 0.714 0.094
+d 1.000
+newmtl train_wheel6 material_649923fb-940c-4a3c-b837-3788ad20d811
+Kd 0.859 0.714 0.094
+d 1.000
+newmtl train_wheel5 material_dd2b6614-ac2f-4429-a801-e8c6b76a9957
+Kd 0.859 0.714 0.094
+d 1.000
