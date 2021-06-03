@@ -54,8 +54,9 @@ import {bodyToMesh} from './three-conversion-util.js'
         {
             const skyColor = 0xCBD9E6;  
             const groundColor = 0xE2E2E4;  
-            const intensity = 0.7;
+            const intensity = 0.85;
             const light = new THREE.HemisphereLight(skyColor, groundColor, intensity);
+            light.position.set(100, 0, 0)
             scene.add(light);   
         }
 
@@ -530,7 +531,10 @@ import {bodyToMesh} from './three-conversion-util.js'
 
     train.position.copy(chassisBody.position)
     train.quaternion.copy(chassisBody.quaternion)
-    // camera.lookAt(new THREE.Vector3(chassisBody.position.x, chassisBody.position.y, chassisBody.position.z))
+    camera.position.z = chassisBody.position.z + 50
+    camera.position.x = chassisBody.position.x + 50
+    camera.position.y = chassisBody.position.y + 60
+    camera.lookAt(new THREE.Vector3(chassisBody.position.x, chassisBody.position.y, chassisBody.position.z))
     train.rotateY(Math.PI)
     train.position.y -= 0.5
 
@@ -570,36 +574,39 @@ import {bodyToMesh} from './three-conversion-util.js'
         case 'w':
         case 'W':
         case 'ArrowUp':
-        vehicle.applyEngineForce(-maxForce, 2)
-        vehicle.applyEngineForce(-maxForce, 3)
-        break
+            vehicle.applyEngineForce(-maxForce, 2)
+            vehicle.applyEngineForce(-maxForce, 3)
+            break
 
         case 's':
         case 'S':
         case 'ArrowDown':
-        vehicle.applyEngineForce(maxForce, 2)
-        vehicle.applyEngineForce(maxForce, 3)
-        break
+            vehicle.applyEngineForce(maxForce, 2)
+            vehicle.applyEngineForce(maxForce, 3)
+            break
 
         case 'a':
         case 'A':
         case 'ArrowLeft':
-        vehicle.setSteeringValue(maxSteerVal, 0)
-        vehicle.setSteeringValue(maxSteerVal, 1)
-        break
+            vehicle.setSteeringValue(maxSteerVal, 0)
+            vehicle.setSteeringValue(maxSteerVal, 1)
+            break
 
         case 'd':
         case 'D':
         case 'ArrowRight':
-        vehicle.setSteeringValue(-maxSteerVal, 0)
-        vehicle.setSteeringValue(-maxSteerVal, 1)
-        break
+            vehicle.setSteeringValue(-maxSteerVal, 0)
+            vehicle.setSteeringValue(-maxSteerVal, 1)
+            break
 
         case ' ':
-        vehicle.setBrake(brakeForce, 2)
-        vehicle.setBrake(brakeForce, 3)
-
-        break
+            vehicle.setBrake(brakeForce, 2)
+            vehicle.setBrake(brakeForce, 3)
+            break
+        
+        case 'q':
+            chassisBody.velocity.y = 100
+            break
 
         case 'r':
         case 'R':
@@ -641,6 +648,10 @@ import {bodyToMesh} from './three-conversion-util.js'
         case 'ArrowRight':
         vehicle.setSteeringValue(0, 0)
         vehicle.setSteeringValue(0, 1)
+        break
+
+        case 'q':
+            chassisBody.velocity.y = -5
         break
 
         case ' ':
