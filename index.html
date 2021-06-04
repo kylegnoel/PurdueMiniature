@@ -5,9 +5,13 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Document</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
 </head>
 
 <style>
+body{
+	overflow: hidden;
+}
 .popShow{
 	opacity: 1;
 	transition: opacity 1s;
@@ -18,12 +22,53 @@
 	transition: opacity 1s;
 }
 
+.card-container{
+	display: block;
+	position: absolute;
+	margin: auto;
+	width: 25%;
+	border-radius: 30px;
+	height: 75%;
+	text-align: center;
+	background: linear-gradient(180deg, #555555 45%, white 45%);
+}
+
+.card-top {
+	display: inline-block;
+	color: white;
+	height: 45%;
+}
+
+
+.card-bottom {
+	display: inline-block;
+	height: 55%;
+}
+
+img {
+	max-width: 75%;
+	height: auto;
+}
+
 </style>
 
 <body>
 	<!-- <canvas id="c"></canvas> -->
-	<div style="text-align: center; display: block; width: 100%; position: absolute; top: 5px;">
-		<div id="textBox0" class="popHide" style="display: inline-block; background: chartreuse; border: 1px solid black; border-radius: 5px; font-size: 30px;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio, magnam.</div>
+	<!-- <div style="text-align: center; display: block; width: 100%; position: absolute; top: 50%;">
+		<div id="textBox0" class="popShow" style="display: inline-block; background: #555555; border: 1px solid black; border-radius: 5px; font-size: 30px;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio, magnam.</div>
+	</div> -->
+	<input type="checkbox" name="chaseCamToggle" class="form-check-input" id="chaseCamToggle" style="position: absolute; left: 88%;" checked>
+	<label class="form-check-label" for="chaseCamToggle" style="position: absolute; left: 90%;">Toggle Chase Cam</label>
+	<div id="textBox0" class="card-container popHide">
+		<div class="card-top">
+			<h2>Find Where You Want To Go</h2>
+			<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Est voluptatibus autem veniam ad pariatur nostrum fugit ullam! Ipsa doloremque voluptate, architecto quidem eos debitis culpa?</p>
+		</div>
+		<div class="card-bottom">
+			<img src="Images/Pepe.jpg" alt="Pepe">
+			<p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Et, quaerat!</p>
+			<a href="https://www.google.com" target="_blank" class="btn btn-secondary" style="border-radius: 30px; padding-left: 25%; padding-right: 25%;">Visit Link</a>
+		</div>
 	</div>
 	
 	<link rel="stylesheet" href="style.css">

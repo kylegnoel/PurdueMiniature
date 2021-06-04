@@ -383,7 +383,7 @@ import {bodyToMesh} from './three-conversion-util.js'
                 material: groundMaterial
             })
             gatewayPillar0.addShape(new CANNON.Box(new CANNON.Vec3(6, 6, 20)))
-            gatewayPillar0.quaternion.setFromEuler(Math.PI / 2, 0, 0)
+            gatewayPillar0.quaternion   .setFromEuler(Math.PI / 2, 0, 0)
             gatewayPillar0.position.set(-90, 100, -63)
             world.addBody(gatewayPillar0)
 
@@ -448,7 +448,7 @@ import {bodyToMesh} from './three-conversion-util.js'
                         // document.getElementById("textBox0").style.display = "none"
                         document.getElementById("textBox0").classList.remove("popShow")
                         document.getElementById("textBox0").classList.add("popHide")
-                    }, 2000)
+                    }, 4000)
                 })
             })
        
@@ -531,10 +531,15 @@ import {bodyToMesh} from './three-conversion-util.js'
 
     train.position.copy(chassisBody.position)
     train.quaternion.copy(chassisBody.quaternion)
-    camera.position.z = chassisBody.position.z + 50
-    camera.position.x = chassisBody.position.x + 50
-    camera.position.y = chassisBody.position.y + 60
-    camera.lookAt(new THREE.Vector3(chassisBody.position.x, chassisBody.position.y, chassisBody.position.z))
+
+    const isChaseCam = document.getElementById("chaseCamToggle").checked
+    if (isChaseCam) {
+        camera.position.z = chassisBody.position.z + 30
+        camera.position.x = chassisBody.position.x + 30
+        camera.position.y = chassisBody.position.y + 40
+        camera.lookAt(new THREE.Vector3(chassisBody.position.x, chassisBody.position.y, chassisBody.position.z))
+    }
+    
     train.rotateY(Math.PI)
     train.position.y -= 0.5
 
