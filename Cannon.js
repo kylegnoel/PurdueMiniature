@@ -13,6 +13,7 @@ import {bodyToMesh} from './three-conversion-util.js'
  * over to the three.js scene.
  */
     // three.js variables
+    const canvas = document.querySelector('#c');
     let camera, scene, renderer
     let mesh
     let block0, block1, ramp, test
@@ -90,7 +91,7 @@ import {bodyToMesh} from './three-conversion-util.js'
         
 
         // Renderer
-        renderer = new THREE.WebGLRenderer({ antialias: true })
+        renderer = new THREE.WebGLRenderer({canvas, antialias: true })
         renderer.setSize(window.innerWidth, window.innerHeight)
 
         document.body.appendChild(renderer.domElement)
@@ -299,12 +300,12 @@ import {bodyToMesh} from './three-conversion-util.js'
             world.addBody(block1Physics)
 
             // Helper visuals for block1
-            const block1Geo = new THREE.BoxBufferGeometry(86, 65, 70)
-            const block1Mat = new THREE.MeshBasicMaterial({color: 0xFF0000, side: THREE.DoubleSide, wireframe: true})
-            block1 = new THREE.Mesh(block1Geo, block1Mat)
-            block1.position.copy(block1Physics.position)
-            block1.quaternion.copy(block1Physics.quaternion)
-            scene.add(block1)
+            // const block1Geo = new THREE.BoxBufferGeometry(86, 65, 70)
+            // const block1Mat = new THREE.MeshBasicMaterial({color: 0xFF0000, side: THREE.DoubleSide, wireframe: true})
+            // block1 = new THREE.Mesh(block1Geo, block1Mat)
+            // block1.position.copy(block1Physics.position)
+            // block1.quaternion.copy(block1Physics.quaternion)
+            // scene.add(block1)
         }
 
         // Adding physics of block2
@@ -319,12 +320,12 @@ import {bodyToMesh} from './three-conversion-util.js'
             
             // helper visuals for block2
 
-            const block2Geo = new THREE.BoxBufferGeometry(100, 100, 116)
-            const block2Mat = new THREE.MeshBasicMaterial({color: 0xFF0000, side: THREE.DoubleSide, wireframe: true})
-            const block2Mesh = new THREE.Mesh(block2Geo, block2Mat)
-            block2Mesh.position.copy(block2Physics.position)
-            block2Mesh.quaternion.copy(block2Physics.quaternion)
-            scene.add(block2Mesh)
+            // const block2Geo = new THREE.BoxBufferGeometry(100, 100, 116)
+            // const block2Mat = new THREE.MeshBasicMaterial({color: 0xFF0000, side: THREE.DoubleSide, wireframe: true})
+            // const block2Mesh = new THREE.Mesh(block2Geo, block2Mat)
+            // block2Mesh.position.copy(block2Physics.position)
+            // block2Mesh.quaternion.copy(block2Physics.quaternion)
+            // scene.add(block2Mesh)
 
         }
 
@@ -355,13 +356,15 @@ import {bodyToMesh} from './three-conversion-util.js'
             rampPhysics2.position.set(63, 37.05, -33)
             world.addBody(rampPhysics2)
 
-            const ramp2Geo = new THREE.BoxBufferGeometry(26, 65, 20.4)
-            const ramp2Mat = new THREE.MeshBasicMaterial({color: 0xFF0000, side: THREE.DoubleSide, wireframe: true})
-            const ramp2Mesh = new THREE.Mesh(ramp2Geo, ramp2Mat)
+            // Helper to visualize physics
 
-            ramp2Mesh.position.copy(rampPhysics2.position)
-            ramp2Mesh.quaternion.copy(rampPhysics2.quaternion)
-            scene.add(ramp2Mesh)
+            // const ramp2Geo = new THREE.BoxBufferGeometry(26, 65, 20.4)
+            // const ramp2Mat = new THREE.MeshBasicMaterial({color: 0xFF0000, side: THREE.DoubleSide, wireframe: true})
+            // const ramp2Mesh = new THREE.Mesh(ramp2Geo, ramp2Mat)
+
+            // ramp2Mesh.position.copy(rampPhysics2.position)
+            // ramp2Mesh.quaternion.copy(rampPhysics2.quaternion)
+            // scene.add(ramp2Mesh)
 
         }
 
@@ -439,17 +442,21 @@ import {bodyToMesh} from './three-conversion-util.js'
             bigAcademicBuildingAtBlock0Front.quaternion.setFromEuler(Math.PI / 2, 0, 0)
             bigAcademicBuildingAtBlock0Front.position.set(-45, 100, -75)
             bigAcademicBuildingAtBlock0Front.addEventListener("collide", function(e) {
+                console.log("AHHHHHHHHHHHHHHHHHHHHHHHH")
                 // document.getElementById("textBox0").style.display = "block"
                 document.getElementById("textBox0").classList.add("popShow")
                 document.getElementById("textBox0").classList.remove("popHide")
-                world.addEventListener('endContact', () => {
-                    // document.getElementById("textBox0").style.display = "block"
-                    setTimeout(function() {
+                // world.addEventListener('endContact', () => {
+                //     console.log("OOOOOOOOOOOOOOOOOOOO")
+                //     // document.getElementById("textBox0").style.display = "block"
+
+                // })
+
+                setTimeout(function() {
                         // document.getElementById("textBox0").style.display = "none"
                         document.getElementById("textBox0").classList.remove("popShow")
                         document.getElementById("textBox0").classList.add("popHide")
-                    }, 4000)
-                })
+                }, 10000)
             })
        
             world.addBody(bigAcademicBuildingAtBlock0Front)
@@ -532,12 +539,14 @@ import {bodyToMesh} from './three-conversion-util.js'
     train.position.copy(chassisBody.position)
     train.quaternion.copy(chassisBody.quaternion)
 
-    const isChaseCam = document.getElementById("chaseCamToggle").checked
-    if (isChaseCam) {
+    const isChaseCam = document.getElementById("chaseCamToggle")
+    isChaseCam.addEventListener("keyup", (e) => {e.preventDefault();})
+    if (isChaseCam.checked) {
         camera.position.z = chassisBody.position.z + 30
         camera.position.x = chassisBody.position.x + 30
         camera.position.y = chassisBody.position.y + 40
         camera.lookAt(new THREE.Vector3(chassisBody.position.x, chassisBody.position.y, chassisBody.position.z))
+
     }
     
     train.rotateY(Math.PI)

@@ -14,22 +14,25 @@ body{
 }
 .popShow{
 	opacity: 1;
-	transition: opacity 1s;
+	transform: scale(1);
+	transition: transform 1s;
 }
 
 .popHide{
 	opacity: 0;
-	transition: opacity 1s;
+	transform: scale(0.1);
+	transition: all 1s;
 }
 
 .card-container{
 	display: block;
 	position: absolute;
 	margin: auto;
-	width: 25%;
+	width: 420px;
 	border-radius: 30px;
-	height: 75%;
-	text-align: center;
+	height: 660px;
+	top: 10px;
+	left: 10px;
 	background: linear-gradient(180deg, #555555 45%, white 45%);
 }
 
@@ -53,21 +56,25 @@ img {
 </style>
 
 <body>
-	<!-- <canvas id="c"></canvas> -->
+	<canvas id="c"></canvas>
 	<!-- <div style="text-align: center; display: block; width: 100%; position: absolute; top: 50%;">
 		<div id="textBox0" class="popShow" style="display: inline-block; background: #555555; border: 1px solid black; border-radius: 5px; font-size: 30px;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio, magnam.</div>
 	</div> -->
-	<input type="checkbox" name="chaseCamToggle" class="form-check-input" id="chaseCamToggle" style="position: absolute; left: 88%;" checked>
-	<label class="form-check-label" for="chaseCamToggle" style="position: absolute; left: 90%;">Toggle Chase Cam</label>
+	<input type="checkbox" name="chaseCamToggle" class="form-check-input" id="chaseCamToggle" style="position: absolute; right: 150px;" checked>
+	<label class="form-check-label" for="chaseCamToggle" style="position: absolute; right: 10px;">Toggle Chase Cam</label>
 	<div id="textBox0" class="card-container popHide">
 		<div class="card-top">
-			<h2>Find Where You Want To Go</h2>
-			<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Est voluptatibus autem veniam ad pariatur nostrum fugit ullam! Ipsa doloremque voluptate, architecto quidem eos debitis culpa?</p>
+			<div class="content" style="margin: 45px;">
+				<h4>Find Where You Want To Go</h4>
+				<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Est voluptatibus autem veniam ad pariatur nostrum fugit ullam! Ipsa doloremque voluptate, architecto quidem eos debitis culpa?</p>	
+			</div>
 		</div>
 		<div class="card-bottom">
-			<img src="Images/Pepe.jpg" alt="Pepe">
-			<p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Et, quaerat!</p>
-			<a href="https://www.google.com" target="_blank" class="btn btn-secondary" style="border-radius: 30px; padding-left: 25%; padding-right: 25%;">Visit Link</a>
+			<div class="content" style="margin: 45px; justify-content: center; flex-direction: column; display: inline-flex; align-items: center;">
+				<img src="Images/Pepe.jpg" alt="Pepe">
+				<p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Et, quaerat!</p>
+				<a href="https://www.google.com" target="_blank" class="btn btn-secondary" style="border-radius: 30px; padding-left: 35%; padding-right: 35%;">Visit Link</a>	
+			</div>
 		</div>
 	</div>
 	
@@ -77,6 +84,7 @@ img {
  
 	</script>
 	<script type="module" src="Cannon.js"></script>
+	
 
 </body>
 </html>
