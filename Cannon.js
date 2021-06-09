@@ -19,6 +19,8 @@ let mesh
 let block0, block1, ramp, test
 let car
 let engineeringFountainMesh
+let raycaster = new THREE.Raycaster();
+const pointer = new THREE.Vector2();
 
 // cannon.js variables
 let world
@@ -92,6 +94,7 @@ function initThree() {
 
     // Renderer
     renderer = new THREE.WebGLRenderer({ canvas, antialias: true })
+    renderer.setPixelRatio(window.devicePixelRatio)
     renderer.setSize(window.innerWidth, window.innerHeight)
 
     document.body.appendChild(renderer.domElement)
@@ -134,6 +137,7 @@ function initThree() {
     // console.log(car)
     // scene.add(car)
 
+
     const mtlLoader = new MTLLoader();
     mtlLoader.load('models/BoilermakerXtraSpecial/BoilermakerXtraSpecial.mtl', (mtl) => {
         mtl.preload();
@@ -159,6 +163,11 @@ function onWindowResize() {
     camera.aspect = window.innerWidth / window.innerHeight
     camera.updateProjectionMatrix()
     renderer.setSize(window.innerWidth, window.innerHeight)
+}
+
+function onPointerMOve(event) {
+    pointer.x = (event.clientX / window.innerWidth) * 2 - 1;
+    pointer.y = - (event.clientY / window.innerHeight) * 2 + 1;
 }
 
 function initCannon() {
@@ -210,6 +219,7 @@ function initCannon() {
     wheelOptions.chassisConnectionPointLocal.set(-2.5, 0, -2)
     vehicle.addWheel(wheelOptions)
 
+    wheelOptions.radius = 1.7
     wheelOptions.chassisConnectionPointLocal.set(2.5, 0, 2)
     vehicle.addWheel(wheelOptions)
 
@@ -409,13 +419,15 @@ function initCannon() {
             // scene.add(pillar1Mesh)
         }
 
-        addTreePhysics(new CANNON.Vec3(-92, 83, -90), true)
-        addTreePhysics(new CANNON.Vec3(-90, 83, -80), true)
-        addTreePhysics(new CANNON.Vec3(-67, 83, -88), true)
-        addBigAcademicBuildingPhysics(new CANNON.Vec3(-45, 100, -85), new CANNON.Quaternion(Math.PI / 2, 0, 0), true)
-        addBigAcademicBuildingPhysics(new CANNON.Vec3(32, 80, -93), new CANNON.Quaternion(Math.PI / 2, 0, 0), true)
-        addSmallAcademicBuildingPhysics(new CANNON.Vec3(1, 80, -93), new CANNON.Quaternion(Math.PI / 2, 0, 0), true)
-        addSmallAcademicBuildingPhysics(new CANNON.Vec3(62, 80, -93), new CANNON.Quaternion(Math.PI / 2, 0, 0), true)
+        addTreePhysics(new CANNON.Vec3(-92, 83, -90), false)
+        addTreePhysics(new CANNON.Vec3(-90, 83, -80), false)
+        addTreePhysics(new CANNON.Vec3(-67, 83, -88), false)
+        addBigAcademicBuildingPhysics(new CANNON.Vec3(-45, 85, -85), new CANNON.Quaternion(Math.PI / 2, 0, 0), true)
+
+
+        addBigAcademicBuildingPhysics(new CANNON.Vec3(32, 75, -93), new CANNON.Quaternion(Math.PI / 2, 0, 0), true)
+        addSmallAcademicBuildingPhysics(new CANNON.Vec3(1, 80, -93), new CANNON.Quaternion(Math.PI / 2, 0, 0), false)
+        addSmallAcademicBuildingPhysics(new CANNON.Vec3(62, 80, -93), new CANNON.Quaternion(Math.PI / 2, 0, 0), false)
 
 
         // Small Academic Building Block 1
@@ -529,7 +541,18 @@ function addBigAcademicBuildingPhysics(position, quaternion, visuals) {
         }, 10000)
     })
 
+    buildingFront.addEventListener("click", function(e) { 
+        alert("BRO")
+    })
+
     world.addBody(buildingFront)
+
+    const areaGeo = new THREE.RingGeometry(20, 21, 4, 1, Math.PI / 4)
+    const areaMat = new THREE.MeshBasicMaterial({color: 0xFF0000, side: THREE.DoubleSide})
+    const areaMesh = new THREE.Mesh(areaGeo, areaMat)
+    areaMesh.position.copy(buildingFront.position)
+    areaMesh.quaternion.copy(buildingFront.quaternion)
+    scene.add(areaMesh)
 
     if (visuals) {
         const buildingBackGeo = new THREE.BoxBufferGeometry(30, 12, 40)
@@ -546,6 +569,8 @@ function addBigAcademicBuildingPhysics(position, quaternion, visuals) {
         scene.add(buildingFrontMesh)
     }
 }
+
+
 
 
 function animate() {
@@ -600,9 +625,14 @@ function updatePhysics() {
 }
 
 function render() {
+    raycaster.setFromCamera( pointer, camera)
+    const intersects = raycaster.intersectObjects( scene.children )
+    for (let i = 0; i < intersects.length; i++) {
+        intersects[i].object.material.color.set(0x000000)
+    }
     renderer.render(scene, camera)
 }
-
+window.addEventListener('mousemove', onPointerMOve, false)
 
 document.addEventListener('keydown', (event) => {
     const maxSteerVal = 0.7
