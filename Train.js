@@ -6,7 +6,4 @@ export default class Train {
         
     }
 
-    setChassis() {
-        this.chassisShape = new
-    }
 }
