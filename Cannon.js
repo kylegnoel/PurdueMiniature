@@ -174,7 +174,9 @@ function initCannon() {
     // Create the physics of the Car
 
     const chassisShape = new CANNON.Box(new CANNON.Vec3(2, 1, 1))
-    chassisBody = new CANNON.Body({ mass: 700 })
+    chassisBody = new CANNON.Body({ 
+        mass: 700,
+     })
     chassisBody.addShape(chassisShape)
     chassisBody.position.set(-80, 90, -50)
     chassisBody.quaternion.setFromEuler(0, Math.PI, 0)
@@ -207,7 +209,7 @@ function initCannon() {
 
     wheelOptions.chassisConnectionPointLocal.set(-2.5, 0, -2)
     vehicle.addWheel(wheelOptions)
-    
+
     wheelOptions.chassisConnectionPointLocal.set(2.5, 0, 2)
     vehicle.addWheel(wheelOptions)
 
@@ -263,23 +265,6 @@ function initCannon() {
 
     // Adding physics of the world
     {
-        // Adding physics of the ground
-        {
-            // const heightfieldShape = new CANNON.Plane()
-            // const heightfieldBody = new CANNON.Body({ mass: 0, material: groundMaterial })
-            // heightfieldBody.addShape(heightfieldShape)
-            // heightfieldBody.quaternion.setFromEuler(-Math.PI / 2, 0, 0)
-            // world.addBody(heightfieldBody)
-        }
-
-        // Adding visuals of the ground
-        {
-            // const groundGeo = new THREE.PlaneGeometry(1000, 1000, 1, 1)
-            // const groundMat = new THREE.MeshBasicMaterial({ color: 0x0000FF, side: THREE.DoubleSide})
-            // const groundMesh = new THREE.Mesh(groundGeo, groundMat)
-            // groundMesh.rotation.x = Math.PI / 2;
-            // scene.add(groundMesh)
-        }
         // Adding physics of block0
         {
             block0Physics = new CANNON.Body({
@@ -374,11 +359,19 @@ function initCannon() {
         // Adding the physics of the interaction/behavior between the wheel material and the ground material
         {
             const wheel_ground = new CANNON.ContactMaterial(wheelMaterial, groundMaterial, {
-                friction: 0.8,
+                friction: 0.3,
                 restitution: 0,
                 contactEquationStiffness: 1000,
             })
             world.addContactMaterial(wheel_ground)
+
+            const groundGround = new CANNON.ContactMaterial(groundMaterial, groundMaterial, {
+                friction: 0.8,
+                restitution: 30,
+                contactEquationStiffness: 1000,
+            })
+            
+            world.addContactMaterial(groundGround)
         }
 
         // Adding the physics of the gateway to the future
@@ -416,60 +409,26 @@ function initCannon() {
             // scene.add(pillar1Mesh)
         }
 
-        // Adding physics to the buildings in block0
+        addTreePhysics(new CANNON.Vec3(-92, 83, -90), true)
+        addTreePhysics(new CANNON.Vec3(-90, 83, -80), true)
+        addTreePhysics(new CANNON.Vec3(-67, 83, -88), true)
+        addBigAcademicBuildingPhysics(new CANNON.Vec3(-45, 100, -85), new CANNON.Quaternion(Math.PI / 2, 0, 0), true)
+        addBigAcademicBuildingPhysics(new CANNON.Vec3(32, 80, -93), new CANNON.Quaternion(Math.PI / 2, 0, 0), true)
+        addSmallAcademicBuildingPhysics(new CANNON.Vec3(1, 80, -93), new CANNON.Quaternion(Math.PI / 2, 0, 0), true)
+        addSmallAcademicBuildingPhysics(new CANNON.Vec3(62, 80, -93), new CANNON.Quaternion(Math.PI / 2, 0, 0), true)
+
+
+        // Small Academic Building Block 1
         {
-            const bigAcademicBuildingAtBlock0Back = new CANNON.Body({
+            const buildingSmallBlock1Left = new CANNON.Body({
                 mass: 0,
                 material: groundMaterial
             })
-            bigAcademicBuildingAtBlock0Back.addShape(new CANNON.Box(new CANNON.Vec3(15, 6, 20)))
-            bigAcademicBuildingAtBlock0Back.quaternion.setFromEuler(Math.PI / 2, 0, 0)
-            bigAcademicBuildingAtBlock0Back.position.set(-45, 100, -85)
-            world.addBody(bigAcademicBuildingAtBlock0Back)
+            buildingSmallBlock1Left.addShape(new CANNON.Box(new CANNON.Vec3(12, 6, 20)))
+            buildingSmallBlock1Left.quaternion.setFromEuler(Math.PI / 2, 0, 0)
+            buildingSmallBlock1Left.position.set(0, 75, -95)
 
-            // Helper visuals for BigAcademicBuildingAtBlock0
-
-            // const bigAcademicBuildingAtBlock0GeoBack = new THREE.BoxBufferGeometry(30, 12, 40)
-            // const bigAcademicBuildingAtBlock0MatBack = new THREE.MeshBasicMaterial({ color: 0xFF0000, side: THREE.DoubleSide, wireframe: true})
-            // const bigAcademicBuildingAtBlock0MeshBack = new THREE.Mesh(bigAcademicBuildingAtBlock0GeoBack, bigAcademicBuildingAtBlock0MatBack)
-            // bigAcademicBuildingAtBlock0MeshBack.position.copy(bigAcademicBuildingAtBlock0Back.position)
-            // bigAcademicBuildingAtBlock0MeshBack.quaternion.copy(bigAcademicBuildingAtBlock0Back.quaternion)
-            // scene.add(bigAcademicBuildingAtBlock0MeshBack)
-
-            const bigAcademicBuildingAtBlock0Front = new CANNON.Body({
-                mass: 0,
-                material: groundMaterial
-            })
-            bigAcademicBuildingAtBlock0Front.addShape(new CANNON.Box(new CANNON.Vec3(8, 6, 20)))
-            bigAcademicBuildingAtBlock0Front.quaternion.setFromEuler(Math.PI / 2, 0, 0)
-            bigAcademicBuildingAtBlock0Front.position.set(-45, 100, -75)
-            bigAcademicBuildingAtBlock0Front.addEventListener("collide", function (e) {
-                console.log("AHHHHHHHHHHHHHHHHHHHHHHHH")
-                // document.getElementById("textBox0").style.display = "block"
-                document.getElementById("textBox0").classList.add("popShow")
-                document.getElementById("textBox0").classList.remove("popHide")
-                // world.addEventListener('endContact', () => {
-                //     console.log("OOOOOOOOOOOOOOOOOOOO")
-                //     // document.getElementById("textBox0").style.display = "block"
-
-                // })
-
-                setTimeout(function () {
-                    // document.getElementById("textBox0").style.display = "none"
-                    document.getElementById("textBox0").classList.remove("popShow")
-                    document.getElementById("textBox0").classList.add("popHide")
-                }, 10000)
-            })
-
-            world.addBody(bigAcademicBuildingAtBlock0Front)
-
-            // const bigAcademicBuildingAtBlock0GeoFront = new THREE.BoxBufferGeometry(16, 12, 40)
-            // const bigAcademicBuildingAtBlock0MatFront = new THREE.MeshBasicMaterial({ color: 0xFF0000, side: THREE.DoubleSide, wireframe: true})
-            // const bigAcademicBuildingAtBlock0MeshFront = new THREE.Mesh(bigAcademicBuildingAtBlock0GeoFront, bigAcademicBuildingAtBlock0MatFront)
-            // bigAcademicBuildingAtBlock0MeshFront.position.copy(bigAcademicBuildingAtBlock0Front.position)
-            // bigAcademicBuildingAtBlock0MeshFront.quaternion.copy(bigAcademicBuildingAtBlock0Front.quaternion)
-            // scene.add(bigAcademicBuildingAtBlock0MeshFront)
-
+            world.addBody(buildingSmallBlock1Left)
 
         }
 
@@ -501,6 +460,91 @@ function initCannon() {
             });
         }
     }
+
+}
+
+function addTreePhysics(position, visuals) {
+    const tree = new CANNON.Body({
+        mass: 0,
+    })
+    tree.addShape(new CANNON.Box(new CANNON.Vec3(2, 4, 2)))
+    tree.position.set(position.x, position.y, position.z)
+    world.addBody(tree)
+
+    if (visuals) {
+        const treeGeo = new THREE.BoxBufferGeometry(4, 8, 4)
+        const treeMat = new THREE.MeshBasicMaterial({color: 0xFF0000, side: THREE.DoubleSide, wireframe: true})
+        const treeMesh = new THREE.Mesh(treeGeo, treeMat)
+        treeMesh.position.copy(tree.position)
+        treeMesh.quaternion.copy(tree.quaternion)
+        scene.add(treeMesh)
+    }
+}
+
+function addSmallAcademicBuildingPhysics(position, quaternion, visuals) {
+    const building = new CANNON.Body({
+        mass: 0,
+        material: groundMaterial
+    })
+    building.addShape(new CANNON.Box(new CANNON.Vec3(11, 6, 20)))
+    building.quaternion.setFromEuler(quaternion.x, quaternion.y, quaternion.z)
+    building.position.set(position.x, position.y, position.z)
+    world.addBody(building)
+
+    if (visuals) {
+        const buildingGeo = new THREE.BoxBufferGeometry(22, 12, 40)
+        const buildingMat = new THREE.MeshBasicMaterial({ color: 0xFF0000, side: THREE.DoubleSide, wireframe: true})
+        const buildingMesh = new THREE.Mesh(buildingGeo, buildingMat)
+        buildingMesh.position.copy(building.position)
+        buildingMesh.quaternion.copy(building.quaternion)
+        scene.add(buildingMesh)
+    }
+}
+
+function addBigAcademicBuildingPhysics(position, quaternion, visuals) {
+    const buildingBack = new CANNON.Body({
+        mass: 0,
+        material: groundMaterial
+    })
+    buildingBack.addShape(new CANNON.Box(new CANNON.Vec3(15, 6, 20)))
+    buildingBack.quaternion.setFromEuler(quaternion.x, quaternion.y, quaternion.z)
+    buildingBack.position.set(position.x, position.y, position.z)
+    world.addBody(buildingBack)
+
+    const buildingFront = new CANNON.Body({
+        mass: 0,
+        material: groundMaterial
+    })
+    buildingFront.addShape(new CANNON.Box(new CANNON.Vec3(8, 6, 20)))
+    buildingFront.quaternion.setFromEuler(quaternion.x, quaternion.y, quaternion.z)
+    buildingFront.position.set(position.x, position.y, position.z + 10)
+    buildingFront.addEventListener("collide", function (e) {
+        console.log("AHHHHHHHHHHHHHHHHHHHHHHHH")
+        document.getElementById("textBox0").classList.add("popShow")
+        document.getElementById("textBox0").classList.remove("popHide")
+
+        setTimeout(function () {
+            document.getElementById("textBox0").classList.remove("popShow")
+            document.getElementById("textBox0").classList.add("popHide")
+        }, 10000)
+    })
+
+    world.addBody(buildingFront)
+
+    if (visuals) {
+        const buildingBackGeo = new THREE.BoxBufferGeometry(30, 12, 40)
+        const buildingMat = new THREE.MeshBasicMaterial({ color: 0xFF0000, side: THREE.DoubleSide, wireframe: true})
+        const buildingBackMesh = new THREE.Mesh(buildingBackGeo, buildingMat)
+        buildingBackMesh.position.copy(buildingBack.position)
+        buildingBackMesh.quaternion.copy(buildingBack.quaternion)
+        scene.add(buildingBackMesh)
+
+        const buildingFrontGeo = new THREE.BoxBufferGeometry(16, 12, 40)
+        const buildingFrontMesh = new THREE.Mesh(buildingFrontGeo, buildingMat)
+        buildingFrontMesh.position.copy(buildingFront.position)
+        buildingFrontMesh.quaternion.copy(buildingFront.quaternion)
+        scene.add(buildingFrontMesh)
+    }
 }
 
 
@@ -509,18 +553,6 @@ function animate() {
 
     // Step the physics world
     updatePhysics()
-
-    // Copy coordinates from cannon.js to three.js
-    // mesh.position.copy(body.position)
-    // mesh.quaternion.copy(body.quaternion)
-    // block0.position.copy(block0Physics.position)
-    // block0.quaternion.copy(block0Physics.quaternion)
-    // block1.position.copy(block1Physics.position)
-    // block1.quaternion.copy(block1Physics.quaternion)
-    // ramp.position.copy(rampPhysics1.position)
-    // ramp.quaternion.copy(rampPhysics1.quaternion)
-    // car.position.copy(chassisBody.position)
-    // car.quaternion.copy(chassisBody.quaternion)
 
     let fountain = scene.getObjectByName("engineeringFountain", true)
     fountain.position.copy(engineeringFountain.position)
@@ -610,14 +642,17 @@ document.addEventListener('keydown', (event) => {
             break
 
         case ' ':
-            console.log(vehicle.currentVehicleSpeedKmHour)
-            if (vehicle.currentVehicleSpeedKmHour < 0) { 
-                vehicle.setBrake(brakeForce, 2)
-                vehicle.setBrake(brakeForce, 3)
-            } else {
-                chassisBody.angularVelocity.set(0, 0, 0)
-                chassisBody.velocity.set(0, 0, 0)
-            }
+            // console.log(vehicle.currentVehicleSpeedKmHour)
+            // if (vehicle.currentVehicleSpeedKmHour < 0) {
+            //     vehicle.setBrake(brakeForce, 2)
+            //     vehicle.setBrake(brakeForce, 3)
+            // } else {
+            //     chassisBody.angularVelocity.set(0, 0, 0)
+            //     chassisBody.velocity.set(0, 0, 0)
+            // }
+
+            chassisBody.angularVelocity.set(0, 0, 0)
+            chassisBody.velocity.set(0, 0, 0)
             break
 
         case 'q':
@@ -675,8 +710,8 @@ document.addEventListener('keyup', (event) => {
         case ' ':
             // vehicle.setBrake(0, 0)
             // vehicle.setBrake(0, 1)
-            vehicle.setBrake(0, 2)
-            vehicle.setBrake(0, 3)
+            // vehicle.setBrake(0, 2)
+            // vehicle.setBrake(0, 3)
             break
     }
 })
