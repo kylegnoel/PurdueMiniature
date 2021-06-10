@@ -1,4 +1,4 @@
-import * as CANNON from './build/cannon-es.js'
+import * as CANNON from '../build/cannon-es.js'
 import * as THREE from 'https://unpkg.com/three@0.122.0/build/three.module.js'
 import { ConvexGeometry } from 'https://unpkg.com/three@0.122.0/examples/jsm/geometries/ConvexGeometry.js'
 import { SimplifyModifier } from 'https://unpkg.com/three@0.122.0/examples/jsm/modifiers/SimplifyModifier.js'

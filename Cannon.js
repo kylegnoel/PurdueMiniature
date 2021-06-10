@@ -1,9 +1,11 @@
 import * as CANNON from './build/cannon-es.js'
 import * as THREE from 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r127/three.module.min.js';
-import { OBJLoader } from './OBJLoader.js';
+import { OBJLoader } from './utils/OBJLoader.js';
 import { MTLLoader } from 'https://threejsfundamentals.org/threejs/resources/threejs/r127/examples/jsm/loaders/MTLLoader.js';
-import { OrbitControls } from './OrbitControls.js';
-import { bodyToMesh } from './three-conversion-util.js'
+import { OrbitControls } from './utils/OrbitControls.js';
+import { BufferGeometryUtils } from './utils/BufferGeometryUtils.js'
+import { Vector3 } from './build/three.module.js';
+// import { bodyToMesh } from './three-conversion-util.js'
 
 /**
  * Really basic example to show cannon.js integration
@@ -21,6 +23,7 @@ let car
 let engineeringFountainMesh
 let raycaster = new THREE.Raycaster();
 const pointer = new THREE.Vector2();
+let intersects = []
 
 // cannon.js variables
 let world
@@ -165,10 +168,7 @@ function onWindowResize() {
     renderer.setSize(window.innerWidth, window.innerHeight)
 }
 
-function onPointerMOve(event) {
-    pointer.x = (event.clientX / window.innerWidth) * 2 - 1;
-    pointer.y = - (event.clientY / window.innerHeight) * 2 + 1;
-}
+
 
 function initCannon() {
     world = new CANNON.World({
@@ -422,10 +422,10 @@ function initCannon() {
         addTreePhysics(new CANNON.Vec3(-92, 83, -90), false)
         addTreePhysics(new CANNON.Vec3(-90, 83, -80), false)
         addTreePhysics(new CANNON.Vec3(-67, 83, -88), false)
-        addBigAcademicBuildingPhysics(new CANNON.Vec3(-45, 85, -85), new CANNON.Quaternion(Math.PI / 2, 0, 0), true)
+        addBigAcademicBuildingPhysics(new CANNON.Vec3(-45, 93, -85), new CANNON.Quaternion(Math.PI / 2, 0, 0), false)
 
 
-        addBigAcademicBuildingPhysics(new CANNON.Vec3(32, 75, -93), new CANNON.Quaternion(Math.PI / 2, 0, 0), true)
+        addBigAcademicBuildingPhysics(new CANNON.Vec3(32, 84, -93), new CANNON.Quaternion(Math.PI / 2, 0, 0), false)
         addSmallAcademicBuildingPhysics(new CANNON.Vec3(1, 80, -93), new CANNON.Quaternion(Math.PI / 2, 0, 0), false)
         addSmallAcademicBuildingPhysics(new CANNON.Vec3(62, 80, -93), new CANNON.Quaternion(Math.PI / 2, 0, 0), false)
 
@@ -514,11 +514,13 @@ function addSmallAcademicBuildingPhysics(position, quaternion, visuals) {
 }
 
 function addBigAcademicBuildingPhysics(position, quaternion, visuals) {
+
+
     const buildingBack = new CANNON.Body({
         mass: 0,
         material: groundMaterial
     })
-    buildingBack.addShape(new CANNON.Box(new CANNON.Vec3(15, 6, 20)))
+    buildingBack.addShape(new CANNON.Box(new CANNON.Vec3(15, 6, 12)))
     buildingBack.quaternion.setFromEuler(quaternion.x, quaternion.y, quaternion.z)
     buildingBack.position.set(position.x, position.y, position.z)
     world.addBody(buildingBack)
@@ -527,11 +529,10 @@ function addBigAcademicBuildingPhysics(position, quaternion, visuals) {
         mass: 0,
         material: groundMaterial
     })
-    buildingFront.addShape(new CANNON.Box(new CANNON.Vec3(8, 6, 20)))
+    buildingFront.addShape(new CANNON.Box(new CANNON.Vec3(8, 6, 12)))
     buildingFront.quaternion.setFromEuler(quaternion.x, quaternion.y, quaternion.z)
     buildingFront.position.set(position.x, position.y, position.z + 10)
     buildingFront.addEventListener("collide", function (e) {
-        console.log("AHHHHHHHHHHHHHHHHHHHHHHHH")
         document.getElementById("textBox0").classList.add("popShow")
         document.getElementById("textBox0").classList.remove("popHide")
 
@@ -541,36 +542,52 @@ function addBigAcademicBuildingPhysics(position, quaternion, visuals) {
         }, 10000)
     })
 
-    buildingFront.addEventListener("click", function(e) { 
-        alert("BRO")
-    })
-
     world.addBody(buildingFront)
 
-    const areaGeo = new THREE.RingGeometry(20, 21, 4, 1, Math.PI / 4)
-    const areaMat = new THREE.MeshBasicMaterial({color: 0xFF0000, side: THREE.DoubleSide})
-    const areaMesh = new THREE.Mesh(areaGeo, areaMat)
-    areaMesh.position.copy(buildingFront.position)
-    areaMesh.quaternion.copy(buildingFront.quaternion)
-    scene.add(areaMesh)
+    // Adding some visuals
+
+    const geometryArray = []
+    const buildingMat = new THREE.MeshBasicMaterial({ color: 0xFF0000, side: THREE.DoubleSide, wireframe: true, transparent: true, opacity: 1})
+
+    const buildingBackGeo = new THREE.BoxBufferGeometry(30, 12, 24)
+    const buildingBackMesh = new THREE.Mesh(buildingBackGeo, buildingMat)
+    // buildingBackMesh.position.copy(buildingBack.position)
+    // buildingBackMesh.quaternion.copy(buildingBack.quaternion)
+    buildingBackMesh.updateMatrixWorld()
+    geometryArray.push(buildingBackMesh.geometry.clone().applyMatrix4( buildingBackMesh.matrixWorld))
+
+    const buildingFrontGeo = new THREE.BoxBufferGeometry(16, 12, 24)
+
+    const buildingFrontMesh = new THREE.Mesh(buildingFrontGeo, buildingMat)
+    buildingFrontMesh.position.copy(new Vector3(buildingBackMesh.position.x, buildingBackMesh.position.y + 10, buildingBackMesh.position.z))
+    // buildingFrontMesh.quaternion.copy(buildingFront.quaternion)
+    buildingFrontMesh.updateMatrix()
+    geometryArray.push(buildingFrontMesh.geometry.clone().applyMatrix4( buildingFrontMesh.matrix))
+
 
     if (visuals) {
-        const buildingBackGeo = new THREE.BoxBufferGeometry(30, 12, 40)
-        const buildingMat = new THREE.MeshBasicMaterial({ color: 0xFF0000, side: THREE.DoubleSide, wireframe: true})
-        const buildingBackMesh = new THREE.Mesh(buildingBackGeo, buildingMat)
-        buildingBackMesh.position.copy(buildingBack.position)
-        buildingBackMesh.quaternion.copy(buildingBack.quaternion)
-        scene.add(buildingBackMesh)
-
-        const buildingFrontGeo = new THREE.BoxBufferGeometry(16, 12, 40)
-        const buildingFrontMesh = new THREE.Mesh(buildingFrontGeo, buildingMat)
-        buildingFrontMesh.position.copy(buildingFront.position)
-        buildingFrontMesh.quaternion.copy(buildingFront.quaternion)
-        scene.add(buildingFrontMesh)
+        buildingMat.opacity = 1
     }
+    
+    let buildingGeo = new THREE.BufferGeometry()
+    buildingGeo = BufferGeometryUtils.mergeBufferGeometries(geometryArray)
+    const buildingMesh = new THREE.Mesh(buildingGeo, buildingMat)
+
+    buildingMesh.position.copy(buildingBack.position)
+    buildingMesh.quaternion.copy(buildingBack.quaternion)
+
+    scene.add(buildingMesh)
 }
 
-
+let newColor = new THREE.Color(0x000000)
+let changeNewColor = false
+function changeColor(mesh) {
+    mesh.material.color.getHexString() == "ff0000" || "000000" ? changeNewColor = true : changeNewColor = false
+    if (changeNewColor) {
+        mesh.material.color.getHexString() == "000000" ? newColor.setHex(0xff0000) : newColor.setHex(0x000000)
+        changeNewColor = false
+    }
+}
 
 
 function animate() {
@@ -626,19 +643,46 @@ function updatePhysics() {
 
 function render() {
     raycaster.setFromCamera( pointer, camera)
-    const intersects = raycaster.intersectObjects( scene.children )
-    for (let i = 0; i < intersects.length; i++) {
-        intersects[i].object.material.color.set(0x000000)
+
+    const objects = raycaster.intersectObjects( scene.children )
+    if (objects.length != 0) {
+        console.log(objects)
     }
+    if (objects.length != 0) {
+        intersects = objects
+        for (let i = 0; i < intersects.length; i++) {
+            // changeColor(intersects[i].object)
+            let obj = intersects[i].object
+            obj.material.opacity = 1
+            obj.rotateOnAxis(new Vector3(0, 0, 1), Math.PI/300)
+        }
+    } else {
+        if (intersects.length != 0) {
+            for (let i = 0; i < intersects.length; i++) {
+                // changeColor(intersects[i].object)
+                intersects[i].object.material.opacity = 1
+                // intersects[i].object.material.color.lerp(newColor, 1)
+            }
+            intersects = []
+        }
+    }
+
     renderer.render(scene, camera)
 }
-window.addEventListener('mousemove', onPointerMOve, false)
+
+
+function onPointerMove(event) {
+    pointer.x = (event.clientX / window.innerWidth) * 2 - 1;
+    pointer.y = - (event.clientY / window.innerHeight) * 2 + 1;
+}
+
+window.addEventListener('mousemove', onPointerMove, false)
+// window.addEventListener('mouseout', function(e) {}, false)
 
 document.addEventListener('keydown', (event) => {
     const maxSteerVal = 0.7
     const maxForce = 6000
     const brakeForce = 10000
-    console.log(event.key)
 
     switch (event.key) {
         case 'w':
