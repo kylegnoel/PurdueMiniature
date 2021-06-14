@@ -183,9 +183,9 @@ function initCannon() {
     // Create the physics of the Car
 
     const chassisShape = new CANNON.Box(new CANNON.Vec3(2, 1, 1))
-    chassisBody = new CANNON.Body({ 
+    chassisBody = new CANNON.Body({
         mass: 700,
-     })
+    })
     chassisBody.addShape(chassisShape)
     chassisBody.position.set(-80, 90, -50)
     chassisBody.quaternion.setFromEuler(0, Math.PI, 0)
@@ -254,6 +254,7 @@ function initCannon() {
             flatShading: true,
         })
         let wheelvisual = new THREE.Mesh(wheelGeo, wheelMat)
+        wheelvisual.name = "vehicle"
         wheelVisuals.push(wheelvisual)
         console.log(wheelvisual.rotation)
         scene.add(wheelvisual)
@@ -380,7 +381,7 @@ function initCannon() {
                 restitution: 30,
                 contactEquationStiffness: 1000,
             })
-            
+
             world.addContactMaterial(groundGround)
         }
 
@@ -485,7 +486,7 @@ function addTreePhysics(position, visuals) {
 
     if (visuals) {
         const treeGeo = new THREE.BoxBufferGeometry(4, 8, 4)
-        const treeMat = new THREE.MeshBasicMaterial({color: 0xFF0000, side: THREE.DoubleSide, wireframe: true})
+        const treeMat = new THREE.MeshBasicMaterial({ color: 0xFF0000, side: THREE.DoubleSide, wireframe: true })
         const treeMesh = new THREE.Mesh(treeGeo, treeMat)
         treeMesh.position.copy(tree.position)
         treeMesh.quaternion.copy(tree.quaternion)
@@ -503,14 +504,18 @@ function addSmallAcademicBuildingPhysics(position, quaternion, visuals) {
     building.position.set(position.x, position.y, position.z)
     world.addBody(building)
 
+    const buildingGeo = new THREE.BoxBufferGeometry(22, 12, 40)
+    const buildingMat = new THREE.MeshBasicMaterial({ color: 0xFF0000, side: THREE.DoubleSide, wireframe: true, transparent: true, opacity: 0})
+    const buildingMesh = new THREE.Mesh(buildingGeo, buildingMat)
+    buildingMesh.position.copy(building.position)
+    buildingMesh.quaternion.copy(building.quaternion)
+
     if (visuals) {
-        const buildingGeo = new THREE.BoxBufferGeometry(22, 12, 40)
-        const buildingMat = new THREE.MeshBasicMaterial({ color: 0xFF0000, side: THREE.DoubleSide, wireframe: true})
-        const buildingMesh = new THREE.Mesh(buildingGeo, buildingMat)
-        buildingMesh.position.copy(building.position)
-        buildingMesh.quaternion.copy(building.quaternion)
-        scene.add(buildingMesh)
+        buildingMat.opacity = 0.5
     }
+
+    scene.add(buildingMesh)
+
 }
 
 function addBigAcademicBuildingPhysics(position, quaternion, visuals) {
@@ -547,28 +552,24 @@ function addBigAcademicBuildingPhysics(position, quaternion, visuals) {
     // Adding some visuals
 
     const geometryArray = []
-    const buildingMat = new THREE.MeshBasicMaterial({ color: 0xFF0000, side: THREE.DoubleSide, wireframe: true, transparent: true, opacity: 1})
+    const buildingMat = new THREE.MeshNormalMaterial({ color: 0xDEBB19, side: THREE.DoubleSide, wireframe: false, transparent: true, opacity: 0 })
 
     const buildingBackGeo = new THREE.BoxBufferGeometry(30, 12, 24)
     const buildingBackMesh = new THREE.Mesh(buildingBackGeo, buildingMat)
-    // buildingBackMesh.position.copy(buildingBack.position)
-    // buildingBackMesh.quaternion.copy(buildingBack.quaternion)
     buildingBackMesh.updateMatrixWorld()
-    geometryArray.push(buildingBackMesh.geometry.clone().applyMatrix4( buildingBackMesh.matrixWorld))
+    geometryArray.push(buildingBackMesh.geometry.clone().applyMatrix4(buildingBackMesh.matrixWorld))
 
     const buildingFrontGeo = new THREE.BoxBufferGeometry(16, 12, 24)
 
     const buildingFrontMesh = new THREE.Mesh(buildingFrontGeo, buildingMat)
     buildingFrontMesh.position.copy(new Vector3(buildingBackMesh.position.x, buildingBackMesh.position.y + 10, buildingBackMesh.position.z))
-    // buildingFrontMesh.quaternion.copy(buildingFront.quaternion)
     buildingFrontMesh.updateMatrix()
-    geometryArray.push(buildingFrontMesh.geometry.clone().applyMatrix4( buildingFrontMesh.matrix))
-
+    geometryArray.push(buildingFrontMesh.geometry.clone().applyMatrix4(buildingFrontMesh.matrix))
 
     if (visuals) {
-        buildingMat.opacity = 1
+        buildingMat.opacity = 0.5
     }
-    
+
     let buildingGeo = new THREE.BufferGeometry()
     buildingGeo = BufferGeometryUtils.mergeBufferGeometries(geometryArray)
     const buildingMesh = new THREE.Mesh(buildingGeo, buildingMat)
@@ -579,15 +580,6 @@ function addBigAcademicBuildingPhysics(position, quaternion, visuals) {
     scene.add(buildingMesh)
 }
 
-let newColor = new THREE.Color(0x000000)
-let changeNewColor = false
-function changeColor(mesh) {
-    mesh.material.color.getHexString() == "ff0000" || "000000" ? changeNewColor = true : changeNewColor = false
-    if (changeNewColor) {
-        mesh.material.color.getHexString() == "000000" ? newColor.setHex(0xff0000) : newColor.setHex(0x000000)
-        changeNewColor = false
-    }
-}
 
 
 function animate() {
@@ -640,31 +632,38 @@ function updatePhysics() {
     }
     lastCallTime = time
 }
+let pyramidExist = false
 
 function render() {
-    raycaster.setFromCamera( pointer, camera)
+    raycaster.setFromCamera(pointer, camera)
 
-    const objects = raycaster.intersectObjects( scene.children )
-    if (objects.length != 0) {
-        console.log(objects)
-    }
-    if (objects.length != 0) {
+    const objects = raycaster.intersectObjects(scene.children)
+    if (objects.length != 0 && !pyramidExist) {
         intersects = objects
-        for (let i = 0; i < intersects.length; i++) {
-            // changeColor(intersects[i].object)
-            let obj = intersects[i].object
-            obj.material.opacity = 1
-            obj.rotateOnAxis(new Vector3(0, 0, 1), Math.PI/300)
+        let obj = intersects[0].object
+        if (obj.name === "vehicle") {
+            renderer.render(scene, camera)
+
+            return
         }
-    } else {
+        console.log(obj)
+        const pyramidGeo = new THREE.CylinderGeometry(0, 3, 3, 4);
+        const pyramidMat = new THREE.MeshNormalMaterial({ transparent: true, opacity: 0.5 })
+        const pyramidMesh = new THREE.Mesh(pyramidGeo, pyramidMat)
+        pyramidMesh.rotateX(Math.PI)
+        pyramidMesh.position.copy(new THREE.Vector3(obj.position.x, obj.position.y + 20, obj.position.z))
+        pyramidExist = true
+        pyramidMesh.name = "pyramid"
+        scene.add(pyramidMesh)
+    } else if (objects.length == 0) {
         if (intersects.length != 0) {
-            for (let i = 0; i < intersects.length; i++) {
-                // changeColor(intersects[i].object)
-                intersects[i].object.material.opacity = 1
-                // intersects[i].object.material.color.lerp(newColor, 1)
-            }
-            intersects = []
+            let removePyramid = scene.getObjectByName("pyramid")
+            scene.remove(removePyramid)
+            pyramidExist = false;
         }
+    } else if (objects.length != 0 && pyramidExist) {
+        let pyramid = scene.getObjectByName("pyramid")
+        pyramid.rotation.y += 0.05
     }
 
     renderer.render(scene, camera)
@@ -677,7 +676,6 @@ function onPointerMove(event) {
 }
 
 window.addEventListener('mousemove', onPointerMove, false)
-// window.addEventListener('mouseout', function(e) {}, false)
 
 document.addEventListener('keydown', (event) => {
     const maxSteerVal = 0.7
