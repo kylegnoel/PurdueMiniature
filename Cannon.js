@@ -5,15 +5,9 @@ import { MTLLoader } from 'https://threejsfundamentals.org/threejs/resources/thr
 import { OrbitControls } from './utils/OrbitControls.js';
 import { BufferGeometryUtils } from './utils/BufferGeometryUtils.js'
 import { Vector3 } from './build/three.module.js';
-// import { bodyToMesh } from './three-conversion-util.js'
+// import { Interactions } from './node_modules/three.interaction/src/index.js';
 
-/**
- * Really basic example to show cannon.js integration
- * with three.js.
- * Each frame the cannon.js world is stepped forward and then
- * the position and rotation data of the boody is copied
- * over to the three.js scene.
- */
+
 // three.js variables
 const canvas = document.querySelector('#c');
 let camera, scene, renderer
@@ -24,6 +18,7 @@ let engineeringFountainMesh
 let raycaster = new THREE.Raycaster();
 const pointer = new THREE.Vector2();
 let intersects = []
+let targetList = []
 
 // cannon.js variables
 let world
@@ -104,41 +99,12 @@ function initThree() {
 
     const orbitControls = new OrbitControls(camera, renderer.domElement);
 
+
     window.addEventListener('resize', onWindowResize)
 
     // // Box
     // const geometry = new THREE.BoxBufferGeometry(10, 10, 10)
     const material = new THREE.MeshBasicMaterial({ color: 0xff0000, wireframe: true })
-
-    // mesh = new THREE.Mesh(geometry, material)
-    // scene.add(mesh)
-
-    // // Plane
-    // let plane = new THREE.PlaneGeometry( 1000, 1000, 1, 1 );
-    // let mat = new THREE.MeshBasicMaterial( { color: 0x0000ff} );
-    // let floor = new THREE.Mesh( plane, mat );
-    // floor.material.side = THREE.DoubleSide;
-    // floor.rotation.x = Math.PI / 2;
-    // scene.add( floor );
-
-    // Block0
-    // const block0Geo = new THREE.BoxBufferGeometry(66, 75, 62)
-    // block0 = new THREE.Mesh(block0Geo, material)
-    // scene.add(block0)
-
-
-
-    // const rampGeo = new THREE.BoxBufferGeometry(26, 75, 20)
-    // ramp = new THREE.Mesh(rampGeo, material)
-    // scene.add(ramp)
-
-    // Create the visuals of the Car
-    // const carGeo = new THREE.BoxBufferGeometry(8, 0.8, 4)
-    // const carMat = new THREE.MeshBasicMaterial({ color: 0x000000, wireframe: true })
-    // car = new THREE.Mesh(carGeo, carMat)
-    // console.log("CAR: "+ car)
-    // console.log(car)
-    // scene.add(car)
 
 
     const mtlLoader = new MTLLoader();
@@ -427,8 +393,8 @@ function initCannon() {
 
 
         addBigAcademicBuildingPhysics(new CANNON.Vec3(32, 84, -93), new CANNON.Quaternion(Math.PI / 2, 0, 0), false)
-        addSmallAcademicBuildingPhysics(new CANNON.Vec3(1, 80, -93), new CANNON.Quaternion(Math.PI / 2, 0, 0), false)
-        addSmallAcademicBuildingPhysics(new CANNON.Vec3(62, 80, -93), new CANNON.Quaternion(Math.PI / 2, 0, 0), false)
+        addSmallAcademicBuildingPhysics(new CANNON.Vec3(1, 84, -93), new CANNON.Quaternion(Math.PI / 2, 0, 0), true)
+        addSmallAcademicBuildingPhysics(new CANNON.Vec3(62, 84, -93), new CANNON.Quaternion(Math.PI / 2, 0, 0), true)
 
 
         // Small Academic Building Block 1
@@ -513,7 +479,7 @@ function addSmallAcademicBuildingPhysics(position, quaternion, visuals) {
     if (visuals) {
         buildingMat.opacity = 0.5
     }
-
+    targetList.splice(buildingMesh)
     scene.add(buildingMesh)
 
 }
@@ -577,6 +543,7 @@ function addBigAcademicBuildingPhysics(position, quaternion, visuals) {
     buildingMesh.position.copy(buildingBack.position)
     buildingMesh.quaternion.copy(buildingBack.quaternion)
 
+    targetList.push(buildingMesh)
     scene.add(buildingMesh)
 }
 
@@ -635,26 +602,36 @@ function updatePhysics() {
 let pyramidExist = false
 
 function render() {
+    hoverEffect();
+    renderer.render(scene, camera)
+}
+
+function hoverEffect() {
     raycaster.setFromCamera(pointer, camera)
 
-    const objects = raycaster.intersectObjects(scene.children)
+    const objects = raycaster.intersectObjects(scene.children);
     if (objects.length != 0 && !pyramidExist) {
-        intersects = objects
-        let obj = intersects[0].object
+        console.log(objects)
+        intersects = objects;
+        let obj = intersects[0].object;
         if (obj.name === "vehicle") {
-            renderer.render(scene, camera)
-
+            renderer.render(scene, camera);
             return
         }
-        console.log(obj)
-        const pyramidGeo = new THREE.CylinderGeometry(0, 3, 3, 4);
-        const pyramidMat = new THREE.MeshNormalMaterial({ transparent: true, opacity: 0.5 })
+
+        const pyramidGeo = new THREE.CylinderGeometry(0, 3, 9, 4);
+        const pyramidMat = new THREE.MeshPhongMaterial({ transparent: true, opacity: 1, color: 0xD2927D })
         const pyramidMesh = new THREE.Mesh(pyramidGeo, pyramidMat)
         pyramidMesh.rotateX(Math.PI)
         pyramidMesh.position.copy(new THREE.Vector3(obj.position.x, obj.position.y + 20, obj.position.z))
         pyramidExist = true
         pyramidMesh.name = "pyramid"
         scene.add(pyramidMesh)
+
+        document.getElementById("textBox0").classList.add("popShow")
+        document.getElementById("textBox0").classList.remove("popHide")
+
+
     } else if (objects.length == 0) {
         if (intersects.length != 0) {
             let removePyramid = scene.getObjectByName("pyramid")
@@ -666,16 +643,14 @@ function render() {
         pyramid.rotation.y += 0.05
     }
 
-    renderer.render(scene, camera)
 }
 
-
-function onPointerMove(event) {
+function onPointerMove( event ) {
     pointer.x = (event.clientX / window.innerWidth) * 2 - 1;
     pointer.y = - (event.clientY / window.innerHeight) * 2 + 1;
 }
 
-window.addEventListener('mousemove', onPointerMove, false)
+document.addEventListener('mousemove', onPointerMove, true)
 
 document.addEventListener('keydown', (event) => {
     const maxSteerVal = 0.7
