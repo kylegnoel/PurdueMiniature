@@ -90,7 +90,6 @@ export function addBlockPhysics(world, scene, dimensions, position, visuals) {
     block.position.copy(position);
     world.addBody(block);
 
-    // helper visuals for block2
     if (visuals) {
         const blockGeo = new THREE.BoxBufferGeometry(dimensions.x * 2, dimensions.y * 2, dimensions.z * 2);
         const blockMat = new THREE.MeshBasicMaterial({ color: 0xFF0000, side: THREE.DoubleSide, wireframe: true });
@@ -137,7 +136,7 @@ export function addSmallAcademicBuildingPhysics(world, scene, position, quaterni
     buildingMesh.quaternion.copy(building.quaternion)
 
     if (visuals) {
-        buildingMat.opacity = 0.5
+        buildingMat.opacity = 1
     }
     scene.add(buildingMesh)
 

@@ -1,7 +1,5 @@
 import * as CANNON from '../build/cannon-es.js'
 import * as THREE from 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r127/three.module.min.js';
-import { OBJLoader } from '../utils/OBJLoader.js';
-import { MTLLoader } from 'https://threejsfundamentals.org/threejs/resources/threejs/r127/examples/jsm/loaders/MTLLoader.js';
 import { OrbitControls } from '../utils/OrbitControls.js';
 import * as ContentManager from './ContentManager.js';
 import * as WorldPhysic from './WorldPhysics.js'

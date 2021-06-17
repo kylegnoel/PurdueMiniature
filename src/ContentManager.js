@@ -18,7 +18,7 @@ const CARDS = {
 };
 
 
-function updateContent(document, contentToAdd) {
+function updateContent(document, contentToAdd, questionToAdd) {
     let title = document.getElementById("title");
     let topContent = document.getElementById("top-content");
     let botContent = document.getElementById("bot-content");
@@ -36,11 +36,15 @@ function updateContent(document, contentToAdd) {
 function removeCard() {
     document.getElementById("info-card").classList.remove("popShow");
     document.getElementById("info-card").classList.add("popHide");
+    document.getElementById("question-card").classList.remove("popShow");
+    document.getElementById("question-card").classList.add("popHide");
 }
 
 function addCard () {
     document.getElementById("info-card").classList.add("popShow")
     document.getElementById("info-card").classList.remove("popHide")
+    document.getElementById("question-card").classList.add("popShow")
+    document.getElementById("question-card").classList.remove("popHide")
 }
 
 export { updateContent, removeCard, addCard, CARDS }
