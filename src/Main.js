@@ -108,7 +108,7 @@ function initCannon() {
             world.addContactMaterial(groundGround)
         }
 
-        // Adding the physics of all objects on block0
+        // Adding the physics of all objects on block0 (block0 is defined to be the block with the gateway to the future arch)
         {
             // Adding physics of block0
             WorldPhysic.addBlockPhysics(world, scene, new CANNON.Vec3(33, 32.5, 31), new CANNON.Vec3(-62, 48.5, -63), false);
@@ -129,11 +129,12 @@ function initCannon() {
             // small tree besides the big academic building
             WorldPhysic.addTreePhysics(world, scene, new CANNON.Vec3(-67, 83, -88), false);
 
+            // the only academic building in block0
             WorldPhysic.addBigAcademicBuildingPhysics(world, scene, new CANNON.Vec3(-45, 93, -85), new CANNON.Quaternion(Math.PI / 2, 0, 0), false, ContentManager.CARDS[0]);
         }
 
 
-        // Adding the physics of all objects in block1
+        // Adding the physics of all objects in block1 (block1 is defined to be the one where engineering fountain is spwaned)
         {
             // Adding physics of block1
             WorldPhysic.addBlockPhysics(world, scene, new CANNON.Vec3(43, 32.5, 35), new CANNON.Vec3(33, 38.5, -65), false);
@@ -142,21 +143,56 @@ function initCannon() {
 
             // Adding engineering fountain
             engineeringFountain = WorldPhysic.loadEngineeringFountain(world, scene, new CANNON.Vec3(55, 77, -65));
-            console.log(engineeringFountain)
+
             // small academic building on the left of the big academic building
-            WorldPhysic.addSmallAcademicBuildingPhysics(world, scene, new CANNON.Vec3(1, 84, -93), new CANNON.Quaternion(Math.PI / 2, 0, 0), true)
+            WorldPhysic.addSmallAcademicBuildingPhysics(world, scene, new CANNON.Vec3(1, 84, -93), new CANNON.Quaternion(Math.PI / 2, 0, 0), false)
             // bigger building in the middle
-            WorldPhysic.addBigAcademicBuildingPhysics(world, scene, new CANNON.Vec3(32, 84, -93), new CANNON.Quaternion(Math.PI / 2, 0, 0), false, ContentManager.CARDS[1])
+            WorldPhysic.addBigAcademicBuildingPhysics(world, scene, new CANNON.Vec3(32, 84, -93), new CANNON.Quaternion(Math.PI/2, 0, 0), false, ContentManager.CARDS[1])
             // small academic building on the right of the big academic building
             WorldPhysic.addSmallAcademicBuildingPhysics(world, scene, new CANNON.Vec3(62, 84, -93), new CANNON.Quaternion(Math.PI / 2, 0, 0), false)
         }
 
-        // Adding the physics of all objects in block2
+        // Adding the physics of all objects in block2 (block2 is defined to be the block with the big memorial lawn)
         {
             // Adding physics of block2
             WorldPhysic.addBlockPhysics(world, scene, new CANNON.Vec3(50, 50, 58), new CANNON.Vec3(73, 13, 42), false);
 
+            // small academic building closest to the ramp connecting block2 and block3
+            WorldPhysic.addSmallAcademicBuildingPhysics(world, scene, new CANNON.Vec3(30, 75, 31), new CANNON.Vec3(Math.PI/2, 0, -Math.PI/2), false);
+            // small academic building closest to the ramp connecting block1 and block2
+            WorldPhysic.addSmallAcademicBuildingPhysics(world, scene, new CANNON.Vec3(111, 75, -7), new CANNON.Vec3(Math.PI/2, 0, 0), false);
+            // big academic building at the corner of block2 with 2 patches of grass in front
+            WorldPhysic.addBigAcademicBuildingPhysics(world, scene, new CANNON.Vec3(30, 75, 83), new CANNON.Quaternion(Math.PI / 2, 0, -Math.PI/2), false, ContentManager.CARDS[1])
+            
+            // Tree at the middle on the smaller lawn
+            WorldPhysic.addTreePhysics(world, scene, new CANNON.Vec3(86, 67, 4), false)
+            // Tree at the corener of block2
+            WorldPhysic.addTreePhysics(world, scene, new CANNON.Vec3(118, 67, 97), false)
         }
+
+        // Adding the physics of all objects in block3 (block3 is defined to be the block with Loeb Fountain)
+        {
+            // Adding physics of block3
+            WorldPhysic.addBlockPhysics(world, scene, new CANNON.Vec3(40, 50, 40), new CANNON.Vec3(-30, 22, 81), false);
+            // Adding physics of ramp connecting block3 and block2
+            WorldPhysic.addRampPhysics(world, scene, new CANNON.Vec3(13, 32.5, 10), new CANNON.Vec3(9, 37, 53), new CANNON.Vec3(0, 0, 1), -Math.PI / 7.8, false);
+            // Adding small academic building
+            WorldPhysic.addSmallAcademicBuildingPhysics(world, scene, new CANNON.Vec3(-55, 85, 73), new CANNON.Vec3(Math.PI/2, 0, -Math.PI/2), false);
+            // Adding big academic building
+            WorldPhysic.addBigAcademicBuildingPhysics(world, scene, new CANNON.Vec3(-55, 85, 103), new CANNON.Vec3(Math.PI/2, 0, -Math.PI/2), false);
+
+        }
+
+        // Adding physics for the bell tower block
+        {
+            // the block supporting the bell tower
+            WorldPhysic.addBlockPhysics(world, scene, new CANNON.Vec3(10, 100, 10), new CANNON.Vec3(-50, -20, 0), false);
+
+            // the bell tower itself
+            WorldPhysic.addBellTower(world, scene, new CANNON.Vec3(-50, 120, 0), false);
+        }
+
+
 
 
 
@@ -179,7 +215,6 @@ function animate() {
     } catch (e) {
         console.error("engineering fountain not loaded yet.");
     }
-
 
 
     let train = scene.getObjectByName("train", true)
@@ -236,7 +271,7 @@ function hoverEffect() {
     const objects = raycaster.intersectObjects(scene.children);
 
     if (objects.length != 0 && !pyramidExist) {
-        console.log(objects)
+        // console.log(objects)
         intersects = objects;
         let obj = intersects[0].object;
         if (obj.name === "vehicle") {
@@ -248,7 +283,7 @@ function hoverEffect() {
         const pyramidMat = new THREE.MeshPhongMaterial({ transparent: true, opacity: 1, color: 0xD2927D })
         const pyramidMesh = new THREE.Mesh(pyramidGeo, pyramidMat)
         pyramidMesh.rotateX(Math.PI)
-        pyramidMesh.position.copy(new THREE.Vector3(obj.position.x, obj.position.y + 20, obj.position.z))
+        pyramidMesh.position.copy(new THREE.Vector3(obj.position.x, obj.position.y + 30, obj.position.z))
         pyramidExist = true
         pyramidMesh.name = "pyramid"
         scene.add(pyramidMesh)

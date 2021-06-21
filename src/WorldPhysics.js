@@ -104,18 +104,18 @@ export function addBlockPhysics(world, scene, dimensions, position, visuals) {
 export function addTreePhysics(world, scene, position, visuals) {
     const tree = new CANNON.Body({
         mass: 0,
-    })
-    tree.addShape(new CANNON.Box(new CANNON.Vec3(2, 4, 2)))
-    tree.position.set(position.x, position.y, position.z)
-    world.addBody(tree)
+    });
+    tree.addShape(new CANNON.Box(new CANNON.Vec3(2, 4, 2)));
+    tree.position.set(position.x, position.y, position.z);
+    world.addBody(tree);
 
     if (visuals) {
-        const treeGeo = new THREE.BoxBufferGeometry(4, 8, 4)
-        const treeMat = new THREE.MeshBasicMaterial({ color: 0xFF0000, side: THREE.DoubleSide, wireframe: true })
-        const treeMesh = new THREE.Mesh(treeGeo, treeMat)
-        treeMesh.position.copy(tree.position)
-        treeMesh.quaternion.copy(tree.quaternion)
-        scene.add(treeMesh)
+        const treeGeo = new THREE.BoxBufferGeometry(4, 8, 4);
+        const treeMat = new THREE.MeshBasicMaterial({ color: 0xFF0000, side: THREE.DoubleSide, wireframe: true });
+        const treeMesh = new THREE.Mesh(treeGeo, treeMat);
+        treeMesh.position.copy(tree.position);
+        treeMesh.quaternion.copy(tree.quaternion);
+        scene.add(treeMesh);
     }
 }
 
@@ -123,83 +123,104 @@ export function addSmallAcademicBuildingPhysics(world, scene, position, quaterni
     const building = new CANNON.Body({
         mass: 0,
         material: groundMaterial
-    })
-    building.addShape(new CANNON.Box(new CANNON.Vec3(11, 6, 20)))
-    building.quaternion.setFromEuler(quaternion.x, quaternion.y, quaternion.z)
-    building.position.set(position.x, position.y, position.z)
-    world.addBody(building)
+    });
+    building.addShape(new CANNON.Box(new CANNON.Vec3(11, 6, 20)));
+    building.quaternion.setFromEuler(quaternion.x, quaternion.y, quaternion.z);
+    building.position.set(position.x, position.y, position.z);
+    world.addBody(building);
 
-    const buildingGeo = new THREE.BoxBufferGeometry(22, 12, 40)
-    const buildingMat = new THREE.MeshBasicMaterial({ color: 0xFF0000, side: THREE.DoubleSide, wireframe: true, transparent: true, opacity: 0 })
-    const buildingMesh = new THREE.Mesh(buildingGeo, buildingMat)
-    buildingMesh.position.copy(building.position)
-    buildingMesh.quaternion.copy(building.quaternion)
+    const buildingGeo = new THREE.BoxBufferGeometry(22, 12, 40);
+    const buildingMat = new THREE.MeshBasicMaterial({ color: 0xFF0000, side: THREE.DoubleSide, wireframe: true, transparent: true, opacity: 0 });
+    const buildingMesh = new THREE.Mesh(buildingGeo, buildingMat);
+    buildingMesh.position.copy(building.position);
+    buildingMesh.quaternion.copy(building.quaternion);
 
     if (visuals) {
-        buildingMat.opacity = 1
+        buildingMat.opacity = 1;
     }
-    scene.add(buildingMesh)
+    scene.add(buildingMesh);
 
 }
 
 export function addBigAcademicBuildingPhysics(world, scene, position, quaternion, visuals, content) {
 
+    let building =  new CANNON.Body({ mass: 0, material: groundMaterial});
+    building.position.copy(position);
+    building.quaternion.setFromEuler(quaternion.x, quaternion.y, quaternion.z);
 
-    const buildingBack = new CANNON.Body({
-        mass: 0,
-        material: groundMaterial
-    })
-    buildingBack.addShape(new CANNON.Box(new CANNON.Vec3(15, 6, 12)))
-    buildingBack.quaternion.setFromEuler(quaternion.x, quaternion.y, quaternion.z)
-    buildingBack.position.set(position.x, position.y, position.z)
-    world.addBody(buildingBack)
+    let shapeBack = new CANNON.Box(new CANNON.Vec3(15, 6, 12));
+    let shapeFront = new CANNON.Box(new CANNON.Vec3(8, 6, 12));
+    building.addShape(shapeBack, new CANNON.Vec3(0, 0, 0));
+    building.addShape(shapeFront, new CANNON.Vec3(0, 12, 0));
 
-    const buildingFront = new CANNON.Body({
-        mass: 0,
-        material: groundMaterial
-    })
-    buildingFront.addShape(new CANNON.Box(new CANNON.Vec3(8, 6, 12)))
-    buildingFront.quaternion.setFromEuler(quaternion.x, quaternion.y, quaternion.z)
-    buildingFront.position.set(position.x, position.y, position.z + 10)
+    console.log(building)
+    world.addBody(building);
 
-    buildingFront.addEventListener("collide", function (e) {
+    building.addEventListener("collide", function (e) {
         ContentManager.updateContent(document, content);
         ContentManager.addCard();
         setTimeout(function () {
             ContentManager.removeCard()
-        }, 10000)
-    })
+        }, 10000);
+    });
 
-    world.addBody(buildingFront)
 
     // Adding some visuals
 
-    const geometryArray = []
-    const buildingMat = new THREE.MeshNormalMaterial({ color: 0xDEBB19, side: THREE.DoubleSide, wireframe: false, transparent: true, opacity: 0 })
+    const geometryArray = [];
+    const buildingMat = new THREE.MeshNormalMaterial({ color: 0xDEBB19, side: THREE.DoubleSide, wireframe: false, transparent: true, opacity: 0 });
 
-    const buildingBackGeo = new THREE.BoxBufferGeometry(30, 12, 24)
-    const buildingBackMesh = new THREE.Mesh(buildingBackGeo, buildingMat)
-    buildingBackMesh.updateMatrixWorld()
-    geometryArray.push(buildingBackMesh.geometry.clone().applyMatrix4(buildingBackMesh.matrixWorld))
+    const buildingBackGeo = new THREE.BoxBufferGeometry(30, 12, 24);
+    const buildingBackMesh = new THREE.Mesh(buildingBackGeo, buildingMat);
+    buildingBackMesh.updateMatrixWorld();
+    geometryArray.push(buildingBackMesh.geometry.clone().applyMatrix4(buildingBackMesh.matrixWorld));
 
-    const buildingFrontGeo = new THREE.BoxBufferGeometry(16, 12, 24)
+    const buildingFrontGeo = new THREE.BoxBufferGeometry(16, 12, 24);
 
-    const buildingFrontMesh = new THREE.Mesh(buildingFrontGeo, buildingMat)
-    buildingFrontMesh.position.copy(new THREE.Vector3(buildingBackMesh.position.x, buildingBackMesh.position.y + 10, buildingBackMesh.position.z))
-    buildingFrontMesh.updateMatrix()
-    geometryArray.push(buildingFrontMesh.geometry.clone().applyMatrix4(buildingFrontMesh.matrix))
+    const buildingFrontMesh = new THREE.Mesh(buildingFrontGeo, buildingMat);
+    buildingFrontMesh.position.copy(new THREE.Vector3(buildingBackMesh.position.x, buildingBackMesh.position.y + 10, buildingBackMesh.position.z));
+    buildingFrontMesh.updateMatrix();
+    geometryArray.push(buildingFrontMesh.geometry.clone().applyMatrix4(buildingFrontMesh.matrix));
 
     if (visuals) {
-        buildingMat.opacity = 0.5
+        buildingMat.opacity = 0.5;
     }
 
-    let buildingGeo = new THREE.BufferGeometry()
-    buildingGeo = BufferGeometryUtils.mergeBufferGeometries(geometryArray)
-    const buildingMesh = new THREE.Mesh(buildingGeo, buildingMat)
+    let buildingGeo = new THREE.BufferGeometry();
+    buildingGeo = BufferGeometryUtils.mergeBufferGeometries(geometryArray);
+    const buildingMesh = new THREE.Mesh(buildingGeo, buildingMat);
 
-    buildingMesh.position.copy(buildingBack.position)
-    buildingMesh.quaternion.copy(buildingBack.quaternion)
+    buildingMesh.position.copy(building.position);
+    buildingMesh.quaternion.copy(building.quaternion);
 
-    buildingMesh.content = content
-    scene.add(buildingMesh)
+    buildingMesh.content = content;
+    scene.add(buildingMesh);
+}
+
+export function addBellTower(world, scene, position, visuals, content) {
+    const tower = new CANNON.Body({ 
+        mass: 0, 
+        material: groundMaterial
+    });
+    tower.addShape(new CANNON.Box(new CANNON.Vec3(7, 40, 7)));
+    tower.position.copy(position);
+
+    world.addBody(tower);
+
+    const towerGeo = new THREE.BoxBufferGeometry(14, 80, 14);
+    const towerMat = new THREE.MeshBasicMaterial({ color: 0xFF0000, side: THREE.DoubleSide, wireframe: true, transparent: true, opacity: 0 });
+    const towerMesh = new THREE.Mesh(towerGeo, towerMat);
+    
+    towerMesh.position.copy(tower.position);
+    tower.quaternion.copy(tower.quaternion);
+
+    if (visuals) {
+        towerMat.opacity = 1;
+    }
+    if (content != 'undefined') {
+        towerMesh.content = content;
+    }
+
+    scene.add(towerMesh);
+
 }

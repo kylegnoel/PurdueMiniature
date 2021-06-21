@@ -28,14 +28,14 @@ export function initVehicle(world, scene, chassisBody, wheelBody, wheelMaterial)
         suspensionStiffness: 30,
         suspensionRestLength: 0.1,
         frictionSlip: 3,
-        dampingRelaxation: 2.3,
+        dampingRelaxation: 23,
         dampingCompression: 6,
         maxSuspensionForce: 100000,
         rollInfluence: 0.01,
         axleLocal: new CANNON.Vec3(0, 0, 2),
         chassisConnectionPointLocal: new CANNON.Vec3(-1, 0, 1),
         maxSuspensionTravel: 0.3,
-        customSlidingRotationalSpeed: 3000000,
+        customSlidingRotationalSpeed: -40,
         useCustomSlidingRotationalSpeed: true,
     }
 
