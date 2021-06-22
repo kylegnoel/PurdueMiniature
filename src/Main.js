@@ -19,6 +19,7 @@ let engineeringFountain;
 let chassisBody;
 let vehicle;
 let wheelBody;
+let stopSignOnBlock2, stopSignOnBlock3, stopSignOnBlock4;
 const timeStep = 1 / 60;
 let lastCallTime;
 const groundMaterial = new CANNON.Material('ground');
@@ -142,7 +143,7 @@ function initCannon() {
             WorldPhysic.addRampPhysics(world, scene, new CANNON.Vec3(13, 32.5, 10.2), new CANNON.Vec3(63, 37.05, -33), new CANNON.Vec3(1, 0, 0), Math.PI / 8, false);
 
             // Adding engineering fountain
-            engineeringFountain = WorldPhysic.loadEngineeringFountain(world, scene, new CANNON.Vec3(55, 77, -65));
+            engineeringFountain = WorldPhysic.loadEngineeringFountain(world, scene, new CANNON.Vec3(40, 70, 0));
 
             // small academic building on the left of the big academic building
             WorldPhysic.addSmallAcademicBuildingPhysics(world, scene, new CANNON.Vec3(1, 84, -93), new CANNON.Quaternion(Math.PI / 2, 0, 0), false)
@@ -156,6 +157,8 @@ function initCannon() {
         {
             // Adding physics of block2
             WorldPhysic.addBlockPhysics(world, scene, new CANNON.Vec3(50, 50, 58), new CANNON.Vec3(73, 13, 42), false);
+            // Adding physics of ramp connecting block2 and block4
+            WorldPhysic.addRampPhysics(world, scene, new CANNON.Vec3(13, 32.5, 12), new CANNON.Vec3(122, 28, 25.5), new CANNON.Vec3(0, 0, 1), -Math.PI / 7.8, false);
 
             // small academic building closest to the ramp connecting block2 and block3
             WorldPhysic.addSmallAcademicBuildingPhysics(world, scene, new CANNON.Vec3(30, 75, 31), new CANNON.Vec3(Math.PI/2, 0, -Math.PI/2), false);
@@ -168,6 +171,9 @@ function initCannon() {
             WorldPhysic.addTreePhysics(world, scene, new CANNON.Vec3(86, 67, 4), false)
             // Tree at the corener of block2
             WorldPhysic.addTreePhysics(world, scene, new CANNON.Vec3(118, 67, 97), false)
+
+            // Add a stop sign for fun
+            stopSignOnBlock2 = WorldPhysic.addStopSigns(world, scene, new CANNON.Vec3(73, 77, 97), new CANNON.Vec3(0, Math.PI / 2, 0), 2);
         }
 
         // Adding the physics of all objects in block3 (block3 is defined to be the block with Loeb Fountain)
@@ -175,11 +181,26 @@ function initCannon() {
             // Adding physics of block3
             WorldPhysic.addBlockPhysics(world, scene, new CANNON.Vec3(40, 50, 40), new CANNON.Vec3(-30, 22, 81), false);
             // Adding physics of ramp connecting block3 and block2
-            WorldPhysic.addRampPhysics(world, scene, new CANNON.Vec3(13, 32.5, 10), new CANNON.Vec3(9, 37, 53), new CANNON.Vec3(0, 0, 1), -Math.PI / 7.8, false);
+            WorldPhysic.addRampPhysics(world, scene, new CANNON.Vec3(13, 32.5, 12), new CANNON.Vec3(9, 37, 55), new CANNON.Vec3(0, 0, 1), -Math.PI / 7.8, false);
             // Adding small academic building
             WorldPhysic.addSmallAcademicBuildingPhysics(world, scene, new CANNON.Vec3(-55, 85, 73), new CANNON.Vec3(Math.PI/2, 0, -Math.PI/2), false);
             // Adding big academic building
             WorldPhysic.addBigAcademicBuildingPhysics(world, scene, new CANNON.Vec3(-55, 85, 103), new CANNON.Vec3(Math.PI/2, 0, -Math.PI/2), false);
+
+            // Add stop sign for fun
+            stopSignOnBlock3 = WorldPhysic.addStopSigns(world, scene, new CANNON.Vec3(-55, 95, 45), new CANNON.Vec3(0, 0, 0), 3);
+        }
+
+        // Adding the physics of all objects in block4 (block4 is defined to be the block with PMU)
+        {
+            // Adding the physicss of block4
+            WorldPhysic.addBlockPhysics(world, scene, new CANNON.Vec3(32, 50, 30), new CANNON.Vec3(169, 5, 28), false);
+
+            // Adding the physics of PMU
+            WorldPhysic.addPMU(world, scene, new CANNON.Vec3(169.2, 65, 5), false);
+
+            // Adding stop sign for fun
+            stopSignOnBlock4 = WorldPhysic.addStopSigns(world, scene, new CANNON.Vec3(195, 75, 40), new CANNON.Vec3(0, Math.PI, 0), 4);
 
         }
 
@@ -191,6 +212,7 @@ function initCannon() {
             // the bell tower itself
             WorldPhysic.addBellTower(world, scene, new CANNON.Vec3(-50, 120, 0), false);
         }
+
 
 
 
@@ -214,6 +236,25 @@ function animate() {
         fountain.position.y -= 5;
     } catch (e) {
         console.error("engineering fountain not loaded yet.");
+    }
+
+    let stopSignB2 = scene.getObjectByName("stopSignOnBlock2");
+    let stopSignB3 = scene.getObjectByName("stopSignOnBlock3");
+    let stopSignB4 = scene.getObjectByName("stopSignOnBlock4");
+    try {
+        stopSignB2.position.copy(stopSignOnBlock2.position);
+        stopSignB2.quaternion.copy(stopSignOnBlock2.quaternion);
+        stopSignB2.position.y -= 12;
+
+        stopSignB3.position.copy(stopSignOnBlock3.position);
+        stopSignB3.quaternion.copy(stopSignOnBlock3.quaternion);
+        stopSignB3.position.y -= 12;
+
+        stopSignB4.position.copy(stopSignOnBlock4.position);
+        stopSignB4.quaternion.copy(stopSignOnBlock4.quaternion);
+        stopSignB4.position.y -= 12;
+    } catch (e) {
+
     }
 
 

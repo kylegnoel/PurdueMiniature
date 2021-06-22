@@ -119,7 +119,7 @@ export function addTreePhysics(world, scene, position, visuals) {
     }
 }
 
-export function addSmallAcademicBuildingPhysics(world, scene, position, quaternion, visuals) {
+export function addSmallAcademicBuildingPhysics(world, scene, position, quaternion, visuals, content) {
     const building = new CANNON.Body({
         mass: 0,
         material: groundMaterial
@@ -138,6 +138,9 @@ export function addSmallAcademicBuildingPhysics(world, scene, position, quaterni
     if (visuals) {
         buildingMat.opacity = 1;
     }
+    if (typeof content != 'undefined') {
+        buildingMesh.content = content;
+    }
     scene.add(buildingMesh);
 
 }
@@ -153,7 +156,6 @@ export function addBigAcademicBuildingPhysics(world, scene, position, quaternion
     building.addShape(shapeBack, new CANNON.Vec3(0, 0, 0));
     building.addShape(shapeFront, new CANNON.Vec3(0, 12, 0));
 
-    console.log(building)
     world.addBody(building);
 
     building.addEventListener("collide", function (e) {
@@ -193,7 +195,9 @@ export function addBigAcademicBuildingPhysics(world, scene, position, quaternion
     buildingMesh.position.copy(building.position);
     buildingMesh.quaternion.copy(building.quaternion);
 
-    buildingMesh.content = content;
+    if (typeof content != 'undefined') {
+        buildingMesh.content = content;
+    }
     scene.add(buildingMesh);
 }
 
@@ -217,10 +221,84 @@ export function addBellTower(world, scene, position, visuals, content) {
     if (visuals) {
         towerMat.opacity = 1;
     }
-    if (content != 'undefined') {
+    if (typeof content != 'undefined') {
         towerMesh.content = content;
     }
-
     scene.add(towerMesh);
 
+}
+
+export function addPMU(world, scene, position, visuals, content) {
+
+    let building = new CANNON.Body({
+        mass: 0,
+        material: groundMaterial,
+    });
+    building.position.copy(position);
+
+    let mainBody = new CANNON.Box(new CANNON.Vec3(21, 10, 8));
+    let entrance = new CANNON.Box(new CANNON.Vec3(10, 15, 5));
+
+    building.addShape(mainBody, new CANNON.Vec3(0, 0, 0));
+    building.addShape(entrance, new CANNON.Vec3(0, 0, 10));
+
+    world.addBody(building);
+
+    // visuals
+
+    let geometryArray = [];
+    const buildingMat = new THREE.MeshNormalMaterial({ color: 0xDEBB19, side: THREE.DoubleSide, wireframe: false, transparent: true, opacity: 0 });
+
+    const mainBodyGeo = new THREE.BoxBufferGeometry(42, 20, 16);
+    const mainBodyMesh = new THREE.Mesh(mainBodyGeo, buildingMat);
+    mainBodyMesh.updateMatrixWorld();
+    geometryArray.push(mainBodyMesh.geometry.clone().applyMatrix4(mainBodyMesh.matrixWorld));
+
+    const entranceGeo = new THREE.BoxBufferGeometry(20, 30, 10);
+
+    const entranceMesh = new THREE.Mesh(entranceGeo, buildingMat);
+    entranceMesh.position.copy(new THREE.Vector3(mainBodyMesh.position.x, mainBodyMesh.position.y, mainBodyMesh.position.z + 10));
+    entranceMesh.updateMatrix();
+    geometryArray.push(entranceMesh.geometry.clone().applyMatrix4(entranceMesh.matrix));
+
+    if (visuals) {
+        buildingMat.opacity = 0.5;
+    }
+
+    let buildingGeo = new THREE.BufferGeometry();
+    buildingGeo = BufferGeometryUtils.mergeBufferGeometries(geometryArray);
+    const buildingMesh = new THREE.Mesh(buildingGeo, buildingMat);
+
+    buildingMesh.position.copy(building.position);
+    buildingMesh.quaternion.copy(building.quaternion);
+
+    if (typeof content != 'undefined') {
+        buildingMesh.content = content;
+    }
+    scene.add(buildingMesh);
+
+}
+
+export function addStopSigns(world, scene, position, quaternion, index) {
+    const stopSign = new CANNON.Body({
+        mass: 50,
+        shape: new CANNON.Box(new CANNON.Vec3(2, 10, 2)),
+        material: groundMaterial
+    });
+    stopSign.position.copy(position);
+    stopSign.quaternion.setFromEuler(quaternion.x, quaternion.y, quaternion.z);
+    world.addBody(stopSign);
+
+    const mtlLoader = new MTLLoader();
+    mtlLoader.load('models/StopSign/StopSign.mtl', (mtl) => {
+        mtl.preload();
+        const objLoader = new OBJLoader();
+        objLoader.setMaterials(mtl);
+        objLoader.load('models/StopSign/StopSign.obj', (sign) => {
+            scene.add(sign);
+            const name = "stopSignOnBlock" + index;
+            sign.name = name;
+        });
+    });
+    return stopSign;
 }

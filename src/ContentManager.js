@@ -19,6 +19,8 @@ const CARDS = {
 
 
 function updateContent(document, contentToAdd, questionToAdd) {
+    if (typeof contentToAdd === 'undefined') return;
+
     let title = document.getElementById("title");
     let topContent = document.getElementById("top-content");
     let botContent = document.getElementById("bot-content");
