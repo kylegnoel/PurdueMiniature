@@ -32,33 +32,43 @@ body{
 	height: 660px;
 	top: 10px;
 	left: 10px;
-	background: linear-gradient(180deg, #555555 45%, white 45%);
+	background: linear-gradient(180deg, #555555 35%, white 35%);
 }
 
 .card-top {
 	display: inline-block;
 	color: white;
-	height: 45%;
+	height: 35%;
 }
 
 
 .card-bottom {
 	display: inline-block;
-	height: 55%;
+	margin: 20px; 
+	justify-content: center; 
+	align-items: center;
 }
 
 img {
 	max-width: 75%;
-	height: 150px;
+	max-height: 100px;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 10px;
+}
+
+.double-img {
+	max-height: 60px;
 }
 
 .question-container {
 	position: absolute;
-	width: 50%;
 	background: white;
 	text-align: center;
 	margin-left: auto;
 	margin-right: auto;
+	width: fit-content;
 	left: 0;
 	right: 0;
 	top: 10px;
@@ -66,7 +76,28 @@ img {
 	border-radius: 30px;
 }
 
+.double-content {
+	display: flex;
+}
 
+.link {
+	border-radius: 30px; 
+	padding-left: 35%; 
+	padding-right: 35%;
+	position: absolute;
+    left: 15px;
+    top: 600px;
+    width: fit-content;
+}
+.double-link {
+    left: 0;
+    top: 120px;
+    position: relative;
+	width: fit-content;
+	border-radius: 30px; 
+	padding-left: 35%; 
+	padding-right: 35%;
+}
 </style>
 
 <body>
@@ -77,22 +108,20 @@ img {
 		<div class="card-top">
 			<div class="content" style="margin: 45px;">
 				<button type="button" class="btn-close btn-close-white" aria-label="Close" style="position: absolute;top: 20px; right: 25px" onclick="removeCard()"></button>
-				<h4 id="title">Find Where You Want To Go</h4>
-				<p id="top-content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Est voluptatibus autem veniam ad pariatur nostrum fugit ullam! Ipsa doloremque voluptate, architecto quidem eos debitis culpa?</p>	
+				<h4 id="title"></h4>
+				<p id="top-content"></p>	
 			</div>
 		</div>
-		<div class="card-bottom">
-			<div class="content" style="margin: 45px; justify-content: center; flex-direction: column; display: inline-flex; align-items: center;">
-				<img id="logo" src="Images/Pepe.jpg" alt="Pepe">
-				<p id="bot-content">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Et, quaerat!</p>
-				<a id="link" href="https://www.google.com" target="_blank" class="btn btn-secondary" style="border-radius: 30px; padding-left: 35%; padding-right: 35%;">Visit Link</a>	
+		<div id="card-bottom" class="card-bottom">
+			<div>
+				<img id="logo" src="" alt="">
+				<p id="bot-content"></p>
+				<a id="link" href="" target="_blank" class="btn btn-secondary link">Visit Website</a>	
 			</div>
 		</div>
 	</div>
 
-	<div id="question-card" class="question-container popHide">
-		Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam, nobis!
-	</div>
+	<div id="question-card" class="question-container popHide"></div>
 	
 	<link rel="stylesheet" href="style.css">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>

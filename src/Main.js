@@ -146,11 +146,11 @@ function initCannon() {
             engineeringFountain = WorldPhysic.loadEngineeringFountain(world, scene, new CANNON.Vec3(40, 70, 0));
 
             // small academic building on the left of the big academic building
-            WorldPhysic.addSmallAcademicBuildingPhysics(world, scene, new CANNON.Vec3(1, 84, -93), new CANNON.Quaternion(Math.PI / 2, 0, 0), false)
+            WorldPhysic.addSmallAcademicBuildingPhysics(world, scene, new CANNON.Vec3(1, 84, -93), new CANNON.Quaternion(Math.PI / 2, 0, 0), false, ContentManager.CARDS[1])
             // bigger building in the middle
-            WorldPhysic.addBigAcademicBuildingPhysics(world, scene, new CANNON.Vec3(32, 84, -93), new CANNON.Quaternion(Math.PI/2, 0, 0), false, ContentManager.CARDS[1])
+            WorldPhysic.addBigAcademicBuildingPhysics(world, scene, new CANNON.Vec3(32, 84, -93), new CANNON.Quaternion(Math.PI/2, 0, 0), false, ContentManager.CARDS[2])
             // small academic building on the right of the big academic building
-            WorldPhysic.addSmallAcademicBuildingPhysics(world, scene, new CANNON.Vec3(62, 84, -93), new CANNON.Quaternion(Math.PI / 2, 0, 0), false)
+            WorldPhysic.addSmallAcademicBuildingPhysics(world, scene, new CANNON.Vec3(62, 84, -93), new CANNON.Quaternion(Math.PI / 2, 0, 0), false, ContentManager.CARDS[3])
         }
 
         // Adding the physics of all objects in block2 (block2 is defined to be the block with the big memorial lawn)
@@ -165,7 +165,7 @@ function initCannon() {
             // small academic building closest to the ramp connecting block1 and block2
             WorldPhysic.addSmallAcademicBuildingPhysics(world, scene, new CANNON.Vec3(111, 75, -7), new CANNON.Vec3(Math.PI/2, 0, 0), false);
             // big academic building at the corner of block2 with 2 patches of grass in front
-            WorldPhysic.addBigAcademicBuildingPhysics(world, scene, new CANNON.Vec3(30, 75, 83), new CANNON.Quaternion(Math.PI / 2, 0, -Math.PI/2), false, ContentManager.CARDS[1])
+            WorldPhysic.addBigAcademicBuildingPhysics(world, scene, new CANNON.Vec3(30, 75, 83), new CANNON.Quaternion(Math.PI / 2, 0, -Math.PI/2), false, ContentManager.CARDS[4])
             
             // Tree at the middle on the smaller lawn
             WorldPhysic.addTreePhysics(world, scene, new CANNON.Vec3(86, 67, 4), false)
