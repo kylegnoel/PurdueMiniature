@@ -49,8 +49,8 @@ d 1.000
 newmtl Buffer Layer material 64_b72dac7b-0614-45b9-a7fb-179c49baf387
 Kd 0.796 0.796 0.804
 d 1.000
-newmtl Box material 5_0890dc77-e4b0-4da1-9c82-c4756056030a
-Kd 0.588 0.588 0.588
+newmtl 3D Text material 10_a53e2663-76e0-4317-a8cb-7ce13b7b69d6
+Kd 0.373 0.431 0.314
 d 1.000
 newmtl Buffer Layer material 79_5e370c86-e8ef-4000-9cf6-a3b0ef20211d
 Kd 0.333 0.333 0.333
@@ -127,14 +127,14 @@ d 1.000
 newmtl Material 19_a0ddc452-cd07-44e7-9a61-893e182dc765
 Kd 0.651 0.412 0.337
 d 1.000
+newmtl Box material 5_0890dc77-e4b0-4da1-9c82-c4756056030a
+Kd 0.588 0.588 0.588
+d 1.000
 newmtl Buffer Layer material 114_f74f3273-3b3b-46ac-b547-a28c1018330c
 Kd 0.533 0.647 0.400
 d 1.000
 newmtl Buffer Layer material 115_94d6a821-749d-4864-938e-14c1f52f1a03
 Kd 0.871 0.871 0.878
-d 1.000
-newmtl Buffer Layer material 137_2fea217d-fe65-48ba-9bbb-f2402c9d4128
-Kd 0.800 0.800 0.800
 d 1.000
 newmtl Material_00e95c33-371e-4e9a-a29a-a42919e41bf0
 Kd 0.957 0.914 0.878
@@ -156,6 +156,9 @@ Kd 0.251 0.808 0.482
 d 1.000
 newmtl Material 18_ed50ae3a-1bce-48c8-bb53-b1775c14a1ec
 Kd 0.243 0.247 0.318
+d 1.000
+newmtl Buffer Layer material 137_2fea217d-fe65-48ba-9bbb-f2402c9d4128
+Kd 0.800 0.800 0.800
 d 1.000
 newmtl 3D Text material 9_11ded8ca-350e-41a4-baf9-c12e31712c53
 Kd 0.373 0.431 0.314
@@ -237,9 +240,6 @@ Kd 0.741 0.827 0.847
 d 1.000
 newmtl Buffer Layer material 113_5a32caa1-321d-4013-a831-eebef1019047
 Kd 0.878 0.765 0.592
-d 1.000
-newmtl Box material 1_da23232f-91c8-4550-9e57-8613b357361a
-Kd 0.886 0.886 0.894
 d 1.000
 newmtl Material 15_17292981-c1db-48ce-a95d-ad475d8cf493
 Kd 0.251 0.808 0.482
@@ -361,9 +361,6 @@ d 1.000
 newmtl Buffer Layer material 101_579f68ea-91d6-4fac-803f-8ba87af4766a
 Kd 0.878 0.765 0.592
 d 1.000
-newmtl Box material 6_8801c1ed-8653-4560-ad66-9e24c2a00151
-Kd 0.588 0.588 0.588
-d 1.000
 newmtl 3D Text material 8_edc2adde-ebe3-4222-a601-79a2cb9aad8f
 Kd 0.373 0.431 0.314
 d 1.000
@@ -372,6 +369,12 @@ Kd 0.875 0.769 0.608
 d 1.000
 newmtl Box material 14_cb601634-144e-4b17-ba9e-b65f09b3f855
 Kd 0.529 0.655 0.373
+d 1.000
+newmtl Box material 6_8801c1ed-8653-4560-ad66-9e24c2a00151
+Kd 0.588 0.588 0.588
+d 1.000
+newmtl Box material 1_da23232f-91c8-4550-9e57-8613b357361a
+Kd 0.886 0.886 0.894
 d 1.000
 newmtl Box material 16_0d2313aa-91ea-49ff-8acc-8c6ada0536e7
 Kd 0.529 0.655 0.373
@@ -430,9 +433,6 @@ d 1.000
 newmtl Buffer Layer material 7_36228e22-9252-45eb-bd0b-e4d4b8ea38e1
 Kd 0.878 0.765 0.592
 d 1.000
-newmtl Box material_cb2e539d-64bb-4571-b369-e22b270a7a2e
-Kd 0.886 0.886 0.894
-d 1.000
 newmtl Buffer Layer material 38_e1ac4cba-8916-41a5-8ffa-a46caee75980
 Kd 0.855 0.855 0.855
 d 1.000
@@ -469,517 +469,520 @@ d 1.000
 newmtl Buffer Layer material 50_09d1d3c6-d09f-4934-9e58-e37d60d52f30
 Kd 0.878 0.765 0.592
 d 1.000
-newmtl _cc18f3fd-f39c-4606-b035-c572943e0c2e
+newmtl Box material_cb2e539d-64bb-4571-b369-e22b270a7a2e
+Kd 0.886 0.886 0.894
+d 1.000
+newmtl _0b7c8022-708f-4097-8d59-467210ddb286
 Kd 0.878 0.816 0.773
 d 1.000
-newmtl _af02b25c-6456-4cda-836e-8a6a4ddc0611
+newmtl _b98ef73a-55bc-4cce-8df2-35fc2fba8afc
 Kd 0.827 0.757 0.698
 d 1.000
-newmtl _cbd1887b-070b-4ec2-807f-04489381bd17
+newmtl _638eb017-c52e-4795-a287-1a2c0454dea2
 Kd 0.812 0.729 0.659
 d 1.000
-newmtl _25f97c85-2755-46f9-82f2-c3b1d6478e59
+newmtl _91bd7b69-2405-4ed2-aa74-639d14985914
 Kd 0.827 0.757 0.698
 d 1.000
-newmtl _fd626b7a-4b30-4100-bf00-eda5c6f0f4c9
+newmtl _7f63b274-2689-4916-8df5-7c1dd9ea6dd3
 Kd 0.812 0.729 0.659
 d 1.000
-newmtl _b875a853-f8bb-4569-86ab-0fd350980935
+newmtl _430fe94f-ee75-4bec-90c6-8864f65edff0
 Kd 0.827 0.757 0.698
 d 1.000
-newmtl _7257769d-f0d7-40be-9278-28b6e749668e
+newmtl _dad2eaa4-a284-495e-a44b-c3cd80a96174
 Kd 0.812 0.729 0.659
 d 1.000
-newmtl _dbfe280b-5cff-4296-bc42-3f0d48dd0c7a
+newmtl _c654441f-b7e9-4d95-91ab-bb4677f84c56
 Kd 0.827 0.757 0.698
 d 1.000
-newmtl _d8495ca8-ba3e-4b07-8c5a-1bd5ff12448a
+newmtl _7caadaf7-d0f5-4a19-88f7-7fb9249c7d55
 Kd 0.812 0.729 0.659
 d 1.000
-newmtl _d6a61c97-d2c1-453a-8dcd-1b443b833abc
+newmtl _09d8a62b-7f16-4394-8855-fd1ffe6cf286
 Kd 0.827 0.757 0.698
 d 1.000
-newmtl _a10704bb-0372-40d6-9357-cf0a526b86c9
+newmtl _87f24a3d-d493-4729-b2dd-8285428830e7
 Kd 0.812 0.729 0.659
 d 1.000
-newmtl _dc888a37-2be9-432c-ace4-f7c7e144113d
+newmtl _d8365ef0-408c-49b0-a57b-0887f4af9cba
 Kd 0.827 0.757 0.698
 d 1.000
-newmtl _d836c5ad-a8cc-4a9b-8459-20d3fb1cdadd
+newmtl _95fcee80-af9d-487d-afb6-3aa99d6b835e
 Kd 0.812 0.729 0.659
 d 1.000
-newmtl _8c70d5b4-3318-4486-a8b9-fa398ad7ac07
+newmtl _32122ee0-f5a4-481f-b3ff-145c4ba7cf58
 Kd 0.827 0.757 0.698
 d 1.000
-newmtl _abbed55e-e16f-430f-80c0-dd8d65efc7d5
+newmtl _78a5196e-0550-42df-9146-92712eca7fed
 Kd 0.812 0.729 0.659
 d 1.000
-newmtl _d00109bf-5fca-4364-ba67-18b50bbb0382
+newmtl _63e03888-bab8-4444-bebc-a8b1127d6d8b
 Kd 0.827 0.757 0.698
 d 1.000
-newmtl _c7197141-65ef-4beb-b176-8b092e21794a
+newmtl _71ebae3a-dcaf-48ee-9b5f-d1e5dbe2b01c
 Kd 0.812 0.729 0.659
 d 1.000
-newmtl _211b21a2-9c18-4e08-9006-b28cc628fe8c
+newmtl _e0183b16-7c79-4031-9bce-85b04d844c53
 Kd 0.800 0.710 0.639
 d 1.000
-newmtl _98315991-848b-482d-9de8-b55fdf6e9660
+newmtl _3bb9bf7e-806f-47b6-90bd-88edd3fee95f
 Kd 0.910 0.851 0.808
 d 1.000
-newmtl _850dcec0-fc62-42ec-b912-6216d3febf2e
+newmtl _0e827baa-56ff-46ab-9a20-34b1b91ad266
 Kd 0.878 0.816 0.773
 d 1.000
-newmtl _9cd66d7d-cba6-46a5-8e3e-bbb40327bd81
+newmtl _ae7a2a6e-994d-4c9a-9c49-a3efd54ad94e
 Kd 0.827 0.757 0.698
 d 1.000
-newmtl _e0f0b7f0-84e7-4a99-8987-0606e84157f4
+newmtl _e3182302-bfe6-4814-a5a4-92cfb362dc21
 Kd 0.812 0.729 0.659
 d 1.000
-newmtl _97f71512-b340-4392-aeba-cac4f68c2e46
+newmtl _bcdfae9a-83ff-47ee-a822-cfbe04fb182d
 Kd 0.827 0.757 0.698
 d 1.000
-newmtl _9cbd59b4-e398-4399-97e4-f07454aa946c
+newmtl _2c939c17-5350-45de-ad95-a3ef4b1a53df
 Kd 0.812 0.729 0.659
 d 1.000
-newmtl _87c8e6c9-85cd-4fe2-aae1-a178aa7a5384
+newmtl _18e5b059-3e2e-48d8-b012-1fdf6be1a0c1
 Kd 0.827 0.757 0.698
 d 1.000
-newmtl _11cb00e8-e397-4942-9b4f-3a08daa7b23b
+newmtl _8cf15ea1-ac71-4481-8e09-830435c3a33b
 Kd 0.812 0.729 0.659
 d 1.000
-newmtl _3bb766af-bbfd-4c21-a293-28ae74188da5
+newmtl _617252be-3b05-4c94-8e71-8b625083b3ed
 Kd 0.827 0.757 0.698
 d 1.000
-newmtl _9de1e710-3a1b-45f4-9b17-410b26d95627
+newmtl _9707a68c-8827-4aeb-ad20-60dcd74ef5b3
 Kd 0.812 0.729 0.659
 d 1.000
-newmtl _30d5eea9-88cf-4762-a6d8-057ed0be3dcb
+newmtl _162d91b1-6f4c-42cf-8c4d-06c2a2f92c11
 Kd 0.827 0.757 0.698
 d 1.000
-newmtl _fa6bee29-17ae-4fbf-8a76-0f8a4cdc9abc
+newmtl _e86a13c7-a9f4-4c2f-bdba-8c73d72bb57e
 Kd 0.812 0.729 0.659
 d 1.000
-newmtl _4d328d21-c05a-4b3a-944c-f99e171a6920
+newmtl _60c2f151-6628-47e7-b42c-40efd0047e76
 Kd 0.827 0.757 0.698
 d 1.000
-newmtl _6d41c6e0-e1b5-467f-a50f-2ee5752caa94
+newmtl _fe1c3def-34e9-479f-b478-1d19ad95d213
 Kd 0.812 0.729 0.659
 d 1.000
-newmtl _1a92cb3d-ad40-45bd-b98e-cf2cfbba6862
+newmtl _bb5c1da0-53f9-446e-beac-18407b96cee0
 Kd 0.827 0.757 0.698
 d 1.000
-newmtl _303c3117-0852-4d8e-8db5-3a79624520c4
+newmtl _3e18c1ec-a650-41e5-924e-71d276777fab
 Kd 0.812 0.729 0.659
 d 1.000
-newmtl _3bac831e-9b29-46db-8d6e-fcb038b199fb
+newmtl _f587bafc-e92a-45b2-93fa-359160fa1adf
 Kd 0.827 0.757 0.698
 d 1.000
-newmtl _d4c8d8b5-6b80-4072-9383-89c7ad389372
+newmtl _2b081496-8b10-4f69-a4af-2ed358c02d4f
 Kd 0.812 0.729 0.659
 d 1.000
-newmtl _b198e9b1-350f-491f-911f-d696781c0ce6
+newmtl _01383133-2179-4da4-b53b-b96f65eaec5d
 Kd 0.800 0.710 0.639
 d 1.000
-newmtl _ad416f1b-3ee6-4870-a83c-54db6d5701ea
+newmtl _97fa299c-0b4f-4446-b12f-90089219efe8
 Kd 0.910 0.851 0.808
 d 1.000
-newmtl _539e7902-963f-4b43-8d0e-cd560339f229
+newmtl _46683319-c3e9-410c-9920-308d291b31e0
 Kd 0.878 0.816 0.773
 d 1.000
-newmtl _6f3335fc-7d8e-45ab-a73b-35a47e37fbb2
+newmtl _2359675a-97ec-4498-a8b4-029ff6b6698c
 Kd 0.827 0.757 0.698
 d 1.000
-newmtl _52e9fa25-843b-41b7-9a11-3f30ea0e896d
+newmtl _f08f988a-c6a1-4287-b493-0f8e574ffa8d
 Kd 0.812 0.729 0.659
 d 1.000
-newmtl _2b607db0-e0c5-4f0d-8b41-12fbd5452f9a
+newmtl _25401c3f-f651-4228-a407-dc4e86adcf5a
 Kd 0.827 0.757 0.698
 d 1.000
-newmtl _54c91619-5e9f-426c-bba0-2567d80b6a35
+newmtl _b192a7ad-00ec-4f4c-a729-fd5ae7f21c2a
 Kd 0.812 0.729 0.659
 d 1.000
-newmtl _929489f1-c1cb-475e-a443-8556573a4a99
+newmtl _e85e44f9-4283-4bc5-9825-6da6a332bd60
 Kd 0.827 0.757 0.698
 d 1.000
-newmtl _cbac7443-7989-4435-8674-7e61b6a56952
+newmtl _d492604f-e5fc-4965-a308-16d4e6dde009
 Kd 0.812 0.729 0.659
 d 1.000
-newmtl _119b54b5-0cbf-4990-a717-375b0f6610ce
+newmtl _5c36c485-4b1e-43e8-96a5-8704d0988881
 Kd 0.827 0.757 0.698
 d 1.000
-newmtl _ff3daf83-739c-4073-9ad8-8c40116c8d66
+newmtl _4aa8143b-5742-454b-94c0-26a19e14fe56
 Kd 0.812 0.729 0.659
 d 1.000
-newmtl _3f56be4d-dcb0-4d6a-836f-3ee9ee8b7cd9
+newmtl _f2ac0b8b-410e-4e29-908d-2c031940fc80
 Kd 0.827 0.757 0.698
 d 1.000
-newmtl _7e1986e5-db72-44e8-9240-bc5546ec57ca
+newmtl _75eeb4ee-225b-4f5b-873f-5e9976223f94
 Kd 0.812 0.729 0.659
 d 1.000
-newmtl _3e8cc230-f04e-40ce-9244-a8253949827b
+newmtl _7a47941e-e190-48c0-9b08-22f15db7e669
 Kd 0.827 0.757 0.698
 d 1.000
-newmtl _a24b7830-1a38-4312-a223-52ff51b09aa6
+newmtl _fd1995f1-3012-484f-b3a0-26285714565b
 Kd 0.812 0.729 0.659
 d 1.000
-newmtl _5a6b6038-8610-4ed4-b2ee-8038783d7684
+newmtl _5a98a801-a616-474f-896b-fd610083b9c8
 Kd 0.827 0.757 0.698
 d 1.000
-newmtl _7768ab11-766c-4b1c-9365-ca1c632ff75e
+newmtl _e006ff55-38ab-4579-a00a-a6041a1e638f
 Kd 0.812 0.729 0.659
 d 1.000
-newmtl _73bbde55-cf8a-425e-b907-35b5cf416561
+newmtl _4802eaeb-1dcd-47b1-b46f-9916be06634a
 Kd 0.827 0.757 0.698
 d 1.000
-newmtl _967f7ffb-8ec8-4887-968d-1768748fb78a
+newmtl _911236fa-fac9-4a62-80ce-a1c5f9f20ab2
 Kd 0.812 0.729 0.659
 d 1.000
-newmtl _ba626591-1b78-470b-8414-506c3faf3e87
+newmtl _e1b8357f-5f88-4d01-ba5c-afeb6507a39f
 Kd 0.800 0.710 0.639
 d 1.000
-newmtl _4a9a3511-d7c9-4639-a211-dcebab29ea81
+newmtl _f8b9476c-4aa4-40cd-b1a8-b46b07311e13
 Kd 0.910 0.851 0.808
 d 1.000
-newmtl _ee012bdf-dec8-4b41-a045-0fe1aeda4911
+newmtl _bfa5ee32-8c75-44e9-9834-91141ca57429
 Kd 0.878 0.816 0.773
 d 1.000
-newmtl _b0464c44-88cf-4202-ae03-58f3fafbe2b6
+newmtl _753a4705-630e-41e1-a32c-786b3c7f478c
 Kd 0.827 0.757 0.698
 d 1.000
-newmtl _24335bf4-5ea2-4dd9-9866-7886fcd9ce0f
+newmtl _b48a5cca-ea52-4587-98c8-5ca34726beae
 Kd 0.812 0.729 0.659
 d 1.000
-newmtl _90b49aff-0046-40bd-9e03-7740fac3c349
+newmtl _e129ece5-aaf9-4494-b66b-183fdf22b3cb
 Kd 0.827 0.757 0.698
 d 1.000
-newmtl _cf45aa09-dbaa-4125-9eac-2e761be7f2cf
+newmtl _c6d34a3e-c3a2-4bd6-860c-f6fa2b035e43
 Kd 0.812 0.729 0.659
 d 1.000
-newmtl _d098af61-fc5c-4382-ab18-0bbaf70a91ab
+newmtl _62259105-8221-4135-a15e-235b4b2ddc3d
 Kd 0.827 0.757 0.698
 d 1.000
-newmtl _c97c779b-dab0-41cf-8fba-3f2083988b92
+newmtl _3d91cd76-0b66-4b03-b44c-b998d75918b0
 Kd 0.812 0.729 0.659
 d 1.000
-newmtl _409e047e-268c-4399-bdbb-18512006cda0
+newmtl _a07bcdf3-e9f6-47ad-ab82-f62cc3054c44
 Kd 0.827 0.757 0.698
 d 1.000
-newmtl _27542b6e-eee5-4397-9d31-3f5e21ca25e1
+newmtl _8cf494f9-4ab9-4444-b9a0-2d5caf2c14fd
 Kd 0.812 0.729 0.659
 d 1.000
-newmtl _ca779c27-edd1-42dd-8d87-1d63ad3ee0be
+newmtl _4d697411-4ac9-4400-a8b4-ab91ccb3f1da
 Kd 0.827 0.757 0.698
 d 1.000
-newmtl _06a0dddc-fd2d-4b57-86e6-5da497aeb3ba
+newmtl _7884bdbb-a32a-40ad-8758-b731acda478c
 Kd 0.812 0.729 0.659
 d 1.000
-newmtl _97c72be4-1e8c-4b63-866b-4dfd6fb663a3
+newmtl _159bea0e-8979-4922-aded-2a5dece65a57
 Kd 0.827 0.757 0.698
 d 1.000
-newmtl _4518e8c2-60b8-4648-92da-e85f0ccaf350
+newmtl _4f54b7d1-5b4b-4dbe-8ff7-1c62b247b0ce
 Kd 0.812 0.729 0.659
 d 1.000
-newmtl _10ec6a2b-b9b0-4a2f-8559-c1718c20abcc
+newmtl _f2b8ce8a-fce7-4818-89ab-36dc06f6cd73
 Kd 0.827 0.757 0.698
 d 1.000
-newmtl _55b85fdc-144a-46cb-9d87-3351b4b7bc3e
+newmtl _ecc83f06-b509-4bf7-a238-91016268c5e6
 Kd 0.812 0.729 0.659
 d 1.000
-newmtl _3ea21254-82c2-470d-b0b2-defbeda6e1ea
+newmtl _4e2a39be-e301-46bf-b30c-dccad46475c1
 Kd 0.827 0.757 0.698
 d 1.000
-newmtl _c2ee90fb-40a6-4854-9593-de10fa9e6c78
+newmtl _5579a3df-9d05-4b3d-806d-a7c9ad716d92
 Kd 0.812 0.729 0.659
 d 1.000
-newmtl _13000eeb-5f43-4574-bb39-f13950fd795a
+newmtl _421c24a8-8d15-4511-8608-d0eaf39fb542
 Kd 0.800 0.710 0.639
 d 1.000
-newmtl _42e4369b-58c2-43a3-834c-f36df0a54927
+newmtl _71f88cb7-95ad-4013-bb3f-122f443f326c
 Kd 0.910 0.851 0.808
 d 1.000
-newmtl _e2ba8720-066a-43aa-8add-d586b59f6f8a
+newmtl _836d4bb5-015d-48ac-9741-fd33f45e81fe
 Kd 0.878 0.816 0.773
 d 1.000
-newmtl _a603ede0-e896-4a76-826c-54e070711018
+newmtl _0d5a66f0-da02-47ae-8e21-eab6ffeaa12d
 Kd 0.827 0.757 0.698
 d 1.000
-newmtl _31c9977a-c315-4085-9308-7b8e8edd6c1f
+newmtl _7c9fa859-4535-40fe-873e-f73cd1d79814
 Kd 0.812 0.729 0.659
 d 1.000
-newmtl _0b3a519b-749c-414b-8a41-418cc77966cf
+newmtl _eb7720f3-a957-426f-b1d4-f699ee984206
 Kd 0.827 0.757 0.698
 d 1.000
-newmtl _f52bbf6a-b7de-4973-a4ce-bee4af8e4efc
+newmtl _1e6f154a-e933-47ce-9b2a-0f234265601f
 Kd 0.812 0.729 0.659
 d 1.000
-newmtl _594f2f3e-3587-4de0-83a9-4a90c5e09068
+newmtl _d296f377-8c30-4358-aff6-e466ba62a4c4
 Kd 0.827 0.757 0.698
 d 1.000
-newmtl _2373c13e-309c-4661-8795-3726b430ad6e
+newmtl _6091d3ee-1768-4451-91e1-d1b5128c2962
 Kd 0.812 0.729 0.659
 d 1.000
-newmtl _0afb7137-014f-4b2c-96cd-e3d1a8defb8b
+newmtl _e47e265e-ef49-4fd3-86f9-4cf2bfedb833
 Kd 0.827 0.757 0.698
 d 1.000
-newmtl _649a5d6d-4307-4d46-bbe4-73ff81b5cdf0
+newmtl _ff466202-350a-40e9-b6a4-604ef380aecb
 Kd 0.812 0.729 0.659
 d 1.000
-newmtl _9bf355aa-818d-4392-a531-171356ed59ad
+newmtl _64f37dc4-45ca-410d-8117-569ee217180f
 Kd 0.827 0.757 0.698
 d 1.000
-newmtl _b7bb4d20-241e-4d5c-a8ad-99cef96a2aff
+newmtl _b6f38d56-f29c-40f7-bc3d-48a28ea0b7af
 Kd 0.812 0.729 0.659
 d 1.000
-newmtl _30304748-20bb-4bb2-9863-8f393efd2399
+newmtl _4488420a-cff5-4c4c-9b1b-8387c7317913
 Kd 0.827 0.757 0.698
 d 1.000
-newmtl _5ee65be2-66d6-4754-897b-2cdedebe0b5f
+newmtl _5db4f739-9cb7-4b2a-bb31-0d4057b5bc42
 Kd 0.812 0.729 0.659
 d 1.000
-newmtl _07d33746-6967-4bfc-b6dc-ca1772451fbd
+newmtl _3210b326-2f5e-44cf-a045-da8d60124a27
 Kd 0.827 0.757 0.698
 d 1.000
-newmtl _1b7d2672-93d2-44d6-9668-6c8bc703458c
+newmtl _a87a0f33-cef5-4434-b47c-ff25d9ec89b3
 Kd 0.812 0.729 0.659
 d 1.000
-newmtl _f4ac37f0-d8ac-4c40-9efe-ec1849f9cd14
+newmtl _9e555fa3-2c0e-4f04-a049-284f30cb0245
 Kd 0.827 0.757 0.698
 d 1.000
-newmtl _c9812b4b-133f-4798-9118-f4deed7bd590
+newmtl _8702c85e-24a1-4ef0-a63b-d89d9d0a720a
 Kd 0.812 0.729 0.659
 d 1.000
-newmtl _870c0c8f-0372-4c1a-9ad3-198d1bfcb70c
+newmtl _9e75d3e8-fb88-4d5f-bc9a-f3ed4f1f88b8
 Kd 0.800 0.710 0.639
 d 1.000
-newmtl _2718b554-5a98-4009-99c5-b3918566c7d8
+newmtl _64be70dc-b229-4a7a-b9c1-f2beaee03fa6
 Kd 0.910 0.851 0.808
 d 1.000
-newmtl _cd57f98c-0799-4ebc-a409-ae69b0f8215f
+newmtl _36905034-a9bd-4a2a-b1c8-d41cf66249ca
 Kd 0.878 0.816 0.773
 d 1.000
-newmtl _eaa45089-06e4-4221-8c9b-2bd2808327a5
+newmtl _13b23a5f-8899-4dac-a4f4-cf3cd5306bac
 Kd 0.827 0.757 0.698
 d 1.000
-newmtl _4e825fdd-af82-4e40-9137-542311c25498
+newmtl _82952cbf-f60d-44f5-80fc-e1912db24c71
 Kd 0.812 0.729 0.659
 d 1.000
-newmtl _f01fff11-bedc-43d6-9653-e5fed2e8cf8f
+newmtl _18e8f713-e7b3-46a4-aa0e-6dbfcfc94c64
 Kd 0.827 0.757 0.698
 d 1.000
-newmtl _1991df24-87a9-4a2d-9851-674057d380ba
+newmtl _51b0d01e-7e31-477a-bed8-63a57aabc96f
 Kd 0.812 0.729 0.659
 d 1.000
-newmtl _bb31ae76-b743-40cc-ad14-a69c155db4f5
+newmtl _b5f3c559-dad7-4b6e-9a61-27e4b7519327
 Kd 0.827 0.757 0.698
 d 1.000
-newmtl _6022f807-3dce-49a4-b00a-0383fc537357
+newmtl _54fda680-634f-4fe7-94e9-17a7a6c62bc9
 Kd 0.812 0.729 0.659
 d 1.000
-newmtl _c2538634-481b-4403-8a13-74b720d9470e
+newmtl _c4d96eae-c381-4268-b9d0-5ac1a566a107
 Kd 0.827 0.757 0.698
 d 1.000
-newmtl _83c18bb8-596e-468f-b6aa-a978691ee003
+newmtl _5f93493f-7cb4-4a03-9131-5bf5805f3fcf
 Kd 0.812 0.729 0.659
 d 1.000
-newmtl _09c20082-afcd-483c-982a-9420af226000
+newmtl _2271170b-f875-4c19-af96-336d23aee87c
 Kd 0.827 0.757 0.698
 d 1.000
-newmtl _a1b24e46-af80-48ff-9839-ada63a2e51ed
+newmtl _b4f575ba-302e-46c8-a6c7-18d2c061c44e
 Kd 0.812 0.729 0.659
 d 1.000
-newmtl _afcebadf-f302-4cc7-a7d5-d23e7814d24c
+newmtl _ff3e5d83-bc1c-4ae3-af96-333833314cbf
 Kd 0.827 0.757 0.698
 d 1.000
-newmtl _ede2d53b-7607-41a6-94ac-8298a2bed2c2
+newmtl _16eb7a65-ec8a-4b41-9ee6-7f176e54b05b
 Kd 0.812 0.729 0.659
 d 1.000
-newmtl _18eed9a9-c69e-4ec4-bf34-9de541a82cea
+newmtl _4b803043-4c93-4390-a54d-3ca42ac83544
 Kd 0.827 0.757 0.698
 d 1.000
-newmtl _5020fa21-d25b-450b-be89-9cf7c6b0899a
+newmtl _1856f4e6-54be-4664-a157-2f1f2fa3b94f
 Kd 0.812 0.729 0.659
 d 1.000
-newmtl _6b1c4ed4-80a9-43fd-aeba-962ee36f73d8
+newmtl _267968bb-069a-428e-a0f3-586e009a28ee
 Kd 0.827 0.757 0.698
 d 1.000
-newmtl _8bca85fd-871a-449b-b7cd-255c1b66ddb2
+newmtl _2e114146-40cd-4ef3-9585-4a484eaa67ea
 Kd 0.812 0.729 0.659
 d 1.000
-newmtl _518202eb-6e0e-4b19-8d1c-3414ff7743aa
+newmtl _11cc4a0b-8251-42c9-a355-90b3939e45f8
 Kd 0.800 0.710 0.639
 d 1.000
-newmtl _752d1ab3-4ce0-4cd6-83e6-58750894011f
+newmtl _33e0ec43-6114-41be-bf25-6e676a7be7af
 Kd 0.910 0.851 0.808
 d 1.000
-newmtl _c328527e-2465-49dc-a89a-f32d262c0055
+newmtl _148298aa-0ee3-406c-a5c7-1fda2d5e7fd3
 Kd 0.878 0.816 0.773
 d 1.000
-newmtl _3765f02c-e9dc-46d1-bf5a-142ae9ad3567
+newmtl _c0399574-21f1-41d8-a756-2808d540aecd
 Kd 0.827 0.757 0.698
 d 1.000
-newmtl _ed6f95f8-fa8e-4002-be10-faba378cb88b
+newmtl _1b427003-56ef-4db3-b5dc-ece0fde6b6c8
 Kd 0.812 0.729 0.659
 d 1.000
-newmtl _68800e6b-989a-4360-8466-5208830c0857
+newmtl _369f6c5d-4dc1-4f80-9bed-23fabc5fb09d
 Kd 0.827 0.757 0.698
 d 1.000
-newmtl _f123ddf5-69fb-493f-9be9-a59db51c7c75
+newmtl _2aee9826-b596-4dc7-b912-89f104c83112
 Kd 0.812 0.729 0.659
 d 1.000
-newmtl _0486ceef-f15e-49ca-bda7-2cc47cfcdc3d
+newmtl _4d7fc4c6-0bf0-4f63-adf7-e16a28f030de
 Kd 0.827 0.757 0.698
 d 1.000
-newmtl _fa44964f-98b1-4071-86a1-73b1836b3e61
+newmtl _ccfec3ff-8069-4295-9c74-015cd261f829
 Kd 0.812 0.729 0.659
 d 1.000
-newmtl _7d7c124e-9291-4a5f-be50-60c3e7f98072
+newmtl _dfc57416-f912-4e7a-b21d-6ffa1901d13b
 Kd 0.827 0.757 0.698
 d 1.000
-newmtl _caf9085b-bd73-42c2-a5ce-76510a0f77d3
+newmtl _6f8335bf-a5cd-48aa-8b5e-428142d1ca51
 Kd 0.812 0.729 0.659
 d 1.000
-newmtl _fd5327b0-8d87-4f0c-b054-0228c9aed37b
+newmtl _168ed76e-13bd-4869-89c1-36e49f5d7735
 Kd 0.827 0.757 0.698
 d 1.000
-newmtl _80bb11b5-e404-4974-a5ac-39b717fbef14
+newmtl _7ea68485-4f96-4d4d-b65f-3a5330205b09
 Kd 0.812 0.729 0.659
 d 1.000
-newmtl _4504d47a-d395-47b4-9d81-f3f461ce5441
+newmtl _70e66f60-8a62-458e-928e-546334ed4039
 Kd 0.827 0.757 0.698
 d 1.000
-newmtl _8b33c404-3064-4526-9bed-0899aeba4355
+newmtl _6760c0cc-a1bf-4c9c-b355-aaeed12b2a76
 Kd 0.812 0.729 0.659
 d 1.000
-newmtl _12936c25-aac2-48eb-a656-98a5bfe4cb0b
+newmtl _4f708b8c-5ba6-49ad-b46e-95884b1fa4f7
 Kd 0.827 0.757 0.698
 d 1.000
-newmtl _dbf9fe30-1db0-4bf5-b23a-9e6410ada43b
+newmtl _ba7d0f31-4243-487a-b2d6-f07ef7f9ba6f
 Kd 0.812 0.729 0.659
 d 1.000
-newmtl _285ccb51-f9dd-434c-b23e-c882bcbeaa28
+newmtl _7f88b688-ca6d-41a8-a044-ca9c4a87eaec
 Kd 0.827 0.757 0.698
 d 1.000
-newmtl _d0b689ff-a4a4-4165-9b2b-7c3921871ecf
+newmtl _269cee85-6288-42cd-8348-42a9bc0b9a93
 Kd 0.812 0.729 0.659
 d 1.000
-newmtl _fe7506f3-6e1f-4565-94d3-802d3881824a
+newmtl _ed9b411a-1b42-4927-9e28-fcde08063239
 Kd 0.800 0.710 0.639
 d 1.000
-newmtl _f6df0e69-f92d-4f77-b0f4-9390defce374
+newmtl _144145c7-4231-4cd4-82b4-e850070cc75d
 Kd 0.910 0.851 0.808
 d 1.000
-newmtl _a6ef1d05-610e-4a36-ba25-b6d7c649ffaa
+newmtl _f11c0bb3-91c8-4573-b4e8-9826aaaa8c51
 Kd 0.878 0.816 0.773
 d 1.000
-newmtl _d1d4e8a4-34b7-44ae-a69c-67ab2aafeb70
+newmtl _0f9dfc79-9460-4b2e-9bb7-887f7419defd
 Kd 0.827 0.757 0.698
 d 1.000
-newmtl _b6199246-2803-444d-89d8-6199077f4376
+newmtl _8f5ecd48-5499-4b90-9131-c4fda46c5634
 Kd 0.812 0.729 0.659
 d 1.000
-newmtl _9d52dcc2-0d3c-467e-a518-d00343e8a718
+newmtl _9286e883-49bb-43ae-88ec-76670221fe81
 Kd 0.827 0.757 0.698
 d 1.000
-newmtl _48ae971c-26f6-4c06-8567-33a214de61e9
+newmtl _e3b3be7f-7eec-40c5-896e-7d6e08278b68
 Kd 0.812 0.729 0.659
 d 1.000
-newmtl _7712af75-cd57-4966-9067-a540f5d5c41d
+newmtl _ef8629d9-48ec-4eb1-ab62-4d37b4b64c3c
 Kd 0.827 0.757 0.698
 d 1.000
-newmtl _cf573a53-5e2b-4cb2-aad2-450b11bf41dd
+newmtl _070ae551-4a17-49f7-b758-7aad912a94da
 Kd 0.812 0.729 0.659
 d 1.000
-newmtl _9242053e-cbee-46da-9d54-e4caad6d884a
+newmtl _7af2d338-71eb-4d54-a32a-c4cab26828bc
 Kd 0.827 0.757 0.698
 d 1.000
-newmtl _7d46fab9-28f8-4ce0-977a-948df13fc65d
+newmtl _b52bc0e0-b1d8-4f2e-805a-33856296f7a7
 Kd 0.812 0.729 0.659
 d 1.000
-newmtl _654b590d-827b-4765-b40a-f49c4a1d2312
+newmtl _c8ccab43-311b-407d-9975-85798916ce95
 Kd 0.827 0.757 0.698
 d 1.000
-newmtl _9140ca93-ef5f-4700-ad48-24f3760841d8
+newmtl _11984fc3-6e68-486e-811a-84b1ce444659
 Kd 0.812 0.729 0.659
 d 1.000
-newmtl _cbb5abda-aed4-45b4-b92a-7a0a6ba7ace6
+newmtl _a4734f91-882a-42a2-b90d-ed6cd829a9ad
 Kd 0.827 0.757 0.698
 d 1.000
-newmtl _e438b680-da7f-49d1-9242-ab0d015fc0e2
+newmtl _3217c8ec-89ac-4c85-9320-e52a39a099f5
 Kd 0.812 0.729 0.659
 d 1.000
-newmtl _05a5edc6-63d2-48b1-80ec-1ebb48d4c0cc
+newmtl _62c8d553-2ec2-4a6e-b411-b6792cbbd57f
 Kd 0.827 0.757 0.698
 d 1.000
-newmtl _09df7c98-9506-4a57-9ebc-85d6dbe8d912
+newmtl _a0428952-7bf8-4feb-80d2-54dfb8c79c2d
 Kd 0.812 0.729 0.659
 d 1.000
-newmtl _390d76eb-bc3b-430a-a959-cb185f63c996
+newmtl _db861c70-f91d-488e-8def-168162eb4caf
 Kd 0.827 0.757 0.698
 d 1.000
-newmtl _cb0ee24b-c3f9-45eb-966b-46d6f9282cae
+newmtl _e18414f7-22ba-4fe7-985b-ae268c204d39
 Kd 0.812 0.729 0.659
 d 1.000
-newmtl _38af0d7a-407b-4155-a2ca-53829206d505
+newmtl _2b448cd3-0692-4f9a-b119-b58a48f7abf1
 Kd 0.800 0.710 0.639
 d 1.000
-newmtl _c1672825-d7a1-41e8-a4b9-24d47c92b2c3
+newmtl _e3d44915-76e4-4567-9884-941bc78d4857
 Kd 0.910 0.851 0.808
 d 1.000
-newmtl _44fa6ada-6df2-44b8-a40e-bc6c931d5ea5
+newmtl _af419b46-2ef3-4073-b5b4-d04bc367f5f7
 Kd 0.878 0.816 0.773
 d 1.000
-newmtl _9dcf09a1-abc0-40a5-ae6a-64d34ed22e98
+newmtl _35dc1803-aa77-4d30-a336-3db9f4b25274
 Kd 0.827 0.757 0.698
 d 1.000
-newmtl _55692f76-8348-48ae-b009-b29c6e5ab0c0
+newmtl _290874c0-e660-43d3-86d5-332bde882574
 Kd 0.812 0.729 0.659
 d 1.000
-newmtl _60016550-6589-43cd-b877-8850cd679a91
+newmtl _d7accb60-e956-4cfb-a8eb-81e23cebc7d4
 Kd 0.827 0.757 0.698
 d 1.000
-newmtl _66a6259c-33ed-43d2-b214-f4bfdffb0176
+newmtl _1adc8a6d-0cfe-4227-b1e6-1b6aaa9054cb
 Kd 0.812 0.729 0.659
 d 1.000
-newmtl _b6a56052-49b1-4913-825c-e4122b2bd00d
+newmtl _9e3ef585-1444-46c9-a52b-ea7efdb3a628
 Kd 0.827 0.757 0.698
 d 1.000
-newmtl _6060b708-f465-4056-b207-c1887d84aebc
+newmtl _8f6be92a-1d27-4b2b-b7b5-a66b0b8520be
 Kd 0.812 0.729 0.659
 d 1.000
-newmtl _b7dff2f0-ea23-4f3c-86db-2cc9b6cc8ed5
+newmtl _0ca62904-5d66-49f1-a02c-43f138c26fc5
 Kd 0.827 0.757 0.698
 d 1.000
-newmtl _c1e701e8-c08e-49eb-882e-2dae125bd12f
+newmtl _6d073e2e-d97d-4a34-b09e-d1ea643a51ac
 Kd 0.812 0.729 0.659
 d 1.000
-newmtl _dd808d8e-75fe-4e70-80e1-23db71b9547a
+newmtl _ffbc4547-7950-436d-a62d-565991251f37
 Kd 0.827 0.757 0.698
 d 1.000
-newmtl _2c61966f-f11c-4d1d-a59b-9f22d2910a5e
+newmtl _ac4dcbad-6ed2-41b4-baf4-2cfbdab161d1
 Kd 0.812 0.729 0.659
 d 1.000
-newmtl _cbad66fd-6a17-45dc-adea-c10fac56daa2
+newmtl _204b9e62-7580-4a0f-b2c0-a9b3167ccb8d
 Kd 0.827 0.757 0.698
 d 1.000
-newmtl _5ab00770-bb64-43cb-a8dd-9a2218ceaf0b
+newmtl _2a9446f5-2191-434b-8ae8-1f178ef3eebf
 Kd 0.812 0.729 0.659
 d 1.000
-newmtl _87b30106-74bb-4328-a6de-b7f40c543438
+newmtl _1453f34d-ac9e-4248-a1ff-ad9ad6b91e2e
 Kd 0.827 0.757 0.698
 d 1.000
-newmtl _1d2d8152-f8e8-46c6-9e13-936fffdef3d2
+newmtl _0f54aba2-aff7-4664-85dd-2a7376cf9db3
 Kd 0.812 0.729 0.659
 d 1.000
-newmtl _d768a45d-f961-4a04-bdb1-ad244a0fef97
+newmtl _34f2598a-3844-4d74-a94b-10e8b4d8bb42
 Kd 0.827 0.757 0.698
 d 1.000
-newmtl _6bfad03b-5453-48b8-b340-fce7a02b5060
+newmtl _f965933d-9062-416b-ac12-957fe6493924
 Kd 0.812 0.729 0.659
 d 1.000
-newmtl _ad92db0d-31dd-46bc-983b-c2b0042137b9
+newmtl _f82748f4-d412-458f-8542-e4c4b0d7aefd
 Kd 0.800 0.710 0.639
 d 1.000
-newmtl _e11e8db1-3dff-4362-be2b-0462d66f7df4
+newmtl _e2fc5eba-d22a-4a99-afa6-92c295462c51
 Kd 0.910 0.851 0.808
 d 1.000
 newmtl Box material 3_951b9bcd-697c-46af-94ee-98e761b09ec8

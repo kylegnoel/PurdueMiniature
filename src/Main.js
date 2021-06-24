@@ -1,10 +1,10 @@
 import * as CANNON from '../build/cannon-es.js'
 import * as THREE from 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r127/three.module.min.js';
-import { OrbitControls } from '../utils/OrbitControls.js';
-import * as ContentManager from './ContentManager.js';
-import * as WorldPhysic from './WorldPhysics.js'
-import * as Vehicle from './Vehicle.js'
-import * as ThreeHelper from './ThreeHelper.js'
+import { OrbitControls } from './utils/OrbitControls.js';
+import * as ContentManager from './modules/ContentManager.js';
+import * as WorldPhysic from './modules/WorldPhysics.js'
+import * as Vehicle from './modules/Vehicle.js'
+import * as ThreeHelper from './modules/ThreeHelper.js'
 
 // three.js variables
 const canvas = document.querySelector('#c');
@@ -161,11 +161,11 @@ function initCannon() {
             WorldPhysic.addRampPhysics(world, scene, new CANNON.Vec3(13, 32.5, 12), new CANNON.Vec3(122, 28, 25.5), new CANNON.Vec3(0, 0, 1), -Math.PI / 7.8, false);
 
             // small academic building closest to the ramp connecting block2 and block3
-            WorldPhysic.addSmallAcademicBuildingPhysics(world, scene, new CANNON.Vec3(30, 75, 31), new CANNON.Vec3(Math.PI/2, 0, -Math.PI/2), false);
+            WorldPhysic.addSmallAcademicBuildingPhysics(world, scene, new CANNON.Vec3(30, 75, 31), new CANNON.Vec3(Math.PI/2, 0, -Math.PI/2), false, ContentManager.CARDS[4]);
             // small academic building closest to the ramp connecting block1 and block2
-            WorldPhysic.addSmallAcademicBuildingPhysics(world, scene, new CANNON.Vec3(111, 75, -7), new CANNON.Vec3(Math.PI/2, 0, 0), false);
+            WorldPhysic.addSmallAcademicBuildingPhysics(world, scene, new CANNON.Vec3(111, 75, -7), new CANNON.Vec3(Math.PI/2, 0, 0), false, ContentManager.CARDS[5]);
             // big academic building at the corner of block2 with 2 patches of grass in front
-            WorldPhysic.addBigAcademicBuildingPhysics(world, scene, new CANNON.Vec3(30, 75, 83), new CANNON.Quaternion(Math.PI / 2, 0, -Math.PI/2), false, ContentManager.CARDS[4])
+            WorldPhysic.addBigAcademicBuildingPhysics(world, scene, new CANNON.Vec3(30, 75, 83), new CANNON.Quaternion(Math.PI / 2, 0, -Math.PI/2), false, ContentManager.CARDS[6]);
             
             // Tree at the middle on the smaller lawn
             WorldPhysic.addTreePhysics(world, scene, new CANNON.Vec3(86, 67, 4), false)
@@ -197,7 +197,7 @@ function initCannon() {
             WorldPhysic.addBlockPhysics(world, scene, new CANNON.Vec3(32, 50, 30), new CANNON.Vec3(169, 5, 28), false);
 
             // Adding the physics of PMU
-            WorldPhysic.addPMU(world, scene, new CANNON.Vec3(169.2, 65, 5), false);
+            WorldPhysic.addPMU(world, scene, new CANNON.Vec3(169.2, 65, 5), false, ContentManager.CARDS[7]);
 
             // Adding stop sign for fun
             stopSignOnBlock4 = WorldPhysic.addStopSigns(world, scene, new CANNON.Vec3(195, 75, 40), new CANNON.Vec3(0, Math.PI, 0), 4);
@@ -212,15 +212,7 @@ function initCannon() {
             // the bell tower itself
             WorldPhysic.addBellTower(world, scene, new CANNON.Vec3(-50, 120, 0), false);
         }
-
-
-
-
-
-
-
     }
-
 }
 
 

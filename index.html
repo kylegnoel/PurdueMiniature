@@ -1,149 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Document</title>
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+		integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+	<link rel="stylesheet" href="style.css">
 </head>
-
-<style>
-body{
-	overflow: hidden;
-}
-.popShow{
-	opacity: 1;
-	transform: scale(1);
-	transition: transform 1s;
-}
-
-.popHide{
-	opacity: 0;
-	transform: scale(0.1);
-	transition: all 1s;
-}
-
-.card-container{
-	display: block;
-	position: absolute;
-	width: 420px;
-	border-radius: 30px;
-	height: 660px;
-	top: 10px;
-	left: 10px;
-	background: linear-gradient(180deg, #555555 35%, white 35%);
-}
-
-.card-top {
-	display: inline-block;
-	color: white;
-	height: 35%;
-}
-
-
-.card-bottom {
-	display: inline-block;
-	margin: 20px; 
-	justify-content: center; 
-	align-items: center;
-}
-
-img {
-	max-width: 75%;
-	max-height: 100px;
-	display: block;
-	margin-left: auto;
-	margin-right: auto;
-	margin-bottom: 10px;
-}
-
-.double-img {
-	max-height: 60px;
-}
-
-.question-container {
-	position: absolute;
-	background: white;
-	text-align: center;
-	margin-left: auto;
-	margin-right: auto;
-	width: fit-content;
-	left: 0;
-	right: 0;
-	top: 10px;
-	padding: 10px;
-	border-radius: 30px;
-}
-
-.double-content {
-	display: flex;
-}
-
-.link {
-	border-radius: 30px; 
-	padding-left: 35%; 
-	padding-right: 35%;
-	position: absolute;
-    left: 15px;
-    top: 600px;
-    width: fit-content;
-}
-.double-link {
-    left: 0;
-    top: 120px;
-    position: relative;
-	width: fit-content;
-	border-radius: 30px; 
-	padding-left: 35%; 
-	padding-right: 35%;
-}
-</style>
 
 <body>
 	<canvas id="c"></canvas>
-	<input type="checkbox" name="chaseCamToggle" class="form-check-input" id="chaseCamToggle" style="position: absolute; right: 150px;" >
-	<label class="form-check-label" for="chaseCamToggle" style="position: absolute; right: 10px;">Toggle Chase Cam</label>
+	<input type="checkbox" name="chaseCamToggle" class="form-check-input" id="chaseCamToggle"
+		style="position: absolute; right: 150px;">
+	<label class="form-check-label" for="chaseCamToggle" style="position: absolute; right: 10px;">Toggle Chase
+		Cam</label>
 	<div id="info-card" class="card-container popHide">
 		<div class="card-top">
 			<div class="content" style="margin: 45px;">
-				<button type="button" class="btn-close btn-close-white" aria-label="Close" style="position: absolute;top: 20px; right: 25px" onclick="removeCard()"></button>
+				<button type="button" class="btn-close btn-close-white" aria-label="Close"
+					style="position: absolute;top: 20px; right: 25px" onclick="removeCard()"></button>
 				<h4 id="title"></h4>
-				<p id="top-content"></p>	
+				<p id="top-content" class="top-text"></p>
 			</div>
 		</div>
 		<div id="card-bottom" class="card-bottom">
 			<div>
 				<img id="logo" src="" alt="">
-				<p id="bot-content"></p>
-				<a id="link" href="" target="_blank" class="btn btn-secondary link">Visit Website</a>	
+				<p id="bot-content" class="bot-text"></p>
+				<a id="link" href="" target="_blank" class="btn btn-secondary link">Visit Website</a>
 			</div>
 		</div>
 	</div>
 
 	<div id="question-card" class="question-container popHide"></div>
-	
+
 	<link rel="stylesheet" href="style.css">
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+		integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<script>
- 
+
 	</script>
 	<script>
 		function removeCard() {
 			document.getElementById("info-card").classList.remove("popShow");
-            document.getElementById("info-card").classList.add("popHide");
+			document.getElementById("info-card").classList.add("popHide");
 
 			document.getElementById("question-card").classList.remove("popShow");
-            document.getElementById("question-card").classList.add("popHide");
+			document.getElementById("question-card").classList.add("popHide");
 		}
 	</script>
-	<script type="module" src="src/ContentManager.js"></script>
+	<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+	crossorigin="anonymous"></script>
 	<script type="module" src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r127/three.module.min.js"></script>
 	<script type="module" src="src/Main.js"></script>
-	<script type="module" src="src/ContentManager.js"></script>
-	<!-- <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
-	<script type="text/babel" src="src/Main.js"></script> -->
-	
+
+	<!-- <script type="text/babel" src="src/Main.js"></script> -->
+
 
 </body>
+
 </html>

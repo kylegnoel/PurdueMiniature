@@ -7,4 +7,106 @@ html, body {
     height: 100%;
     display: block;
   }
-  
+  body {
+		overflow: hidden;
+	}
+
+	.popShow {
+		opacity: 1;
+		transform: scale(1);
+		transition: transform 1s;
+	}
+
+	.popHide {
+		opacity: 0;
+		transform: scale(0.1);
+		transition: all 1s;
+	}
+
+	.card-container {
+		display: block;
+		position: absolute;
+		width: 420px;
+		border-radius: 30px;
+		/* height: 660px; */
+		top: 10px;
+		left: 10px;
+		background: white;
+	}
+
+	.card-top {
+		display: inline-block;
+		color: white;
+		background: #555;
+		border-radius: 30px;
+		border-bottom-left-radius: 0;
+		border-bottom-right-radius: 0;
+	}
+
+
+	.card-bottom {
+		display: inline-block;
+		margin: 20px;
+		justify-content: center;
+		align-items: center;
+		background: white;
+	}
+
+	img {
+		max-width: 75%;
+		max-height: 100px;
+		display: block;
+		margin-left: auto;
+		margin-right: auto;
+		margin-bottom: 10px;
+	}
+
+	.double-img {
+		max-height: 60px;
+	}
+
+	.question-container {
+		position: absolute;
+		background: white;
+		text-align: center;
+		margin-left: auto;
+		margin-right: auto;
+		width: fit-content;
+		left: 0;
+		right: 0;
+		top: 10px;
+		padding: 10px;
+		border-radius: 30px;
+	}
+
+	.double-content {
+		display: flex;
+	}
+
+	.link {
+		border-radius: 30px;
+		display: block;
+		width: 100%;
+		text-align: center;
+	}
+
+	.double-link {
+		position: relative;
+		width: fit-content;
+		border-radius: 30px;
+		display: block;
+		width: 90%;
+		text-align: center;
+		margin: 0 auto;
+	}
+
+	.top-text {
+		max-height: 150px;
+		overflow-y: auto;
+	}
+
+	.bot-text {
+		max-height: 200px;
+		overflow-y: auto;
+		text-align: center;
+	}
