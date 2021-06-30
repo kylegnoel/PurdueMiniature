@@ -1,7 +1,6 @@
 import * as THREE from 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r127/three.module.min.js';
 import { OBJLoader } from '../utils/OBJLoader.js';
 import { MTLLoader } from 'https://threejsfundamentals.org/threejs/resources/threejs/r127/examples/jsm/loaders/MTLLoader.js';
-import { OrbitControls } from '../utils/OrbitControls.js';
 
 export function initHemisphereLight(scene) {
     const skyColor = 0xCBD9E6;
