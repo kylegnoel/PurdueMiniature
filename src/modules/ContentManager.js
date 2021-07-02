@@ -153,8 +153,8 @@ function removeCard() {
 function addCard () {
     document.getElementById("info-card").classList.add("popShow")
     document.getElementById("info-card").classList.remove("popHide")
-    document.getElementById("question-card").classList.add("popShow")
-    document.getElementById("question-card").classList.remove("popHide")
+    document.getElementById("question-container").classList.add("popShow")
+    document.getElementById("question-container").classList.remove("popHide")
 }
 
 export { updateContent, removeCard, addCard, CARDS }

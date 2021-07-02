@@ -78,7 +78,18 @@ html, body {
 		padding: 10px;
 		border-radius: 30px;
 	}
-
+	svg {
+		height: 300px;
+		width: 300px;
+		position: absolute;
+		left: 45%;
+		top: -85px;
+	  }
+	  path {
+		fill: white;
+		stroke-width: 2;
+		stroke-linejoin: round;
+	  }
 	.double-content {
 		display: flex;
 	}
