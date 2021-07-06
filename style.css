@@ -25,31 +25,27 @@ html, body {
 
 	.card-container {
 		display: block;
-		position: absolute;
-		width: 420px;
 		border-radius: 30px;
-		/* height: 660px; */
-		top: 10px;
-		left: 10px;
-		background: white;
+		position: absolute;
+		/* background: white; */
+		padding: 20px;
 	}
 
 	.card-top {
 		display: inline-block;
 		color: white;
 		background: #555;
-		border-radius: 30px;
+		border-radius: 20px;
 		border-bottom-left-radius: 0;
 		border-bottom-right-radius: 0;
 	}
 
 
 	.card-bottom {
-		display: inline-block;
-		margin: 20px;
-		justify-content: center;
-		align-items: center;
+		padding: 20px;
 		background: white;
+		border-bottom-left-radius: 20px;
+		border-bottom-right-radius: 20px;
 	}
 
 	img {
@@ -76,8 +72,18 @@ html, body {
 		right: 0;
 		top: 10px;
 		padding: 10px;
-		border-radius: 30px;
+		border-radius: 20px;
 	}
+
+	#mobile-question {
+		background-color: white;
+		border-radius: 20px;
+		padding-top: 10px;
+		padding-bottom: 10px;
+		margin-top: 10px;
+		margin-bottom: 10px;
+	}
+
 	svg {
 		height: 300px;
 		width: 300px;
@@ -91,11 +97,11 @@ html, body {
 		stroke-linejoin: round;
 	  }
 	.double-content {
-		display: flex;
+		/* display: flex; */
 	}
 
 	.link {
-		border-radius: 30px;
+		border-radius: 20px;
 		display: block;
 		width: 100%;
 		text-align: center;
@@ -104,9 +110,9 @@ html, body {
 	.double-link {
 		position: relative;
 		width: fit-content;
-		border-radius: 30px;
+		border-radius: 20px;
 		display: block;
-		width: 90%;
+		width: 100%;
 		text-align: center;
 		margin: 0 auto;
 	}
@@ -119,5 +125,4 @@ html, body {
 	.bot-text {
 		max-height: 200px;
 		overflow-y: auto;
-		text-align: center;
 	}

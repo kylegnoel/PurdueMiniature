@@ -91,6 +91,7 @@ function updateContent(document, contentToAdd) {
     if (typeof contentToAdd === 'undefined') return;
 
     let question = document.getElementById("question-card");
+    let mobileQuestion = document.getElementById("mobile-question");
     let title = document.getElementById("title");
     let topContent = document.getElementById("top-content");
     let botContent = document.getElementById("bot-content");
@@ -98,18 +99,21 @@ function updateContent(document, contentToAdd) {
     let link = document.getElementById("link");
     
     question.innerHTML = contentToAdd.question;
+    mobileQuestion.innerHTML = contentToAdd.question;
     title.innerHTML = contentToAdd.title;
     topContent.innerHTML = contentToAdd.top;
 
-    let mainContainer = document.getElementById("card-bottom");
+    let mainContainer = document.getElementById("bottom-row");
 
     if (contentToAdd.isDoubleContent && !mainContainer.classList.contains("double-content")) {
         mainContainer.classList.add("double-content");
         let botContentRightContainer = document.createElement('div');
+        botContentRightContainer.classList.add("col");
         botContentRightContainer.id = "content-on-the-right";
         let botContentRightLogo = document.createElement('img');
         let botContentRightText = document.createElement('p');
         let botContentRightLink = document.createElement('a');
+
         botContentRightLink.innerHTML = "Visit Website";
         botContentRightLink.classList.add("btn-secondary");
         botContentRightLink.classList.add("btn");
@@ -146,17 +150,22 @@ function updateContent(document, contentToAdd) {
 function removeCard() {
     document.getElementById("info-card").classList.remove("popShow");
     document.getElementById("info-card").classList.add("popHide");
-    document.getElementById("question-card").classList.remove("popShow");
-    document.getElementById("question-card").classList.add("popHide");
+    document.getElementById("question-container").classList.remove("popShow");
+    document.getElementById("question-container").classList.add("popHide");
 }
 
 function addCard () {
-    document.getElementById("info-card").classList.add("popShow")
-    document.getElementById("info-card").classList.remove("popHide")
-    document.getElementById("question-container").classList.add("popShow")
-    document.getElementById("question-container").classList.remove("popHide")
+    document.getElementById("info-card").classList.add("popShow");
+    document.getElementById("info-card").classList.remove("popHide");
+    if (window.outerWidth < 576) {
+
+    } else {
+        document.getElementById("question-container").classList.add("popShow");
+        document.getElementById("question-container").classList.remove("popHide");
+    }
+
 }
 
-export { updateContent, removeCard, addCard, CARDS }
+export { updateContent, removeCard, addCard, CARDS };
 
 

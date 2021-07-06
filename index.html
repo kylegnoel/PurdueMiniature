@@ -17,23 +17,29 @@
 		style="position: absolute; right: 150px;">
 	<label class="form-check-label" for="chaseCamToggle" style="position: absolute; right: 10px;">Toggle Chase
 		Cam</label>
-	<div id="info-card" class="card-container popHide">
-		<div class="card-top">
-			<div class="content" style="margin: 45px;">
-				<button type="button" class="btn-close btn-close-white" aria-label="Close"
-					style="position: absolute;top: 20px; right: 25px" onclick="removeCard()"></button>
-				<h4 id="title"></h4>
-				<p id="top-content" class="top-text"></p>
+	<div class="row" style="margin: 0;">
+		<div id="info-card" class="card-container popHide col-sm-12 col-lg-3 col-md-6">
+			<div class="col-sm-12 d-md-none d-lg-none d-xl-none" id="mobile-question"></div>
+			<div class="card-top">
+				<span onclick="removeCard()" style="cursor: pointer; display:block; float: right;margin-right: 15px; margin-top: 10px;">&#10005;</span>
+				<div class="content" style="margin: 25px; margin-top: 30px;">
+					<h4 id="title"></h4>
+					<p id="top-content" class="top-text"></p>
+				</div>
 			</div>
-		</div>
-		<div id="card-bottom" class="card-bottom">
-			<div>
-				<img id="logo" src="" alt="">
-				<p id="bot-content" class="bot-text"></p>
-				<a id="link" href="" target="_blank" class="btn btn-secondary link">Visit Website</a>
-			</div>
+				<div id="card-bottom" class="card-bottom">
+					<div class="row" id="bottom-row">
+						<div class="col">
+							<img id="logo" src="" alt="">
+							<p id="bot-content" class="bot-text"></p>
+							<a id="link" href="" target="_blank" class="btn btn-secondary link">Visit Website</a>
+						</div>
+					</div>
+				</div>
 		</div>
 	</div>
+
+	<div class="question-container-mobile" id="question-container-mobile"></div>
 
 	<svg viewBox="0 0 105 105" id="question-container" class="popHide">
 		<path d='M 25,60 
