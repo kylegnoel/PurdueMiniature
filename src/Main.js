@@ -148,8 +148,8 @@ function initCannon() {
             engineeringFountain = WorldPhysic.loadEngineeringFountain(world, scene, new CANNON.Vec3(40, 70, 0));
 
             // Adding trees
-            WorldPhysic.addTreePhysics(world, scene, new CANNON.Vec3(-5, 75, -33), true);
-            WorldPhysic.addTreePhysics(world, scene, new CANNON.Vec3(4, 75, -35.5), true);
+            WorldPhysic.addTreePhysics(world, scene, new CANNON.Vec3(-5, 75, -33), false);
+            WorldPhysic.addTreePhysics(world, scene, new CANNON.Vec3(4, 75, -35.5), false);
 
             // small academic building on the left of the big academic building
             WorldPhysic.addSmallAcademicBuildingPhysics(world, scene, new CANNON.Vec3(1, 84, -93), new CANNON.Quaternion(Math.PI / 2, 0, 0), false, ContentManager.CARDS[1])
@@ -195,7 +195,7 @@ function initCannon() {
             WorldPhysic.addBigAcademicBuildingPhysics(world, scene, new CANNON.Vec3(-55, 85, 103), new CANNON.Vec3(Math.PI/2, 0, -Math.PI/2), false);
 
             // Adding tree
-            WorldPhysic.addTreePhysics(world, scene, new CANNON.Vec3(-33, 75, 115), true);
+            WorldPhysic.addTreePhysics(world, scene, new CANNON.Vec3(-33, 75, 115), false);
 
             // Add stop sign for fun
             stopSignOnBlock3 = WorldPhysic.addStopSigns(world, scene, new CANNON.Vec3(-55, 95, 45), new CANNON.Vec3(0, 0, 0), 3);
