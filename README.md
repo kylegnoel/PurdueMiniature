@@ -47,3 +47,67 @@ Once changes have been made to the ES6 code, we must first transpile them into a
 4.  ```npm run build```
 
 Afther this, you should be able to run the cco_website project and go to /Miniature to try out the tool.
+
+## Contribution
+
+Contributions are always welcomed. To contribute, create a new pull request have have the following in the description:
+1. Description and explaination for the changes.
+2. Screenshots (if possible)
+
+### 3D Modeling
+If you would like to contribute to improve the looks of the campus, always remember to export the 3D object as an ```.obj``` file. Other file format would require a change in the loader under ```WorldPhysics.js```.
+
+### Backend
+The game physics can always be improved, if you found improvements on things like better tuning for Boilermaker Xtra Special, feel free to create a PR!
+
+## Project Structure
+```
+Career Campus/
+|
+|---Build/
+|       |---cannon-es.js
+|       |---three.module.js
+|
+|---Images/                                                       *** various images needed for the project ***
+|
+|---models/                                                       *** All models are exported to .obj format which includes .mtl files for its material ***
+|       |---BoilermakerXtraSpecial/
+|       |       |---BoilermakerXtraSpecial.mtl
+|       |       |---BoilermakerXtraSpecial.obj
+|       |
+|       |---EngineeringFountain/
+|       |       |---EngineeringFountain.mtl
+|       |       |---EngineeringFountain.obj
+|       |
+|       |---PurdueMiniature/
+|       |       |---PurdueMiniature.mtl
+|       |       |---PurdueMiniature.obj
+|       |
+|       |---StopSign/
+|       |       |---1358_Stop_Sign.jpg
+|       |       |---StopSign.mtl
+|       |       |---StopSign.obj
+|       |
+|       |---Train/
+|       |       |---11709_train_v1_L3.mtl
+|       |       |---11709_train_v1_L3.obj
+|       |       |---11709_train_wood_black_diff.jpg
+|       |       |---11709_train_wood_blue_diff.jpg
+|       |       |---11709_train_wood_diff.jpg
+|
+|---src/
+|       |---modules/
+|       |       |---ContentManager.js               *** This file includes all the content needed for the information card that pops up when mouse hovers over a building ***
+|       |       |---ThreeHelper.js                  *** Takes care of all the 3D rendering ***
+|       |       |---Vehicle.js                      *** Dedicated to the rendering of the BoilermakerXtra Special and the settings of its physical behavior *** 
+|       |       |---WorldPhysics.js                 *** The template for spawning physical objects of the world (buildings, platfroms, etc.)
+|       |---utils/
+|       |       |---BufferGeometryUtils.js          *** Needed to combine two meshes into one ***
+|       |       |---OBJLoader.js                    *** Used to load all 3D Objects in this world ***
+|       |       |---OrbitControls.js                *** Enable drag orbit controls ***
+|       |---Main.js                                 *** Combines all the files above to produce the Career Campus ***
+|
+|---index.html                                      *** Simple HTML file to render the project ***
+|
+|---style.css
+```
