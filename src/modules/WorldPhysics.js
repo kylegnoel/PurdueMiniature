@@ -135,6 +135,14 @@ export function addSmallAcademicBuildingPhysics(world, scene, position, quaterni
     buildingMesh.position.copy(building.position);
     buildingMesh.quaternion.copy(building.quaternion);
 
+    building.addEventListener("collide", function (e) {
+        ContentManager.updateContent(document, content);
+        ContentManager.addCard();
+        setTimeout(function () {
+            ContentManager.removeCard()
+        }, 10000);
+    });
+
     if (visuals) {
         buildingMat.opacity = 1;
     }
@@ -217,6 +225,14 @@ export function addBellTower(world, scene, position, visuals, content) {
     
     towerMesh.position.copy(tower.position);
     tower.quaternion.copy(tower.quaternion);
+    
+    tower.addEventListener("collide", function (e) {
+        ContentManager.updateContent(document, content);
+        ContentManager.addCard();
+        setTimeout(function () {
+            ContentManager.removeCard()
+        }, 10000);
+    });
 
     if (visuals) {
         towerMat.opacity = 1;
@@ -243,6 +259,14 @@ export function addPMU(world, scene, position, visuals, content) {
     building.addShape(entrance, new CANNON.Vec3(0, 0, 10));
 
     world.addBody(building);
+    
+    building.addEventListener("collide", function (e) {
+        ContentManager.updateContent(document, content);
+        ContentManager.addCard();
+        setTimeout(function () {
+            ContentManager.removeCard()
+        }, 10000);
+    });
 
     // visuals
 

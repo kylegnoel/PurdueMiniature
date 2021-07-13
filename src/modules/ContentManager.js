@@ -112,6 +112,7 @@ function updateContent(document, contentToAdd) {
         botContentRightContainer.id = "content-on-the-right";
         let botContentRightLogo = document.createElement('img');
         let botContentRightText = document.createElement('p');
+        botContentRightText.classList.add("bot-content");
         let botContentRightLink = document.createElement('a');
 
         botContentRightLink.innerHTML = "Visit Website";
@@ -157,15 +158,37 @@ function removeCard() {
 function addCard () {
     document.getElementById("info-card").classList.add("popShow");
     document.getElementById("info-card").classList.remove("popHide");
-    if (window.outerWidth < 576) {
-
-    } else {
+    if (window.outerWidth >= 576) {
         document.getElementById("question-container").classList.add("popShow");
         document.getElementById("question-container").classList.remove("popHide");
     }
 
 }
 
-export { updateContent, removeCard, addCard, CARDS };
+let currentID = -1;
+
+function rotateCardsNext() {
+    if (document.getElementById("info-card").classList.contains("popShow")) {
+        removeCard();
+    }
+    if (currentID >= 8)
+        currentID = -1;
+    currentID += 1;
+    updateContent(document, CARDS[currentID]);
+    addCard();
+}
+
+function rotateCardsPrev() {
+    if (document.getElementById("info-card").classList.contains("popShow")) {
+        removeCard();
+    }
+    if (currentID < 0)
+        currentID = 8;
+    currentID -= 1;
+    updateContent(document, CARDS[currentID]);
+    addCard();
+}
+
+export { updateContent, removeCard, addCard, CARDS, rotateCardsNext, rotateCardsPrev };
 
 

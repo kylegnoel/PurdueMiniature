@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+        integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="Toggle.css">
+</head>
+
+<body>
+    <!-- <section id="loading-screen">
+		<div id="loader"></div>
+	</section> -->
+    <div class="container-fluid">
+        <canvas id="c"></canvas>
+
+        <!-- chase cam toggle -->
+        <div id="chaseCamToggle">
+            <div
+                style="position: absolute; top: 10px; right: 135px; font-size: 20px; font-weight: bold; user-select: none; -webkit-text-stroke: 1px gray">
+                Chase Cam</div>
+            <div class="toggle-radio">
+                <input type="radio" name="rdo" id="no" checked>
+                <input type="radio" name="rdo" id="yes">
+                <div class="switch">
+                    <label for="no">OFF</label>
+                    <label for="yes">ON</label>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- start slide show for mobile only  -->
+        <div id="start-slide">
+            <span class="arrows" id="prev-slide">
+                <i class="fa fa-arrow-left" aria-hidden="true" ></i>&nbsp; &nbsp;PREV
+            </span>
+            
+            <span class="arrows" id="next-slide">
+                 NEXT&nbsp; &nbsp;<i class="fa fa-arrow-right" aria-hidden="true" ></i>
+            </span>
+        </div>
+
+
+        <!-- question card -->
+        <div>
+            <div class="question-container-mobile" id="question-container-mobile"></div>
+
+            <svg viewBox="0 0 105 105" id="question-container" class="popHide">
+                <path d='M 25,60 
+                a 20, 20 1 0,0 0,40 
+                h 50 
+                a 20,20 1 0,0 0,-40 
+                a 15,15 1 0,0 -20,-10 
+                a 25,25 1 0,0 -35,10  
+                z' />
+                <foreignObject x="12" y="61" width="80" height="40" font-size="6px" style="padding: 1px;">
+                    <text id="question-card"></text>
+                </foreignObject>
+            </svg>
+        </div>
+        <!-- information card -->
+        <div class="row">
+            <div id="info-card" class="card-container popHide col-sm-12 col-lg-3 col-md-6">
+                <div class="col-sm-12 d-md-none d-lg-none d-xl-none" id="mobile-question"></div>
+                <div class="card-top">
+                    <span id="x-button"
+                        style="cursor: pointer; display:block; float: right;margin-right: 15px; margin-top: 10px;">&#10005;</span>
+                    <div class="content" style="margin: 25px; margin-top: 30px;">
+                        <h4 id="title"></h4>
+                        <p id="top-content" class="top-text"></p>
+                    </div>
+                </div>
+                <div id="card-bottom" class="card-bottom">
+                    <div class="row" id="bottom-row">
+                        <div class="col">
+                            <img id="logo" src="" alt="">
+                            <p id="bot-content" class="bot-content"></p>
+                            <a id="link" href="" target="_blank" class="btn btn-secondary link">Visit Website</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
+    crossorigin="anonymous"></script>
+
+<script type="module" src="src/Main.js"></script>
+
+</html>

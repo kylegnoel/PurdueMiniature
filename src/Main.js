@@ -27,6 +27,10 @@ let lastCallTime;
 const groundMaterial = new CANNON.Material('ground');
 const wheelMaterial = new CANNON.Material('wheel');
 
+document.getElementById("x-button").onclick = ContentManager.removeCard;
+document.getElementById("next-slide").onclick = ContentManager.rotateCardsNext;
+document.getElementById("prev-slide").onclick = ContentManager.rotateCardsPrev;
+
 initThree();
 
 function initThree() {
@@ -275,17 +279,15 @@ function animate() {
             chassisBody.velocity.set(0, 0, 0)
         }
     } catch (e) {
-        console.error("train is not loaded yet.");
     }
 
-    const isChaseCam = document.getElementById("chaseCamToggle");
+    const isChaseCam = document.getElementById("yes");
     isChaseCam.addEventListener("keyup", (e) => { e.preventDefault(); });
     if (isChaseCam.checked) {
         camera.position.z = chassisBody.position.z + 30;
         camera.position.x = chassisBody.position.x + 30;
         camera.position.y = chassisBody.position.y + 40;
         camera.lookAt(new THREE.Vector3(chassisBody.position.x, chassisBody.position.y, chassisBody.position.z));
-
     }
 
     render()
@@ -304,7 +306,13 @@ function updatePhysics() {
 let pyramidExist = false
 
 function render() {
-    hoverEffect();
+    if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
+        const toggle = document.getElementById("chaseCamToggle");
+        toggle.style.display = "none";
+    } else {
+        hoverEffect();
+        document.getElementById("start-slide").style.display = "none";
+    }
     renderer.render(scene, camera)
 }
 

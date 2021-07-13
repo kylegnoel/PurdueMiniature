@@ -1,128 +1,264 @@
 html, body {
     margin: 0;
     height: 100%;
-  }
-  #c {
+}
+#c {
     width: 100%;
     height: 100%;
     display: block;
-  }
-  body {
-		overflow: hidden;
-	}
+}
+body {
+    overflow: hidden;
+}
 
-	.popShow {
-		opacity: 1;
-		transform: scale(1);
-		transition: transform 1s;
-	}
+.popShow {
+    opacity: 1;
+    transform: scale(1);
+    transition: transform 1s;
+}
 
-	.popHide {
-		opacity: 0;
-		transform: scale(0.1);
-		transition: all 1s;
-	}
+.popHide {
+    opacity: 0;
+    transform: scale(0.1);
+    transition: all 1s;
+}
 
-	.card-container {
-		display: block;
-		border-radius: 30px;
-		position: absolute;
-		/* background: white; */
-		padding: 20px;
-	}
+.card-container {
+    display: block;
+    border-radius: 30px;
+    position: absolute;
+    padding: 20px;
+    left: 0;
+    right: 0;
+    top: 10px;
+}
 
-	.card-top {
-		display: inline-block;
-		color: white;
-		background: #555;
-		border-radius: 20px;
-		border-bottom-left-radius: 0;
-		border-bottom-right-radius: 0;
-	}
+.card-top {
+    display: inline-block;
+    color: white;
+    background: #555;
+    border-radius: 20px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
 
 
-	.card-bottom {
-		padding: 20px;
-		background: white;
-		border-bottom-left-radius: 20px;
-		border-bottom-right-radius: 20px;
-	}
+.card-bottom {
+    padding: 20px;
+    background: white;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
 
-	img {
-		max-width: 75%;
-		max-height: 100px;
-		display: block;
-		margin-left: auto;
-		margin-right: auto;
-		margin-bottom: 10px;
-	}
+img {
+    max-width: 75%;
+    max-height: 100px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10px;
+}
 
-	.double-img {
-		max-height: 60px;
-	}
+.double-img {
+    max-height: 60px;
+}
 
-	.question-container {
-		position: absolute;
-		background: white;
-		text-align: center;
-		margin-left: auto;
-		margin-right: auto;
-		width: fit-content;
-		left: 0;
-		right: 0;
-		top: 10px;
-		padding: 10px;
-		border-radius: 20px;
-	}
+#start-slide {
+    cursor: pointer;
+    position: absolute;
+    text-align: center;
+    width: 100%;
+    left: 0;
+    right: 0;
+    top: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-radius: 20px;
+    z-index: 999;
+}
 
-	#mobile-question {
-		background-color: white;
-		border-radius: 20px;
-		padding-top: 10px;
-		padding-bottom: 10px;
-		margin-top: 10px;
-		margin-bottom: 10px;
-	}
+.arrows {
+    background: white;
+    padding: 5px 10px;
+    margin: 5px;
+    border-radius: 20px;
+}
 
-	svg {
-		height: 300px;
-		width: 300px;
-		position: absolute;
-		left: 45%;
-		top: -85px;
-	  }
-	  path {
-		fill: white;
-		stroke-width: 2;
-		stroke-linejoin: round;
-	  }
-	.double-content {
-		/* display: flex; */
-	}
+.question-container {
+    position: absolute;
+    background: white;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    left: 0;
+    right: 0;
+    top: 10px;
+    padding: 10px;
+    border-radius: 20px;
+}
 
-	.link {
-		border-radius: 20px;
-		display: block;
-		width: 100%;
-		text-align: center;
-	}
+#mobile-question {
+    text-align: center;
+    background-color: white;
+    border-radius: 20px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-top: 30px;
+    margin-bottom: 10px;
+    max-height: 60px;
+    overflow-y: auto;
+}
 
-	.double-link {
-		position: relative;
-		width: fit-content;
-		border-radius: 20px;
-		display: block;
-		width: 100%;
-		text-align: center;
-		margin: 0 auto;
-	}
+svg {
+    height: 300px;
+    width: 300px;
+    position: absolute;
+    left: 45%;
+    top: -85px;
+}
+path {
+    fill: white;
+    stroke-width: 2;
+    stroke-linejoin: round;
+}
+.double-content {
 
-	.top-text {
-		max-height: 150px;
-		overflow-y: auto;
-	}
+}
 
-	.bot-text {
-		max-height: 200px;
-		overflow-y: auto;
-	}
+.link {
+    border-radius: 20px;
+    display: block;
+    width: 100%;
+    text-align: center;
+}
+
+.double-link {
+    position: relative;
+    width: fit-content;
+    border-radius: 20px;
+    display: block;
+    width: 100%;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.top-text {
+    max-height: 120px;
+    overflow-y: auto;
+}
+
+.bot-content {
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+text {
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+
+#loading-screen {
+    position: absolute;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000000;
+    opacity: 1;
+    transition: 1s opacity;
+}
+#loading-screen.fade-out {
+    opacity: 0;
+}
+
+#loader {
+    display: block;
+    position: relative;
+    left: 50%;
+    top: 50%;
+    width: 150px;
+    height: 150px;
+    margin: -75px 0 0 -75px;
+    border-radius: 50%;
+    border: 3px solid transparent;
+    border-top-color: #9370DB;
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+}
+
+#loader:before {
+    content: "";
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    right: 5px;
+    bottom: 5px;
+    border-radius: 50%;
+    border: 3px solid transparent;
+    border-top-color: #BA55D3;
+    -webkit-animation: spin 3s linear infinite;
+    animation: spin 3s linear infinite;
+}
+#loader:after {
+    content: "";
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    right: 15px;
+    bottom: 15px;
+    border-radius: 50%;
+    border: 3px solid transparent;
+    border-top-color: #FF00FF;
+    -webkit-animation: spin 1.5s linear infinite;
+    animation: spin 1.5s linear infinite;
+}
+@-webkit-keyframes spin {
+    0%   {
+        -webkit-transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+@keyframes spin {
+    0%   {
+        -webkit-transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+.bg-poster>img{
+    width: 100%;
+    border-radius: .3rem;
+}
+
+@media (max-width: 575.98px) {
+    html {
+        font-size: 95%;
+    }
+    .bot-content{
+        max-height: 120px;
+        overflow-y: auto;
+    }
+    #mobile-question{
+        margin-top: 15px;
+        margin-bottom: 2px;
+        font-weight: bold;
+    }
+    img {
+        max-height: 50px;
+    }
+}
