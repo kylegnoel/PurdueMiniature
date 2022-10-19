@@ -305,11 +305,12 @@ export function addPMU(world, scene, position, visuals, content) {
 
 export function addStopSigns(world, scene, position, quaternion, index) {
     const stopSign = new CANNON.Body({
-        mass: 50,
+        mass: 0.1,
         shape: new CANNON.Box(new CANNON.Vec3(2, 10, 2)),
         material: groundMaterial
     });
     stopSign.position.copy(position);
+    stopSign.position.y -= 12
     stopSign.quaternion.setFromEuler(quaternion.x, quaternion.y, quaternion.z);
     world.addBody(stopSign);
 
@@ -320,9 +321,35 @@ export function addStopSigns(world, scene, position, quaternion, index) {
         objLoader.setMaterials(mtl);
         objLoader.load('models/StopSign/StopSign.obj', (sign) => {
             scene.add(sign);
-            const name = "stopSignOnBlock" + index;
+            const name = "stopSign" + index;
             sign.name = name;
         });
     });
     return stopSign;
+}
+
+export function addCheckPoint(world, scene, position, visuals) {
+    const checkPoint = new CANNON.Body({
+        mass: 0.1,
+        shape: new CANNON.Box(new CANNON.Vec3(1,1,1)),
+        material: groundMaterial
+    });
+    checkPoint.position.copy(position);
+
+    world.addBody(checkPoint);
+
+    const checkPointGeo = new THREE.BoxBufferGeometry(2, 2, 2);
+    const checkPointMat = new THREE.MeshBasicMaterial({ color: 0xFF0000, side: THREE.DoubleSide, wireframe: true, transparent: true, opacity: 0 });
+    const checkPointMesh = new THREE.Mesh(checkPointGeo, checkPointMat);
+
+    checkPointMesh.position.copy(checkPoint.position);
+
+    
+    checkPoint.addEventListener("collide", function (e) {
+        console.log("do something")
+    });
+
+    if (visuals) {
+        checkPointMesh.opacity = 1;
+    }
 }

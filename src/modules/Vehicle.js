@@ -1,13 +1,15 @@
 import * as CANNON from '../../build/cannon-es.js'
 import * as THREE from 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r127/three.module.min.js';
 
+const vehicleStartingPosition = {x: -200, y: 90, z:-50}
+
 export function initChassisBody() {
     const chassisShape = new CANNON.Box(new CANNON.Vec3(2, 1, 1))
     const chassisBody = new CANNON.Body({
         mass: 700,
     });
     chassisBody.addShape(chassisShape);
-    chassisBody.position.set(-80, 90, -50);
+    chassisBody.position.set(vehicleStartingPosition.x, vehicleStartingPosition.y, vehicleStartingPosition.z);
     chassisBody.quaternion.setFromEuler(0, Math.PI, 0);
     chassisBody.angularVelocity.set(0, 0, 0);
     chassisBody.velocity.set(0, 0, 0);
@@ -122,19 +124,19 @@ export function vehicleControlKeyDown(event, vehicle, chassisBody) {
             vehicle.applyEngineForce(maxForce, 3);
             break;
 
-        case 'a':
-        case 'A':
-        case 'ArrowLeft':
-            vehicle.setSteeringValue(maxSteerVal, 0);
-            vehicle.setSteeringValue(maxSteerVal, 1);
-            break;
+        // case 'a':
+        // case 'A':
+        // case 'ArrowLeft':
+        //     vehicle.setSteeringValue(maxSteerVal, 0);
+        //     vehicle.setSteeringValue(maxSteerVal, 1);
+        //     break;
 
-        case 'd':
-        case 'D':
-        case 'ArrowRight':
-            vehicle.setSteeringValue(-maxSteerVal, 0);
-            vehicle.setSteeringValue(-maxSteerVal, 1);
-            break;
+        // case 'd':
+        // case 'D':
+        // case 'ArrowRight':
+        //     vehicle.setSteeringValue(-maxSteerVal, 0);
+        //     vehicle.setSteeringValue(-maxSteerVal, 1);
+        //     break;
 
         case ' ':
             chassisBody.angularVelocity.set(0, 0, 0);
@@ -147,7 +149,7 @@ export function vehicleControlKeyDown(event, vehicle, chassisBody) {
 
         case 'r':
         case 'R':
-            chassisBody.position.set(-80, 90, -50);
+            chassisBody.position.set(vehicleStartingPosition.x, vehicleStartingPosition.y, vehicleStartingPosition.z);
             chassisBody.quaternion.setFromEuler(0, Math.PI, 0);
             chassisBody.angularVelocity.set(0, 0, 0);
             chassisBody.velocity.set(0, 0, 0);
