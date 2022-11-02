@@ -1,7 +1,7 @@
 import * as CANNON from '../../build/cannon-es.js'
 import * as THREE from 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r127/three.module.min.js';
 
-const vehicleStartingPosition = {x: -200, y: 90, z:-50}
+const vehicleStartingPosition = {x: -220, y: 90, z:-50}
 
 export function initChassisBody() {
     const chassisShape = new CANNON.Box(new CANNON.Vec3(2, 1, 1))
@@ -13,6 +13,12 @@ export function initChassisBody() {
     chassisBody.quaternion.setFromEuler(0, Math.PI, 0);
     chassisBody.angularVelocity.set(0, 0, 0);
     chassisBody.velocity.set(0, 0, 0);
+    chassisBody.addEventListener('collide', function(e){
+        setTimeout(() => {
+            chassisBody.angularVelocity.set(0, 0, 0);
+            chassisBody.velocity.set(0,0,0)
+        }, 3000)
+    })
     return chassisBody;
 }
 
@@ -68,6 +74,7 @@ export function initVehicle(world, scene, chassisBody, wheelBody, wheelMaterial)
         // quaternion.setFromAxisAngle(new CANNON.Vec3(1, 0, 0), - Math.PI / 2)
         wheelBody.addShape(cylinderShape, new CANNON.Vec3(), quaternion)
         wheelBodies.push(wheelBody)
+
         world.addBody(wheelBody)
 
         let wheelGeo = new THREE.CylinderGeometry(wheel.radius, wheel.radius, 1, 10)
@@ -98,6 +105,7 @@ export function initVehicle(world, scene, chassisBody, wheelBody, wheelMaterial)
             wheelVisual.quaternion.copy(transform.quaternion)
         }
     })
+
     return vehicle;
 
 }
@@ -111,10 +119,7 @@ export function vehicleControlKeyDown(event, vehicle, chassisBody) {
         case 'w':
         case 'W':
         case 'ArrowUp':
-            vehicle.applyEngineForce(-maxForce, 0);
-            vehicle.applyEngineForce(-maxForce, 1);
-            vehicle.applyEngineForce(-maxForce, 2);
-            vehicle.applyEngineForce(-maxForce, 3);
+            chassisBody.velocity.x = 20
             break;
 
         case 's':

@@ -139,6 +139,12 @@ function initCannon() {
 
             stopSigns.push(WorldPhysic.addStopSigns(world, scene, new CANNON.Vec3(-170,107,-40), new CANNON.Vec3(0,Math.PI,0), 0))
             stopSigns.push(WorldPhysic.addStopSigns(world, scene, new CANNON.Vec3(-95,107,-40), new CANNON.Vec3(0,Math.PI,0), 1))
+            stopSigns.push(WorldPhysic.addStopSigns(world, scene, new CANNON.Vec3(10,107,-40), new CANNON.Vec3(0,Math.PI,0), 2))
+            stopSigns.push(WorldPhysic.addStopSigns(world, scene, new CANNON.Vec3(120,107,-40), new CANNON.Vec3(0,Math.PI,0), 3))
+            stopSigns.push(WorldPhysic.addStopSigns(world, scene, new CANNON.Vec3(220,107,-40), new CANNON.Vec3(0,Math.PI,0), 4))
+
+            WorldPhysic.addCheckPoint(world, scene, new CANNON.Vec3(-190,80,-50), Vehicle, true)
+
         }
 
     }
@@ -161,7 +167,9 @@ function animate() {
 
     let stopSign0 = scene.getObjectByName("stopSign0");
     let stopSign1 = scene.getObjectByName("stopSign1");
-    // let stopSignB4 = scene.getObjectByName("checkPoint2");
+    let stopSign2 = scene.getObjectByName("stopSign2");
+    let stopSign3 = scene.getObjectByName("stopSign3");
+    let stopSign4 = scene.getObjectByName("stopSign4");
     try {
         stopSign0.position.copy(stopSigns[0].position);
         stopSign0.quaternion.copy(stopSigns[0].quaternion);
@@ -169,21 +177,14 @@ function animate() {
         stopSign1.position.copy(stopSigns[1].position);
         stopSign1.quaternion.copy(stopSigns[1].quaternion);
 
-        // stopSignB3.position.copy(checkPoint1.position);
-        // stopSignB3.quaternion.copy(checkPoint1.quaternion);
-        // stopSignB3.position.y -= 12;
-
-        // stopSignB4.position.copy(checkPoint2.position);
-        // stopSignB4.quaternion.copy(checkPoint2.quaternion);
-        // stopSignB4.position.y -= 12;
-
+        stopSign2.position.copy(stopSigns[2].position);
+        stopSign2.quaternion.copy(stopSigns[2].quaternion);
         
-        // for (let i = 0; i < stopSigns.length; i++) {
-        //     let checkPoint = scene.getObjectByName("checkPoint"+i)
-        //     checkPoint.position.copy(stopSigns[i])
-        //     checkPoint.quaternion.copy(stopSigns[i].quaternion)
-        //     checkPoint.position.y -= 12
-        // }
+        stopSign3.position.copy(stopSigns[3].position);
+        stopSign3.quaternion.copy(stopSigns[3].quaternion);
+
+        stopSign4.position.copy(stopSigns[4].position);
+        stopSign4.quaternion.copy(stopSigns[4].quaternion);
     } catch (e) {
 
     }
@@ -290,7 +291,7 @@ function onPointerMove(event) {
 }
 
 document.addEventListener('mousemove', onPointerMove, true)
-document.addEventListener('keydown', (event) => {
+document.addEventListener('keypress', (event) => {
     Vehicle.vehicleControlKeyDown(event, vehicle, chassisBody);
 });
 

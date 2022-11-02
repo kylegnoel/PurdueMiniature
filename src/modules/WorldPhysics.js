@@ -328,28 +328,31 @@ export function addStopSigns(world, scene, position, quaternion, index) {
     return stopSign;
 }
 
-export function addCheckPoint(world, scene, position, visuals) {
-    const checkPoint = new CANNON.Body({
-        mass: 0.1,
-        shape: new CANNON.Box(new CANNON.Vec3(1,1,1)),
-        material: groundMaterial
+export function addCheckPoint(world, scene, position, Vehicle, visuals) {
+    const checkpoint = new CANNON.Body({
+        mass: 0,
     });
-    checkPoint.position.copy(position);
+    checkpoint.addShape(new CANNON.Box(new CANNON.Vec3(2, 4, 2)));
+    checkpoint.position.copy(position)
 
-    world.addBody(checkPoint);
+    checkpoint.addEventListener('collide', () => {
+        console.log("hit")
+        checkpoint.position.y -= 100
+        setTimeout(() => {
+            console.log("back up")
+            checkpoint.position.y += 100
+        }, 5000)
+    })
 
-    const checkPointGeo = new THREE.BoxBufferGeometry(2, 2, 2);
-    const checkPointMat = new THREE.MeshBasicMaterial({ color: 0xFF0000, side: THREE.DoubleSide, wireframe: true, transparent: true, opacity: 0 });
-    const checkPointMesh = new THREE.Mesh(checkPointGeo, checkPointMat);
-
-    checkPointMesh.position.copy(checkPoint.position);
-
-    
-    checkPoint.addEventListener("collide", function (e) {
-        console.log("do something")
-    });
+    world.addBody(checkpoint);
 
     if (visuals) {
-        checkPointMesh.opacity = 1;
+        const checkpointGeo = new THREE.BoxBufferGeometry(4, 8, 4);
+        const checkpointMat = new THREE.MeshBasicMaterial({ color: 0xFF0000, side: THREE.DoubleSide, wireframe: true });
+        const checkpointMesh = new THREE.Mesh(checkpointGeo, checkpointMat);
+        checkpointMesh.position.copy(checkpoint.position);
+        checkpointMesh.quaternion.copy(checkpoint.quaternion);
+        scene.add(checkpointMesh);
     }
+
 }
