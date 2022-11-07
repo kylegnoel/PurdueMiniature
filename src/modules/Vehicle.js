@@ -1,5 +1,6 @@
 import * as CANNON from '../../build/cannon-es.js'
 import * as THREE from 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r127/three.module.min.js';
+import { ReverseSubtractEquation } from '../../build/three.module.js';
 
 const vehicleStartingPosition = {x: -220, y: 90, z:-50}
 
@@ -13,12 +14,7 @@ export function initChassisBody() {
     chassisBody.quaternion.setFromEuler(0, Math.PI, 0);
     chassisBody.angularVelocity.set(0, 0, 0);
     chassisBody.velocity.set(0, 0, 0);
-    chassisBody.addEventListener('collide', function(e){
-        setTimeout(() => {
-            chassisBody.angularVelocity.set(0, 0, 0);
-            chassisBody.velocity.set(0,0,0)
-        }, 3000)
-    })
+
     return chassisBody;
 }
 
@@ -111,6 +107,7 @@ export function initVehicle(world, scene, chassisBody, wheelBody, wheelMaterial)
 }
 
 export function vehicleControlKeyDown(event, vehicle, chassisBody) {
+
     const maxSteerVal = 0.7;
     const maxForce = 6000;
     const brakeForce = 10000;
@@ -118,15 +115,22 @@ export function vehicleControlKeyDown(event, vehicle, chassisBody) {
     switch (event.key) {
         case 'w':
         case 'W':
-        case 'ArrowUp':
-            chassisBody.velocity.x = 20
+        case 'ArrowRight':
+            if (chassisBody.velocity.x < 0) {
+                chassisBody.velocity.x = 0
+            } else {
+                chassisBody.velocity.x = 30
+            }
             break;
 
         case 's':
         case 'S':
-        case 'ArrowDown':
-            vehicle.applyEngineForce(maxForce, 2);
-            vehicle.applyEngineForce(maxForce, 3);
+        case 'ArrowLeft':
+            if (chassisBody.velocity.x > 0) {
+                chassisBody.velocity.x = 0
+            } else {
+                chassisBody.velocity.x = -30
+            }
             break;
 
         // case 'a':
@@ -149,7 +153,7 @@ export function vehicleControlKeyDown(event, vehicle, chassisBody) {
             break;
 
         case 'q':
-            chassisBody.velocity.y = 100;
+            chassisBody.velocity.y += 10
             break;
 
         case 'r':

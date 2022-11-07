@@ -22,11 +22,11 @@ export function initDirectionalLight(scene) {
 
 export function load3dMap(scene) {
     const mtlLoader = new MTLLoader();
-    mtlLoader.load('models/PurdueMiniature/Purdue_Mini_Linear_v2.mtl', (mtl) => {
+    mtlLoader.load('models/PurdueMiniature/Linear.mtl', (mtl) => {
         mtl.preload();
         const objLoader = new OBJLoader();
         objLoader.setMaterials(mtl);
-        objLoader.load('models/PurdueMiniature/Purdue_Mini_Linear_v2.obj',
+        objLoader.load('models/PurdueMiniature/Linear.obj',
             // onLoad Callback
             function (world) {
                 scene.add(world);

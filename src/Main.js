@@ -135,15 +135,19 @@ function initCannon() {
             // small tree besides the big academic building
             WorldPhysic.addTreePhysics(world, scene, new CANNON.Vec3(-67, 83, -88), true);
             
-            engineeringFountain = WorldPhysic.loadEngineeringFountain(world, scene, new CANNON.Vec3(-70, 95, -30));
+            engineeringFountain = WorldPhysic.loadEngineeringFountain(world, scene, new CANNON.Vec3(-50, 95, -30));
 
             stopSigns.push(WorldPhysic.addStopSigns(world, scene, new CANNON.Vec3(-170,107,-40), new CANNON.Vec3(0,Math.PI,0), 0))
-            stopSigns.push(WorldPhysic.addStopSigns(world, scene, new CANNON.Vec3(-95,107,-40), new CANNON.Vec3(0,Math.PI,0), 1))
-            stopSigns.push(WorldPhysic.addStopSigns(world, scene, new CANNON.Vec3(10,107,-40), new CANNON.Vec3(0,Math.PI,0), 2))
-            stopSigns.push(WorldPhysic.addStopSigns(world, scene, new CANNON.Vec3(120,107,-40), new CANNON.Vec3(0,Math.PI,0), 3))
+            stopSigns.push(WorldPhysic.addStopSigns(world, scene, new CANNON.Vec3(-60,107,-40), new CANNON.Vec3(0,Math.PI,0), 1))
+            stopSigns.push(WorldPhysic.addStopSigns(world, scene, new CANNON.Vec3(30,107,-40), new CANNON.Vec3(0,Math.PI,0), 2))
+            stopSigns.push(WorldPhysic.addStopSigns(world, scene, new CANNON.Vec3(130,107,-40), new CANNON.Vec3(0,Math.PI,0), 3))
             stopSigns.push(WorldPhysic.addStopSigns(world, scene, new CANNON.Vec3(220,107,-40), new CANNON.Vec3(0,Math.PI,0), 4))
 
-            WorldPhysic.addCheckPoint(world, scene, new CANNON.Vec3(-190,80,-50), Vehicle, true)
+            WorldPhysic.addCheckPoint(world, scene, new CANNON.Vec3(-180,90,-80), true)
+            WorldPhysic.addCheckPoint(world, scene, new CANNON.Vec3(-70,90,-80), true)
+            WorldPhysic.addCheckPoint(world, scene, new CANNON.Vec3(20,90,-80), true)
+            WorldPhysic.addCheckPoint(world, scene, new CANNON.Vec3(120,90,-80), true)
+            WorldPhysic.addCheckPoint(world, scene, new CANNON.Vec3(210,90,-80), true)
 
         }
 
@@ -211,8 +215,8 @@ function animate() {
     isChaseCam.addEventListener("keyup", (e) => { e.preventDefault(); });
     if (isChaseCam.checked) {
         camera.position.x = chassisBody.position.x;
-        camera.position.y = chassisBody.position.y + 30;
-        camera.position.z = chassisBody.position.z + 50;
+        camera.position.y = chassisBody.position.y + 40;
+        camera.position.z = chassisBody.position.z + 60;
         camera.lookAt(new THREE.Vector3(chassisBody.position.x, chassisBody.position.y, chassisBody.position.z));
     }
 
@@ -237,6 +241,8 @@ function render() {
         toggle.style.display = "none";
     } else {
         // hoverEffect();
+        calculateCheckPoint()
+        // console.log(pointer)
         document.getElementById("start-slide").style.display = "none";
     }
     renderer.render(scene, camera)
@@ -285,20 +291,40 @@ function hoverEffect() {
 
 }
 
+/**
+ * This function will calculate if the center of the screen is intersecting with one of the checkpoints
+ * or not. If so, then will immediately stop the vehicle and show information card.
+ */
+function calculateCheckPoint() {
+    const origin = new THREE.Vector2(0, 0.4)
+    raycaster.setFromCamera(origin, camera)
+
+    const intersects = raycaster.intersectObjects(scene.children)
+
+    if (intersects.length != 0) {
+        chassisBody.velocity.set(0,0,0)
+        // call the cards out because the vehicle is in checkpoint
+
+    } 
+}
+
 function onPointerMove(event) {
     pointer.x = (event.clientX / window.innerWidth) * 2 - 1;
     pointer.y = - (event.clientY / window.innerHeight) * 2 + 1;
 }
 
 document.addEventListener('mousemove', onPointerMove, true)
-document.addEventListener('keypress', (event) => {
+document.addEventListener('keydown', (event) => {  
+    if (event.repeat) {
+        return
+    }
     Vehicle.vehicleControlKeyDown(event, vehicle, chassisBody);
 });
 
 
 // Reset force on keyup
 document.addEventListener('keyup', (event) => {
-    Vehicle.vehicleControlKeyUp(event, vehicle, chassisBody);
+    // Vehicle.vehicleControlKeyUp(event, vehicle, chassisBody);
     if (event.key == 'Escape') {
         ContentManager.removeCard();
     }
