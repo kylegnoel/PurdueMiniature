@@ -26,6 +26,7 @@ const timeStep = 1 / 60;
 let lastCallTime;
 const groundMaterial = new CANNON.Material('ground');
 const wheelMaterial = new CANNON.Material('wheel');
+const origin = new THREE.Vector2(0, 0.4)
 
 document.getElementById("x-button").onclick = ContentManager.removeCard;
 document.getElementById("next-slide").onclick = ContentManager.rotateCardsNext;
@@ -143,11 +144,11 @@ function initCannon() {
             stopSigns.push(WorldPhysic.addStopSigns(world, scene, new CANNON.Vec3(130,107,-40), new CANNON.Vec3(0,Math.PI,0), 3))
             stopSigns.push(WorldPhysic.addStopSigns(world, scene, new CANNON.Vec3(220,107,-40), new CANNON.Vec3(0,Math.PI,0), 4))
 
-            WorldPhysic.addCheckPoint(world, scene, new CANNON.Vec3(-180,90,-80), true)
-            WorldPhysic.addCheckPoint(world, scene, new CANNON.Vec3(-70,90,-80), true)
-            WorldPhysic.addCheckPoint(world, scene, new CANNON.Vec3(20,90,-80), true)
-            WorldPhysic.addCheckPoint(world, scene, new CANNON.Vec3(120,90,-80), true)
-            WorldPhysic.addCheckPoint(world, scene, new CANNON.Vec3(210,90,-80), true)
+            WorldPhysic.addCheckPoint(world, scene, new CANNON.Vec3(-180,90,-80), ContentManager.CARDS[0], true)
+            WorldPhysic.addCheckPoint(world, scene, new CANNON.Vec3(-70,90,-80), ContentManager.CARDS[1], true)
+            WorldPhysic.addCheckPoint(world, scene, new CANNON.Vec3(20,90,-80), ContentManager.CARDS[2], true)
+            WorldPhysic.addCheckPoint(world, scene, new CANNON.Vec3(120,90,-80), ContentManager.CARDS[3], true)
+            WorldPhysic.addCheckPoint(world, scene, new CANNON.Vec3(210,90,-80), ContentManager.CARDS[4], true)
 
         }
 
@@ -240,9 +241,7 @@ function render() {
         const toggle = document.getElementById("chaseCamToggle");
         toggle.style.display = "none";
     } else {
-        // hoverEffect();
-        calculateCheckPoint()
-        // console.log(pointer)
+        calculateCheckPoint();
         document.getElementById("start-slide").style.display = "none";
     }
     renderer.render(scene, camera)
@@ -296,16 +295,19 @@ function hoverEffect() {
  * or not. If so, then will immediately stop the vehicle and show information card.
  */
 function calculateCheckPoint() {
-    const origin = new THREE.Vector2(0, 0.4)
+    
     raycaster.setFromCamera(origin, camera)
 
     const intersects = raycaster.intersectObjects(scene.children)
 
     if (intersects.length != 0) {
-        chassisBody.velocity.set(0,0,0)
-        // call the cards out because the vehicle is in checkpoint
 
-    } 
+        chassisBody.velocity.set(0,0,0)        
+        // call the cards out because the vehicle is in checkpoint
+        ContentManager.updateContent(document, intersects[0].object.content)
+        ContentManager.addCard()
+
+    }
 }
 
 function onPointerMove(event) {

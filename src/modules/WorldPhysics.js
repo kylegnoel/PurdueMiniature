@@ -328,7 +328,7 @@ export function addStopSigns(world, scene, position, quaternion, index) {
     return stopSign;
 }
 
-export function addCheckPoint(world, scene, position, visuals) {
+export function addCheckPoint(world, scene, position, content, visuals) {
     const checkpoint = new CANNON.Body({
         mass: 0,
     });
@@ -336,14 +336,19 @@ export function addCheckPoint(world, scene, position, visuals) {
     checkpoint.position.copy(position)
 
     world.addBody(checkpoint);
+    // adding the visuals
+    const checkpointGeo = new THREE.BoxBufferGeometry(0.8, 20, 20);
+    const checkpointMat = new THREE.MeshBasicMaterial({ color: 0xFF0000, side: THREE.DoubleSide, wireframe: true, opacity: 0 });
+    const checkpointMesh = new THREE.Mesh(checkpointGeo, checkpointMat);
+    checkpointMesh.position.copy(checkpoint.position);
+    checkpointMesh.quaternion.copy(checkpoint.quaternion);
 
     if (visuals) {
-        const checkpointGeo = new THREE.BoxBufferGeometry(0.8, 20, 20);
-        const checkpointMat = new THREE.MeshBasicMaterial({ color: 0xFF0000, side: THREE.DoubleSide, wireframe: true });
-        const checkpointMesh = new THREE.Mesh(checkpointGeo, checkpointMat);
-        checkpointMesh.position.copy(checkpoint.position);
-        checkpointMesh.quaternion.copy(checkpoint.quaternion);
-        scene.add(checkpointMesh);
+        checkpointMat.opacity = 1
     }
-
+    
+    if (typeof content != 'undefined') {
+        checkpointMesh.content = content
+    }
+    scene.add(checkpointMesh);
 }
