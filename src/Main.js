@@ -28,9 +28,10 @@ const groundMaterial = new CANNON.Material('ground');
 const wheelMaterial = new CANNON.Material('wheel');
 const origin = new THREE.Vector2(0, 0.4)
 
-document.getElementById("x-button").onclick = ContentManager.removeCard;
-document.getElementById("next-slide").onclick = ContentManager.rotateCardsNext;
-document.getElementById("prev-slide").onclick = ContentManager.rotateCardsPrev;
+
+// document.getElementById("x-button").onclick = ContentManager.removeCard;
+// document.getElementById("next-slide").onclick = ContentManager.rotateCardsNext;
+// document.getElementById("prev-slide").onclick = ContentManager.rotateCardsPrev;
 
 initThree();
 
@@ -93,7 +94,7 @@ function initCannon() {
 
 
     // Create the physics of the Car
-    chassisBody = Vehicle.initChassisBody();
+    chassisBody = Vehicle.initChassisBody({x: -220, y: 90, z:-50});
     vehicle = Vehicle.initVehicle(world, scene, chassisBody, wheelBody, wheelMaterial);
 
     // Adding physics of the world
@@ -119,36 +120,26 @@ function initCannon() {
         // Adding the physics of all objects on block0 (block0 is defined to be the block with the gateway to the future arch)
         {
             // Adding physics of block0
-            WorldPhysic.addBlockPhysics(world, scene, new CANNON.Vec3(260, 32.5, 60), new CANNON.Vec3(20, 48.5, -63), true);
-
-            // pillar besides the lawn
-            WorldPhysic.addGatewayPillarPhysics(world, scene, new CANNON.Vec3(6, 6, 20), new CANNON.Vec3(Math.PI / 2, 0, 0), new CANNON.Vec3(-235, 100, -63), true);
-
-            // pillar at the corner, near the edge of the block
-            WorldPhysic.addGatewayPillarPhysics(world, scene, new CANNON.Vec3(6, 6, 20), new CANNON.Vec3(Math.PI / 2, 0, 0), new CANNON.Vec3(-235, 100, -37), true);
-
+            WorldPhysic.addBlockPhysics(world, scene, new CANNON.Vec3(260, 32.5, 60), new CANNON.Vec3(20, 48.5, -63), false);
 
             WorldPhysic.addBellTower(world, scene, new CANNON.Vec3(267, 120, -51), true);
-            // big tree
-            WorldPhysic.addTreePhysics(world, scene, new CANNON.Vec3(-92, 83, -90), true);
-            // small tree infront of the big tree
-            WorldPhysic.addTreePhysics(world, scene, new CANNON.Vec3(-90, 83, -80), true);
-            // small tree besides the big academic building
-            WorldPhysic.addTreePhysics(world, scene, new CANNON.Vec3(-67, 83, -88), true);
             
             engineeringFountain = WorldPhysic.loadEngineeringFountain(world, scene, new CANNON.Vec3(-50, 95, -30));
 
+            // Adding stop signs, these are meant to be movable objects backed by the physics of the game.
             stopSigns.push(WorldPhysic.addStopSigns(world, scene, new CANNON.Vec3(-170,107,-40), new CANNON.Vec3(0,Math.PI,0), 0))
             stopSigns.push(WorldPhysic.addStopSigns(world, scene, new CANNON.Vec3(-60,107,-40), new CANNON.Vec3(0,Math.PI,0), 1))
             stopSigns.push(WorldPhysic.addStopSigns(world, scene, new CANNON.Vec3(30,107,-40), new CANNON.Vec3(0,Math.PI,0), 2))
             stopSigns.push(WorldPhysic.addStopSigns(world, scene, new CANNON.Vec3(130,107,-40), new CANNON.Vec3(0,Math.PI,0), 3))
             stopSigns.push(WorldPhysic.addStopSigns(world, scene, new CANNON.Vec3(220,107,-40), new CANNON.Vec3(0,Math.PI,0), 4))
 
-            WorldPhysic.addCheckPoint(world, scene, new CANNON.Vec3(-180,90,-80), ContentManager.CARDS[0], true)
-            WorldPhysic.addCheckPoint(world, scene, new CANNON.Vec3(-70,90,-80), ContentManager.CARDS[1], true)
-            WorldPhysic.addCheckPoint(world, scene, new CANNON.Vec3(20,90,-80), ContentManager.CARDS[2], true)
-            WorldPhysic.addCheckPoint(world, scene, new CANNON.Vec3(120,90,-80), ContentManager.CARDS[3], true)
-            WorldPhysic.addCheckPoint(world, scene, new CANNON.Vec3(210,90,-80), ContentManager.CARDS[4], true)
+            // Adding checkpoints, these are thin blocks to indicate when the vehicle should stop.
+            // How does the vehicle know when to stop? Refer to calculate check point
+            WorldPhysic.addCheckPoint(world, scene, new CANNON.Vec3(-180,90,-80), ContentManager.CARDS[0], false)
+            WorldPhysic.addCheckPoint(world, scene, new CANNON.Vec3(-70,90,-80), ContentManager.CARDS[1], false)
+            WorldPhysic.addCheckPoint(world, scene, new CANNON.Vec3(20,90,-80), ContentManager.CARDS[2], false)
+            WorldPhysic.addCheckPoint(world, scene, new CANNON.Vec3(120,90,-80), ContentManager.CARDS[3], false)
+            WorldPhysic.addCheckPoint(world, scene, new CANNON.Vec3(210,90,-80), ContentManager.CARDS[4], false)
 
         }
 
@@ -191,9 +182,8 @@ function animate() {
         stopSign4.position.copy(stopSigns[4].position);
         stopSign4.quaternion.copy(stopSigns[4].quaternion);
     } catch (e) {
-
+        console.log("error with the stop sign");
     }
-
 
     let train = scene.getObjectByName("train", true)
 
@@ -210,11 +200,10 @@ function animate() {
             chassisBody.velocity.set(0, 0, 0)
         }
     } catch (e) {
+        console.log("error in updating chasis body");
     }
-
-    const isChaseCam = document.getElementById("yes");
-    isChaseCam.addEventListener("keyup", (e) => { e.preventDefault(); });
-    if (isChaseCam.checked) {
+    const isChaseCam = true
+    if (isChaseCam) {
         camera.position.x = chassisBody.position.x;
         camera.position.y = chassisBody.position.y + 40;
         camera.position.z = chassisBody.position.z + 60;
@@ -242,7 +231,7 @@ function render() {
         toggle.style.display = "none";
     } else {
         calculateCheckPoint();
-        document.getElementById("start-slide").style.display = "none";
+        // document.getElementById("start-slide").style.display = "none";
     }
     renderer.render(scene, camera)
 }

@@ -18,6 +18,10 @@ export function initChassisBody() {
     return chassisBody;
 }
 
+export function changeChassisBodyPosition(position) {
+    chassisBody.position.set(position.x, position.y, position.z);
+}
+
 export function initVehicle(world, scene, chassisBody, wheelBody, wheelMaterial) {
 
     const vehicle = new CANNON.RaycastVehicle({

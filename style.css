@@ -24,6 +24,7 @@ body {
 }
 
 .card-container {
+    height: 80vh;
     display: block;
     border-radius: 30px;
     position: absolute;
@@ -34,7 +35,7 @@ body {
 }
 
 .card-top {
-    display: inline-block;
+    display: flow-root;
     color: white;
     background: #555;
     border-radius: 20px;
@@ -48,6 +49,7 @@ body {
     background: white;
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
+    height: -webkit-fill-available;
 }
 
 img {
@@ -214,6 +216,19 @@ text {
     border-top-color: #FF00FF;
     -webkit-animation: spin 1.5s linear infinite;
     animation: spin 1.5s linear infinite;
+}
+
+#pregame-questions {
+    background-color: white;
+    height: 90vh;
+    display: block;
+    border-radius: 30px;
+    position: absolute;
+    padding: 20px;
+    left: 10px;
+    right: 10px;
+    top: 10px;
+    bottom: 10px;
 }
 @-webkit-keyframes spin {
     0%   {

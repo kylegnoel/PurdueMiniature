@@ -338,13 +338,13 @@ export function addCheckPoint(world, scene, position, content, visuals) {
     world.addBody(checkpoint);
     // adding the visuals
     const checkpointGeo = new THREE.BoxBufferGeometry(0.8, 20, 20);
-    const checkpointMat = new THREE.MeshBasicMaterial({ color: 0xFF0000, side: THREE.DoubleSide, wireframe: true, opacity: 0 });
+    const checkpointMat = new THREE.MeshNormalMaterial({ color: 0xFF0000, side: THREE.DoubleSide, wireframe: false, opacity: 0, transparent: true });
     const checkpointMesh = new THREE.Mesh(checkpointGeo, checkpointMat);
     checkpointMesh.position.copy(checkpoint.position);
     checkpointMesh.quaternion.copy(checkpoint.quaternion);
 
     if (visuals) {
-        checkpointMat.opacity = 1
+        checkpointMat.transparent = false
     }
     
     if (typeof content != 'undefined') {

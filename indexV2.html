@@ -19,22 +19,6 @@
     <div class="container-fluid">
         <canvas id="c"></canvas>
 
-        <!-- chase cam toggle -->
-        <div id="chaseCamToggle">
-            <div
-                style="position: absolute; top: 10px; right: 135px; font-size: 20px; font-weight: bold; user-select: none; -webkit-text-stroke: 1px gray">
-                Chase Cam</div>
-            <div class="toggle-radio">
-                <input type="radio" name="rdo" id="no">
-                <input type="radio" name="rdo" id="yes" checked>
-                <div class="switch">
-                    <label for="no">OFF</label>
-                    <label for="yes">ON</label>
-                    <span></span>
-                </div>
-            </div>
-        </div>
-
         <!-- start slide show for mobile only  -->
         <div id="start-slide">
             <span class="arrows" id="prev-slide">
@@ -66,13 +50,13 @@
         </div>
         <!-- information card -->
         <div class="row">
-            <div id="info-card" class="card-container popHide col-sm-12 col-lg-3 col-md-6">
+            <div id="info-card" class="card-container popShow col-sm-12 ">
                 <div class="col-sm-12 d-md-none d-lg-none d-xl-none" id="mobile-question"></div>
                 <div class="card-top">
-                    <span id="x-button"
-                        style="cursor: pointer; display:block; float: right;margin-right: 15px; margin-top: 10px;">&#10005;</span>
+                    <!-- <span id="x-button"
+                        style="cursor: pointer; display:block; float: right;margin-right: 15px; margin-top: 10px;">&#10005;</span> -->
                     <div class="content" style="margin: 25px; margin-top: 30px;">
-                        <h4 id="title"></h4>
+                        <h4 id="title">What are you looking for in your career journey?</h4>
                         <p id="top-content" class="top-text"></p>
                     </div>
                 </div>
